@@ -1,7 +1,7 @@
 * {
   border: solid;
 }
-div.searchResultList {
+div.searchResultMain {
   margin-top: 60px;
   border: solid;
   div.searchResultHead {
@@ -29,7 +29,8 @@ div.searchResultList {
       width: 12%;
       padding: 10px;
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
+      flex-direction: row;
       height: 100%;
       i.fas.fa-list {
         margin: 3px;
@@ -38,6 +39,37 @@ div.searchResultList {
       }
       div.letterFilter {
         margin: 3px;
+        padding: 2px;
+      }
+    }
+  }
+  div.searchResultBody {
+    padding: 60px;
+    div.searchResultList {
+      display: grid;
+      grid-template-columns: 40% 40%;
+      grid-template-rows: 350px 350px 350px 350px; //최대최소넣어주기
+      justify-content: center;
+
+      span.searchResultListContent {
+        display: inline-block;
+        margin: 10px;
+        padding: 5px;
+        text-align: center;
+        img.searchResultMainImage {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+    }
+    div.searchResultPaging {
+      height: 80px;
+      display: flex;
+      justify-content: space-evenly;
+      padding-right: 95px;
+      padding-left: 95px;
+      span.paging {
+        line-height: 80px; // 부모와 height 을 동일하게 맞추면 수직 정렬 가능
       }
     }
   }
