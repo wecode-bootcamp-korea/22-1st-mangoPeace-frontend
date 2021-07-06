@@ -1,0 +1,47 @@
+* {
+  border: solid;
+}
+
+form.signUpForm {
+  //display: flex inline-block;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 10%;
+  height: 60%;
+  div.signUpLogo {
+    margin: 10px;
+  }
+  div.signUpTitle {
+    margin: 10px;
+  }
+
+  div.signUpContainer {
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center; //세로축을 옮겨야하므로 align 이용
+
+    //justify-content: center;
+    input.inputName {
+      width: 30%;
+      margin: 10px;
+    }
+    input.inputEmail {
+      width: 30%;
+      margin: 10px;
+    }
+
+    input.inputPassword {
+      width: 30%;
+      margin: 10px;
+    }
+    button.submitInfoBtn {
+      width: 30%;
+      margin: 10px;
+    }
+  }
+  div.checkMembership {
+    margin: 10px;
+  }
+}
