@@ -6,6 +6,7 @@ import Detail from './pages/Detail/Detail';
 import BestList from './pages/BestList/BestList';
 import Main from './pages/Main/Main';
 import SearchResult from './pages/SearchResult/SearchResult';
+import Login from './pages/Login/Login';
 
 class Routes extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class Routes extends React.Component {
       <Router>
         <Nav />
         <Switch>
+          <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Main} />
           <Route exact path="/searchresult" component={SearchResult} />
           <Route exact path="/bestlist/:id" component={BestList} />
