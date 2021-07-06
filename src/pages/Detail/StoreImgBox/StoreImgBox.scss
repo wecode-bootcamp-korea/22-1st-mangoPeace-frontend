@@ -1,0 +1,64 @@
+@import '../../../styles/common.scss';
+
+.storeImgBox {
+  position: relative;
+  padding: 0 10px;
+
+  .slideArrow {
+    @include display-flex;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba($color: $color-white, $alpha: .5);
+    font-size: 50px;
+    color: $color-darkgrey;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba($color: $color-main, $alpha: .5);
+      color: $color-white;
+    }
+
+    &.arrowLeft {
+      left: 15px;
+
+      i {
+        margin-left: -5px;
+      }
+    }
+
+    &.arrowRight {
+      right: 15px;
+
+      i {
+        margin-right: -5px;
+      }
+    }
+  }
+
+  .storeImgUl {
+    @include display-flex(normal, normal);
+    overflow: hidden;
+  
+    .storeImgLi {
+      margin: 0 7px;
+
+      &:first-of-type {
+        margin-left: 0; 
+      }
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      img {
+        width: 500px;
+        height: 400px;
+        object-fit: cover;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+@import '../../../styles/common.scss';
+
+.storeInfo {
+  width: 70%;
+
+  .storeInfoBottom {
+    @include display-flex(space-between, normal);
+    padding: 27px 0px 70px;
+    border-bottom: 1px solid $color-grey;
+
+    .storeLocation {
+      background: oldlace;
+      width: 40%;
+    }
+  }
+}

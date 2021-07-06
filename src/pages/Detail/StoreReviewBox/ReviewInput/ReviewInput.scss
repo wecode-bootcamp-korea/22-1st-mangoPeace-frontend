@@ -1,0 +1,72 @@
+@import '../../../../styles/common.scss';
+
+form {
+  position: relative;
+
+  .reviewTitle {
+    margin-bottom: 30px;
+    font-size: 18px;
+
+    b {
+      margin-right: 5px;
+      color: $color-main;
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+
+  .reviewRatingBox {
+    position: absolute;
+    top: 75px;
+    left: 20px;
+
+    i {
+      font-size: 19px;
+      color: $color-main;
+      cursor: pointer;
+
+      & + i {
+        margin-left: 3px;
+      }
+    }
+  }
+
+  textarea {
+    padding: 60px 20px 10px;
+    width: 100%;
+    height: 200px;
+    border: none;
+    border-radius: 5px;
+    resize: none;
+    box-shadow: -1px 14px 29px 4px rgba(155, 155, 155, 0.42);
+
+    &::placeholder {
+      font-size: 16px;
+      color: $color-grey;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .reviewSubmitBtn {
+    padding: 10px 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border: none;
+    border-radius: 50px;
+    color: $color-white;
+    font-weight: 700;
+
+    &:disabled {
+      background: rgb(218, 218, 218);
+    }
+
+    &:enabled {
+      background: $color-main;
+      cursor: pointer;
+    }
+  }
+}

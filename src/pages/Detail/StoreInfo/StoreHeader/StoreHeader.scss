@@ -1,0 +1,49 @@
+@import '../../../../styles/common.scss';
+
+.storeHeader {
+  position: relative;
+  padding: 70px 0 10px;
+  border-bottom: 1px solid $color-grey;
+
+  .storeTitle {
+    @include display-flex(normal, normal);
+    margin-bottom: 25px;
+    font-size: 35px;
+
+    h2 {
+      margin-right: 15px;
+      color: $color-darkgrey;
+    }
+
+    strong {
+      color: $color-main;
+    }
+  }
+
+  .storeStatus {
+    color: $color-grey;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  .wishBox {
+    @include display-flex(space-between, center);
+    flex-direction: column;
+    height: 70px;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    color: $color-grey;
+    cursor: pointer;
+
+    i {
+      font-size: 42px;
+    }
+
+    span {
+      font-size: 15px;
+    }
+  }
+}

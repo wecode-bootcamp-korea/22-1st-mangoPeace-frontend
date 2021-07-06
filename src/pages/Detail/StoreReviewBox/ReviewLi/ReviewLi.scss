@@ -1,0 +1,58 @@
+@import '../../../../styles/common.scss';
+
+.reviewLi {
+  @include display-flex(normal, normal);
+  padding: 40px 0 50px;
+
+  & + li {
+    border-top: 1px solid $color-grey;
+  }
+
+  .reviewUserInfo {
+    @include display-flex;
+    flex-direction: column;
+    padding-right: 40px;
+
+    .reviewUserImg {
+      margin-bottom: 8px;
+      border-radius: 50%;
+    }
+
+    .reviewUserName {
+      color: $color-darkgrey;
+    }
+  }
+
+  .reviewContent {
+    width: calc(100% - 220px);
+    margin-top: -15px;
+
+    .reviewContentDate {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 17px;
+      color: $color-grey;
+    }
+
+    .reviewContentText {
+      color: $color-black;
+      line-height: 28px;
+    }
+  }
+
+  .reviewScoreBox {
+    @include display-flex;
+    flex-direction: column;
+    padding-left: 60px;
+    color: $color-main;
+
+    .scoreIcon {
+      margin-bottom: 10px;
+      font-size: 52px;
+    }
+
+    .scoreText {
+      font-weight: 700;
+    }
+  }
+}
