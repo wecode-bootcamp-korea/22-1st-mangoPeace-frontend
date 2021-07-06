@@ -2,7 +2,11 @@ import React from 'react';
 
 class Main extends React.Component {
   render() {
-    return <div>Main</div>;
+    return (
+      <div className="mainContainer">
+        <span>Main</span>
+      </div>
+    );
   }
 }
 
