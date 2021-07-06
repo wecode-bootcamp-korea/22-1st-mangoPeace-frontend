@@ -19,6 +19,7 @@
         position: relative;
         font-size: 20px;
         color: $color-grey;
+        font-weight: 400;
         cursor: pointer;
 
         & + li::before {
@@ -29,8 +30,11 @@
           height: 20px;
           border-left: 1px solid $color-grey;
         }
+
+        b {
+          font-weight: 400;
+        }
       }
     }
-
   }
 }
