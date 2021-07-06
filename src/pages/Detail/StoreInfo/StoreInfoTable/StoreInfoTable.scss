@@ -1,6 +1,7 @@
 @import '../../../../styles/common.scss';
 
 table {
+  @include display-flex(normal, normal);
   font-size: 18px;
 
   th {

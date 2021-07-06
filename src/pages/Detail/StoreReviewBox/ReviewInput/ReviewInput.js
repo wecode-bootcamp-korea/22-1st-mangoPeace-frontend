@@ -10,11 +10,11 @@ class ReviewInput extends React.Component {
           <b>더피자보이즈</b>에 대한 솔직한 리뷰를 써주세요
         </p>
         <div className="reviewRatingBox">
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
         <textarea
           className="reviewInputBox"

@@ -11,11 +11,11 @@ class StoreHeader extends React.Component {
           <strong>4.1</strong>
         </div>
         <div className="storeStatus">
-          <i class="fas fa-pen"></i>
+          <i className="fas fa-pen"></i>
           <span>46</span>
         </div>
         <div className="wishBox">
-          <i class="far fa-star"></i>
+          <i className="far fa-star"></i>
           <span>가고싶다</span>
         </div>
       </header>

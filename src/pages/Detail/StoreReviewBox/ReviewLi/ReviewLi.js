@@ -26,9 +26,9 @@ class ReviewLi extends React.Component {
           </p>
         </div>
         <div className="reviewScoreBox">
-          <i class="far fa-laugh-squint scoreIcon"></i>
-          {/* <i class="far fa-smile"></i> */}
-          {/* <i class="far fa-frown"></i> */}
+          <i className="far fa-laugh-squint scoreIcon"></i>
+          {/* <i className="far fa-smile"></i> */}
+          {/* <i className="far fa-frown"></i> */}
           <span className="scoreText">맛있다</span>
         </div>
       </li>

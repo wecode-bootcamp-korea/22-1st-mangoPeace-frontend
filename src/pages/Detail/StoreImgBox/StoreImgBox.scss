@@ -12,10 +12,16 @@
     width: 70px;
     height: 70px;
     border-radius: 50%;
+    border: none;
     background: rgba($color: $color-white, $alpha: .5);
     font-size: 50px;
     color: $color-darkgrey;
     cursor: pointer;
+    z-index: 9999;
+
+    &:disabled {
+      display: none;
+    }
 
     &:hover {
       background: rgba($color: $color-main, $alpha: .5);
@@ -23,7 +29,7 @@
     }
 
     &.arrowLeft {
-      left: 15px;
+      left: 20px;
 
       i {
         margin-left: -5px;
@@ -31,7 +37,7 @@
     }
 
     &.arrowRight {
-      right: 15px;
+      right: 20px;
 
       i {
         margin-right: -5px;
@@ -40,8 +46,13 @@
   }
 
   .storeImgUl {
-    @include display-flex(normal, normal);
+    // border: 1px solid red;
     overflow: hidden;
+
+    .slideInner {
+      // border: 1px solid greenyellow;
+      @include display-flex(normal, normal);
+    }
   
     .storeImgLi {
       margin: 0 7px;
