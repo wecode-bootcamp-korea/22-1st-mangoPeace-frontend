@@ -17,17 +17,17 @@ class StoreInfo extends React.Component {
 
     script.onload = () => {
       kakao.maps.load(() => {
-        let container = document.getElementById('storeLocation');
-        let options = {
+        const container = document.getElementById('storeLocation');
+        const options = {
           center: new kakao.maps.LatLng(37.506502, 127.053617),
           level: 4,
         };
 
         const map = new window.kakao.maps.Map(container, options);
 
-        let markerPosition = new kakao.maps.LatLng(37.506502, 127.053617);
+        const markerPosition = new kakao.maps.LatLng(37.506502, 127.053617);
 
-        let marker = new kakao.maps.Marker({
+        const marker = new kakao.maps.Marker({
           position: markerPosition,
         });
 
