@@ -1,0 +1,144 @@
+@import '../../styles/common.scss';
+
+main {
+  display: flex;
+  flex-direction: column;
+
+  .mainImgBar {
+    @include display-flex;
+    flex-direction: column;
+    background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/0776fea76b4a824ff583128cb51dd45c.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 500px;
+
+    p {
+      color: $color-white;
+      font-size: 40px;
+      padding-bottom: 10px;
+    }
+
+    .mainSearchBar {
+      position: relative;
+      width: 700px;
+      padding-top: 20px;
+
+      #mainSearchIcon {
+        position: absolute;
+        left: 20px;
+        padding-top: 17px;
+        color: $color-grey;
+      }
+
+      input {
+        height: 55px;
+        width: 100%;
+        padding-left: 60px;
+        border: 2px solid $color-main;
+        border-radius: 30px;
+        outline: none;
+        font-size: 17px;
+      }
+
+      button {
+        position: absolute;
+        right: 0px;
+        height: 55px;
+        width: 150px;
+        border: none;
+        border-radius: 25px;
+        background-color: $color-main;
+        color: $color-white;
+        font-size: 17px;
+      }
+    }
+  }
+
+  .foodThemeListBox {
+    @include display-flex;
+    flex-direction: column;
+    padding: 36px 0;
+    border-bottom: 1px solid #dbdbdb;
+
+    .topBar {
+      @include display-flex(space-between, center);
+      padding: 0 160px;
+      height: 50px;
+      width: 100%;
+
+      .listText {
+        color: $color-main;
+        font-size: 25px;
+      }
+
+      .listMore {
+        color: $color-grey;
+        font-size: 18px;
+      }
+    }
+
+    .foodThemeBox {
+      @include display-flex(space-between, center);
+      flex-direction: column;
+      position: relative;
+      width: 100%;
+      padding: 20px 20px 0 20px;
+
+      .arrowBtnLeft {
+        position: absolute;
+        left: 40px;
+        bottom: 210px;
+        border: none;
+        background-color: transparent;
+      }
+
+      .arrowBtnRight {
+        position: absolute;
+        right: 40px;
+        bottom: 210px;
+        border: none;
+        background-color: transparent;
+      }
+
+      i {
+        color: $color-grey;
+      }
+
+      .foodThemeImgBox {
+        @include display-flex;
+        padding-top: 10px;
+
+        .foodThemeImg {
+          @include display-flex(space-between, center);
+          margin-bottom: 30px;
+
+          img {
+            margin: 0 20px;
+            width: 500px;
+            height: 300px;
+          }
+        }
+      }
+
+      .slickDots {
+        @include display-flex;
+        flex-direction: row;
+        list-style: none;
+
+        .slickActive {
+          display: list-item;
+
+          .dotBtn {
+            border: none;
+            background-color: transparent;
+
+            i {
+              color: $color-grey;
+            }
+          }
+        }
+      }
+    }
+  }
+}
