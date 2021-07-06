@@ -1,16 +1,16 @@
+// font-family: 'Gamja Flower', cursive;
+// font-family: 'Noto Sans KR', sans-serif;
+// http://placehold.it/이미지 사이즈
+
+$color-main: #fb7d27;
+$color-white: #ececec;
+$color-grey: #9b9b9b;
+$color-black: #1d1d1d;
+$color-darkgrey: #2c2c2c;
+
 // mixin
 @mixin display-flex($justify: center, $align: center) {
   display: flex;
   justify-content: $justify;
   align-items: $align;
 }
-
-$color-main: #FB7D27;
-$color-white: #ececec;
-$color-grey: #9B9B9B;
-$color-black: #1d1d1d;
-$color-darkgrey: #2c2c2c;
-
-// font-family: 'Gamja Flower', cursive;
-// font-family: 'Noto Sans KR', sans-serif;
-// http://placehold.it/이미지 사이즈 
