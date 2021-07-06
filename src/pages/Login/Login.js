@@ -11,6 +11,7 @@ class Login extends React.Component {
           <input className="inputEmail"></input>
           <input className="inputPassword"></input>
           <div className="askingMissingPassword">
+            <div></div>
             비밀번호를 잊어버리셨나요?
           </div>
           <div className="askingMembership">계정이 없으신가요? 회원가입</div>
