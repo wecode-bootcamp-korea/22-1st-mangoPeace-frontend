@@ -25,7 +25,20 @@ class SignUp extends React.Component {
         passwordValue: event.target.value,
       });
     }
-    console.log(this.state.passwordValue);
+    this.check();
+  };
+
+  check = () => {
+    console.log('ddddd');
+    if (
+      this.state.nameValue.length >= 2 &&
+      this.state.passwordValue.length >= 6 &&
+      this.state.emailValue.includes('@')
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   goToMain = e => {
@@ -47,15 +60,19 @@ class SignUp extends React.Component {
   };
 
   render() {
-    const isAllValueValid =
-      this.state.nameValue.length >= 2 &&
-      this.state.passwordValue.length >= 6 &&
-      this.state.emailValue.includes('@');
+    // const isAllValueValid =
+    //   this.state.nameValue.length >= 2 &&
+    //   this.state.passwordValue.length >= 6 &&
+    //   this.state.emailValue.includes('@');
 
     //console.log(this.button.disabled);
     return (
       <>
-        <form className="signUpForm" onChange={this.controlValue}>
+        <form
+          className="signUpForm"
+          onChange={this.controlValue}
+          onSubmit={this.goToMain}
+        >
           <div className="signUpLogo">
             <img className="logoImage" alt="logo" src="images/mango.png" />
           </div>
@@ -80,10 +97,11 @@ class SignUp extends React.Component {
               placeholder="비밀번호"
             ></input>
             <button
+              type="submit"
               className="submitInfoBtn"
-              disabled={isAllValueValid ? false : true}
-              style={{ backgroundColor: isAllValueValid ? 'white' : 'red' }}
-              onClick={this.goToMain}
+              disabled={this.check() ? false : true}
+              //style={{ backgroundColor: this.check() ? 'white' : 'red' }}
+              // onClick={this.goToMain}
             >
               회원가입
             </button>
