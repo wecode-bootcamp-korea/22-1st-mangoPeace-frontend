@@ -36,7 +36,6 @@ class ReviewInput extends React.Component {
   };
 
   render() {
-    console.log(this.state.isTextValid, this.state.isRatingValid);
     const { handleReviewRating, handleReviewInput } = this;
     const { reviewRating, isTextValid, isRatingValid } = this.state;
 
