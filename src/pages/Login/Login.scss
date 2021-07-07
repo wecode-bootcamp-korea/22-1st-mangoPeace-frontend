@@ -1,3 +1,6 @@
+$color-grey: #9b9b9b;
+$color-main: #fb7d27;
+
 form.loginForm {
   display: flex;
   flex-direction: column;
@@ -5,27 +8,52 @@ form.loginForm {
   margin: 10%;
 
   div.loginLogo {
-    margin: 20px;
+    margin: 25px;
+    .logoImage {
+      width: 100px;
+    }
   }
   div.loginTitle {
-    margin: 20px;
+    margin: 10px;
+    font-weight: bold;
   }
 
   input.inputEmail {
-    height: 30px;
-    width: 250px;
-    margin: 5px;
+    width: 300px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #e8eaec;
   }
   input.inputPassword {
-    height: 30px;
-    width: 250px;
-    margin: 5px;
+    width: 300px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #e8eaec;
+  }
+  button.submitLoginInfoBtn {
+    width: 300px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    background-color: $color-main;
   }
   div.askingMissingPassword {
     margin: 15px;
+    margin-bottom: 10px;
   }
 
   div.askingMembership {
-    margin: 15%;
+    margin: 5px;
+    a.goToSignUp {
+      color: $color-main;
+      margin: 5px;
+    }
   }
 }
