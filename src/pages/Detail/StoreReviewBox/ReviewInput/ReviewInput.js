@@ -4,8 +4,15 @@ import './ReviewInput.scss';
 
 class ReviewInput extends React.Component {
   state = {
-    isBtnActive: false,
+    isTextValid: false,
+    isRatingValid: false,
     reviewRating: [false, false, false, false, false],
+  };
+
+  handleReviewInput = e => {
+    e.target.value.length > 9
+      ? this.setState({ isTextValid: true })
+      : this.setState({ isTextValid: false });
   };
 
   handleReviewRating = e => {
@@ -23,13 +30,15 @@ class ReviewInput extends React.Component {
     }
 
     this.setState({
+      isRatingValid: true,
       reviewRating: copiedRating,
     });
   };
 
   render() {
-    const { handleReviewRating } = this;
-    const { reviewRating, isBtnActive } = this.state;
+    console.log(this.state.isTextValid, this.state.isRatingValid);
+    const { handleReviewRating, handleReviewInput } = this;
+    const { reviewRating, isTextValid, isRatingValid } = this.state;
 
     return (
       <form>
@@ -64,10 +73,14 @@ class ReviewInput extends React.Component {
           ></i>
         </div>
         <textarea
+          onChange={handleReviewInput}
           className="reviewInputBox"
           placeholder="주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"
         />
-        <button disabled className="reviewSubmitBtn">
+        <button
+          className="reviewSubmitBtn"
+          disabled={isTextValid && isRatingValid ? false : true}
+        >
           리뷰작성
         </button>
       </form>
