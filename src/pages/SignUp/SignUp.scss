@@ -1,47 +1,78 @@
-* {
-  border: solid;
-}
+$color-grey: #9b9b9b;
+$color-main: #fb7d27;
 
-form.signUpForm {
-  //display: flex inline-block;
+// * {
+//   border: solid;
+// }
+
+.signUpForm {
   flex-direction: column;
   justify-content: center;
   text-align: center;
   margin: 10%;
-  height: 60%;
-  div.signUpLogo {
-    margin: 10px;
-  }
-  div.signUpTitle {
-    margin: 10px;
+
+  .signUpLogo {
+    margin: 25px;
+
+    .logoImage {
+      width: 100px;
+    }
   }
 
-  div.signUpContainer {
+  .signUpTitle {
+    margin: 10px;
+    font-weight: bold;
+  }
+
+  .signUpContainer {
     display: flex;
     flex-direction: column;
-    // justify-content: center;
-    align-items: center; //세로축을 옮겨야하므로 align 이용
+    align-items: center;
 
-    //justify-content: center;
-    input.inputName {
-      width: 30%;
+    .inputName {
+      width: 300px;
+      height: 40px;
       margin: 10px;
-    }
-    input.inputEmail {
-      width: 30%;
-      margin: 10px;
+      border-radius: 10px;
+      border: none;
+      background-color: #e8eaec;
     }
 
-    input.inputPassword {
-      width: 30%;
+    .inputEmail {
+      width: 300px;
+      height: 40px;
       margin: 10px;
+      border-radius: 10px;
+      border: none;
+      background-color: #e8eaec;
     }
-    button.submitInfoBtn {
-      width: 30%;
+
+    .inputPassword {
+      width: 300px;
+      height: 40px;
       margin: 10px;
+      border-radius: 10px;
+      border: none;
+      background-color: #e8eaec;
+    }
+
+    .submitInfoBtn {
+      width: 300px;
+      height: 40px;
+      margin: 10px;
+      border-radius: 10px;
+      border: none;
+      font-weight: bold;
+      color: white;
+      background-color: $color-main;
     }
   }
-  div.checkMembership {
+
+  .checkMembership {
     margin: 10px;
+    color: $color-grey;
+    a.goToLogin {
+      color: $color-main;
+    }
   }
 }

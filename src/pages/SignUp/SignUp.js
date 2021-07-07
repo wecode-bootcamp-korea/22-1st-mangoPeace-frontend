@@ -6,7 +6,9 @@ class SignUp extends React.Component {
     return (
       <>
         <form className="signUpForm">
-          <div className="signUpLogo">로고 이미지</div>
+          <div className="signUpLogo">
+            <img className="logoImage" alt="logo" src="images/mango.png" />
+          </div>
           <div className="signUpTitle">회원가입</div>
           <div className="signUpContainer">
             <input className="inputName" placeholder="이름"></input>
@@ -14,7 +16,9 @@ class SignUp extends React.Component {
             <input className="inputPassword" placeholder="비밀번호"></input>
             <button className="submitInfoBtn">회원가입</button>
           </div>
-          <div className="checkMembership">이미 가입 하셨나요 ? </div>
+          <div className="checkMembership">
+            이미 가입 하셨나요? <a className="goToLogin">로그인</a>{' '}
+          </div>
         </form>
       </>
     );
