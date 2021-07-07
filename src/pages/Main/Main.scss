@@ -110,7 +110,8 @@ main {
         border: none;
         background-color: transparent;
 
-        &:hover {
+        &:hover i {
+          color: $color-main;
           cursor: pointer;
         }
       }
@@ -122,7 +123,8 @@ main {
         border: none;
         background-color: transparent;
 
-        &:hover {
+        &:hover i {
+          color: $color-main;
           cursor: pointer;
         }
       }
@@ -132,11 +134,13 @@ main {
       }
 
       .foodThemeImgBox {
-        @include display-flex;
+        @include display-flex(normal, normal);
         padding-top: 10px;
+        overflow: hidden;
+        width: 1500px;
 
         .foodThemeImg {
-          @include display-flex(space-between, center);
+          @include display-flex(normal, normal);
           margin-bottom: 40px;
 
           li {

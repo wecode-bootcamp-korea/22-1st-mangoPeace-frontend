@@ -27,9 +27,8 @@ class Main extends React.Component {
             </span>
           </div>
           <div className="foodThemeBox">
-            {/* <i class="fas fa-chevron-left fa-2x" id="arrowLeft"></i> */}
             <button className="arrowBtnLeft">
-              <i class="fas fa-chevron-left fa-2x" id="arrowLeft"></i>
+              <i class="fas fa-chevron-left fa-3x" id="arrowLeft"></i>
             </button>
             <ul className="foodThemeImgBox">
               <div className="foodThemeImg">
@@ -57,12 +56,41 @@ class Main extends React.Component {
                   <h3>수제버거 맛집 베스트 15곳</h3>
                   <h4>"부실한 패스트푸드는 이제 그만!"</h4>
                 </li>
+                <li>
+                  <img
+                    alt="테마이미지"
+                    src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/vh3szktueppvzbam.png?fit=around|600:400&crop=600:400;*,*&output-format=jpg&output-quality=80"
+                  />
+                  <h3>파전 맛집 베스트 30곳</h3>
+                  <h4>"비 오는 날은 파전에 막걸리지"</h4>
+                </li>
+                <li>
+                  <img
+                    alt="테마이미지"
+                    src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/4y8ry99myorgriw9.jpg?fit=around|600:400&crop=600:400;*,*&output-format=jpg&output-quality=80"
+                  />
+                  <h3>선릉 맛집 베스트 30곳</h3>
+                  <h4>"구석구석 맛집으로 가득한 이 곳!"</h4>
+                </li>
+                <li>
+                  <img
+                    alt="테마이미지"
+                    src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/0zjqwsskbtpucd0i.jpg?fit=around|600:400&crop=600:400;*,*&output-format=jpg&output-quality=80"
+                  />
+                  <h3>수제버거 맛집 베스트 15곳</h3>
+                  <h4>"부실한 패스트푸드는 이제 그만!"</h4>
+                </li>
               </div>
             </ul>
             <button className="arrowBtnRight">
-              <i class="fas fa-chevron-right fa-2x" id="arrowRight"></i>
+              <i class="fas fa-chevron-right fa-3x" id="arrowRight"></i>
             </button>
             <ul className="slickDots">
+              <li className="slickActive">
+                <button className="dotBtn">
+                  <i class="fas fa-circle fa-xs"></i>
+                </button>
+              </li>
               <li className="slickActive">
                 <button className="dotBtn">
                   <i class="fas fa-circle fa-xs"></i>
