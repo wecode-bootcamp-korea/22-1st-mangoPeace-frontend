@@ -4,102 +4,95 @@ import './StoreImgBox.scss';
 
 class StoreImgList extends React.Component {
   state = {
-    leftBtn: false,
-    rightBtn: false,
-    imgNumber: 7,
-    imgBoxWidth: 3584,
-    // (img개수 * img width) + ((img개수 - 1) * 14)
-    slideMovingUnit: 0,
+    slideSpot: 0,
   };
 
-  componentDidMount = () => {
-    const { imgBoxWidth } = this.state;
+  n = 10;
+  gap = 14;
+  slideMovingUnit = 500;
+  slideWidth = 400 * this.n + (this.n - 1) * this.gap;
+  hiddenedSlideWidth = this.slideWidth - window.innerWidth;
+  slideEnd;
 
-    if (imgBoxWidth > window.innerWidth - 20) {
+  handlePrevBtn = () => {
+    if (Math.abs(this.state.slideSpot) < this.slideMovingUnit) {
       this.setState({
-        rightBtn: true,
+        slideSpot: 0,
+      });
+    } else {
+      this.setState({
+        slideSpot: this.state.slideSpot + this.slideMovingUnit,
       });
     }
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
-    const { slideMovingUnit } = this.state;
-
-    if (prevState.slideMovingUnit !== slideMovingUnit) {
-      if (slideMovingUnit === 0) {
-        this.setState({
-          leftBtn: false,
-        });
-      }
+  handleNextBtn = () => {
+    if (
+      this.hiddenedSlideWidth - Math.abs(this.state.slideSpot) <
+      this.slideMovingUnit
+    ) {
+      this.setState({
+        slideSpot:
+          this.state.slideSpot -
+          (this.hiddenedSlideWidth - Math.abs(this.state.slideSpot)),
+      });
+      this.slideEnd =
+        this.state.slideSpot -
+        (this.hiddenedSlideWidth - Math.abs(this.state.slideSpot));
+    } else {
+      this.setState({
+        slideSpot: this.state.slideSpot - this.slideMovingUnit,
+      });
     }
   };
 
-  handlePrevBtn = () => {
-    const { slideMovingUnit } = this.state;
-
-    this.setState({
-      slideMovingUnit: slideMovingUnit + 400,
-    });
-    // console.log(slideMovingUnit);
-  };
-
-  handleNextBtn = () => {
-    const { slideMovingUnit } = this.state;
-
-    this.setState({
-      slideMovingUnit: slideMovingUnit - 400,
-      leftBtn: true,
-    });
-    // console.log(slideMovingUnit);
-  };
-
   render() {
-    const { leftBtn, rightBtn, slideMovingUnit } = this.state;
+    const { slideSpot } = this.state;
+    console.log(slideSpot);
 
     return (
       <div className="storeImgBox">
-        <button
-          disabled={leftBtn === false ? true : false}
-          onClick={this.handlePrevBtn}
-          className="slideArrow arrowLeft"
-        >
-          <i className="fas fa-chevron-left"></i>
-        </button>
+        {this.state.slideSpot !== 0 && (
+          <button onClick={this.handlePrevBtn} className="slideArrow arrowLeft">
+            <i className="fas fa-chevron-left"></i>
+          </button>
+        )}
         <ul className="storeImgUl">
           <div
-            style={{ transform: `translateX(${slideMovingUnit}px)` }}
+            style={{ transform: `translateX(${slideSpot}px)` }}
             className="slideInner"
           >
             <li className="storeImgLi">
-              <img src="http://placehold.it/40" />
+              <img src="http://placehold.it/10" />
+            </li>
+            <li className="storeImgLi">
+              <img src="http://placehold.it/20" />
+            </li>
+            <li className="storeImgLi">
+              <img src="http://placehold.it/30" />
             </li>
             <li className="storeImgLi">
               <img src="http://placehold.it/40" />
             </li>
             <li className="storeImgLi">
-              <img src="http://placehold.it/40" />
+              <img src="http://placehold.it/50" />
             </li>
             <li className="storeImgLi">
-              <img src="http://placehold.it/40" />
+              <img src="http://placehold.it/60" />
             </li>
             <li className="storeImgLi">
-              <img src="http://placehold.it/40" />
-            </li>
-            <li className="storeImgLi">
-              <img src="http://placehold.it/40" />
-            </li>
-            <li className="storeImgLi">
-              <img src="http://placehold.it/40" />
+              <img src="http://placehold.it/70" />
             </li>
           </div>
         </ul>
-        <button
-          disabled={rightBtn === false ? true : false}
-          onClick={this.handleNextBtn}
-          className="slideArrow arrowRight"
-        >
-          <i className="fas fa-chevron-right"></i>
-        </button>
+        {this.state.slideSpot !== this.slideEnd && (
+          <button
+            onClick={this.handleNextBtn}
+            className="slideArrow arrowRight"
+          >
+            <i className="fas fa-chevron-right"></i>
+          </button>
+        )}
       </div>
     );
   }

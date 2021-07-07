@@ -13,7 +13,7 @@
     height: 70px;
     border-radius: 50%;
     border: none;
-    background: rgba($color: $color-white, $alpha: .5);
+    background: rgba($color: $color-white, $alpha: 0.5);
     font-size: 50px;
     color: $color-darkgrey;
     cursor: pointer;
@@ -24,7 +24,7 @@
     }
 
     &:hover {
-      background: rgba($color: $color-main, $alpha: .5);
+      background: rgba($color: $color-main, $alpha: 0.5);
       color: $color-white;
     }
 
@@ -53,12 +53,12 @@
       // border: 1px solid greenyellow;
       @include display-flex(normal, normal);
     }
-  
+
     .storeImgLi {
       margin: 0 7px;
 
       &:first-of-type {
-        margin-left: 0; 
+        margin-left: 0;
       }
 
       &:last-of-type {
@@ -66,8 +66,7 @@
       }
 
       img {
-        width: 500px;
-        height: 400px;
+        width: 400px;
         object-fit: cover;
       }
     }

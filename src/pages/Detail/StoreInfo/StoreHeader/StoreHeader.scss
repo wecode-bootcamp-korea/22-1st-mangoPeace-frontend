@@ -42,10 +42,32 @@
 
     i {
       font-size: 42px;
+
+      &.fas {
+        color: $color-main;
+        animation: wishAni 0.2s;
+
+        & + span {
+          color: $color-main;
+          font-weight: 700;
+        }
+      }
     }
 
     span {
       font-size: 15px;
     }
+  }
+}
+
+@keyframes wishAni {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
   }
 }
