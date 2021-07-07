@@ -13,10 +13,19 @@ main {
     background-size: cover;
     height: 500px;
 
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 500px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
     p {
       color: $color-white;
-      font-size: 40px;
-      padding-bottom: 10px;
+      font-size: 35px;
+      padding-bottom: 20px;
+      z-index: 9999;
     }
 
     .mainSearchBar {
@@ -27,7 +36,7 @@ main {
       #mainSearchIcon {
         position: absolute;
         left: 20px;
-        padding-top: 17px;
+        padding-top: 20px;
         color: $color-grey;
       }
 
@@ -47,10 +56,14 @@ main {
         height: 55px;
         width: 150px;
         border: none;
-        border-radius: 25px;
+        border-radius: 30px;
         background-color: $color-main;
         color: $color-white;
         font-size: 17px;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }
@@ -58,23 +71,28 @@ main {
   .foodThemeListBox {
     @include display-flex;
     flex-direction: column;
-    padding: 36px 0;
+    padding: 50px 0;
     border-bottom: 1px solid #dbdbdb;
 
     .topBar {
       @include display-flex(space-between, center);
-      padding: 0 160px;
+      padding: 0 150px;
       height: 50px;
       width: 100%;
 
-      .listText {
+      h2 {
         color: $color-main;
         font-size: 25px;
+        font-weight: 500;
       }
 
       .listMore {
         color: $color-grey;
         font-size: 18px;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
 
@@ -83,22 +101,30 @@ main {
       flex-direction: column;
       position: relative;
       width: 100%;
-      padding: 20px 20px 0 20px;
+      padding: 40px 75px 0 75px;
 
       .arrowBtnLeft {
         position: absolute;
-        left: 40px;
-        bottom: 210px;
+        left: 100px;
+        bottom: 190px;
         border: none;
         background-color: transparent;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       .arrowBtnRight {
         position: absolute;
-        right: 40px;
-        bottom: 210px;
+        right: 100px;
+        bottom: 190px;
         border: none;
         background-color: transparent;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       i {
@@ -111,12 +137,49 @@ main {
 
         .foodThemeImg {
           @include display-flex(space-between, center);
-          margin-bottom: 30px;
+          margin-bottom: 40px;
 
-          img {
-            margin: 0 20px;
-            width: 500px;
-            height: 300px;
+          li {
+            @include display-flex;
+            position: relative;
+
+            &::before {
+              content: '';
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              background: rgba(0, 0, 0, 0.4);
+            }
+
+            & + li {
+              margin-left: 30px;
+            }
+
+            &:hover {
+              cursor: pointer;
+            }
+
+            img {
+              width: 480px;
+              height: 300px;
+              object-fit: cover;
+            }
+
+            h3 {
+              position: absolute;
+              top: 110px;
+              font-size: 30px;
+              color: $color-white;
+              font-weight: 500;
+            }
+
+            h4 {
+              position: absolute;
+              bottom: 120px;
+              font-size: 15px;
+              color: $color-white;
+              font-weight: 400;
+            }
           }
         }
       }
@@ -136,12 +199,113 @@ main {
             i {
               color: $color-grey;
             }
+
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
       }
     }
   }
 
-  .popStoreContainer {
+  .popStoreSection {
+    display: flex;
+    flex-direction: column;
+    padding: 60px 0;
+    border-bottom: 1px solid #dbdbdb;
+
+    h2 {
+      display: block;
+      padding: 0 150px;
+      color: $color-main;
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    .popStoreListBox {
+      @include display-flex;
+      padding: 60px 0 40px 0;
+
+      ul {
+        @include display-flex;
+
+        .popStore {
+          position: relative;
+          cursor: pointer;
+          overflow: hidden;
+
+          &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.5s ease-in-out;
+          }
+          &:hover::before {
+            background: rgba(0, 0, 0, 0.5);
+          }
+
+          &:hover .popStoreInfoBox {
+            display: block;
+            bottom: -30px;
+            cursor: pointer;
+            transition: all 0.5s;
+          }
+
+          img {
+            width: 300px;
+            height: 500px;
+            object-fit: cover;
+          }
+
+          .popStoreInfoBox {
+            flex-direction: column;
+            position: absolute;
+            width: 100%;
+            height: 150px;
+            bottom: -150px;
+            padding: 0 20px;
+            z-index: 9999;
+            // display: none;
+            // flex-direction: column;
+            // position: absolute;
+            // width: 100%;
+            // height: 150px;
+            // bottom: -30px;
+            // padding: 0 20px;
+            // z-index: 9999;
+
+            .topInfo {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 30px;
+
+              h3 {
+                color: $color-white;
+                font-size: 25px;
+                font-weight: 500;
+              }
+
+              span {
+                padding-right: 20px;
+                color: $color-main;
+                font-size: 25px;
+                font-weight: 500;
+              }
+            }
+
+            .bottomInfo {
+              span {
+                color: $color-white;
+                font-size: 15px;
+                font-weight: 300;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
