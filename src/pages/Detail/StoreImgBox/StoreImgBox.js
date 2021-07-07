@@ -7,53 +7,53 @@ class StoreImgList extends React.Component {
     slideSpot: 0,
   };
 
-  n = 10;
-  gap = 14;
+  n = 7; //이미지 수
+  slideGap = 14;
   slideMovingUnit = 500;
-  slideWidth = 400 * this.n + (this.n - 1) * this.gap;
+  imgWidth = 400;
+  slideWidth = this.imgWidth * this.n + (this.n - 1) * this.slideGap;
   hiddenedSlideWidth = this.slideWidth - window.innerWidth;
   slideEnd;
 
   handlePrevBtn = () => {
-    if (Math.abs(this.state.slideSpot) < this.slideMovingUnit) {
+    const { slideMovingUnit } = this;
+    const { slideSpot } = this.state;
+
+    if (Math.abs(slideSpot) < slideMovingUnit) {
       this.setState({
         slideSpot: 0,
       });
     } else {
       this.setState({
-        slideSpot: this.state.slideSpot + this.slideMovingUnit,
+        slideSpot: slideSpot + slideMovingUnit,
       });
     }
   };
 
   handleNextBtn = () => {
-    if (
-      this.hiddenedSlideWidth - Math.abs(this.state.slideSpot) <
-      this.slideMovingUnit
-    ) {
+    let { hiddenedSlideWidth, slideMovingUnit } = this;
+    const { slideSpot } = this.state;
+
+    if (hiddenedSlideWidth - Math.abs(slideSpot) < slideMovingUnit) {
       this.setState({
-        slideSpot:
-          this.state.slideSpot -
-          (this.hiddenedSlideWidth - Math.abs(this.state.slideSpot)),
+        slideSpot: slideSpot - (hiddenedSlideWidth - Math.abs(slideSpot)),
       });
-      this.slideEnd =
-        this.state.slideSpot -
-        (this.hiddenedSlideWidth - Math.abs(this.state.slideSpot));
+      this.slideEnd = slideSpot - (hiddenedSlideWidth - Math.abs(slideSpot));
     } else {
       this.setState({
-        slideSpot: this.state.slideSpot - this.slideMovingUnit,
+        slideSpot: slideSpot - slideMovingUnit,
       });
     }
   };
 
   render() {
+    const { handlePrevBtn, handleNextBtn } = this;
     const { slideSpot } = this.state;
-    console.log(slideSpot);
 
     return (
       <div className="storeImgBox">
-        {this.state.slideSpot !== 0 && (
-          <button onClick={this.handlePrevBtn} className="slideArrow arrowLeft">
+        {slideSpot !== 0 && (
+          <button onClick={handlePrevBtn} className="slideArrow arrowLeft">
             <i className="fas fa-chevron-left"></i>
           </button>
         )}
@@ -85,11 +85,8 @@ class StoreImgList extends React.Component {
             </li>
           </div>
         </ul>
-        {this.state.slideSpot !== this.slideEnd && (
-          <button
-            onClick={this.handleNextBtn}
-            className="slideArrow arrowRight"
-          >
+        {slideSpot !== this.slideEnd && (
+          <button onClick={handleNextBtn} className="slideArrow arrowRight">
             <i className="fas fa-chevron-right"></i>
           </button>
         )}
