@@ -105,7 +105,7 @@ main {
 
       .arrowBtnLeft {
         position: absolute;
-        left: 100px;
+        left: 50px;
         bottom: 190px;
         border: none;
         background-color: transparent;
@@ -118,7 +118,7 @@ main {
 
       .arrowBtnRight {
         position: absolute;
-        right: 100px;
+        right: 50px;
         bottom: 190px;
         border: none;
         background-color: transparent;
@@ -127,6 +127,10 @@ main {
           color: $color-main;
           cursor: pointer;
         }
+      }
+
+      .none {
+        display: none;
       }
 
       i {
@@ -142,6 +146,8 @@ main {
         .foodThemeImg {
           @include display-flex(normal, normal);
           margin-bottom: 40px;
+          transition: all 1s;
+          // transform: translate(-1500px);
 
           li {
             @include display-flex;
@@ -195,6 +201,10 @@ main {
 
         .slickActive {
           display: list-item;
+
+          #colorDot {
+            color: $color-main;
+          }
 
           .dotBtn {
             border: none;
@@ -272,14 +282,6 @@ main {
             bottom: -150px;
             padding: 0 20px;
             z-index: 9999;
-            // display: none;
-            // flex-direction: column;
-            // position: absolute;
-            // width: 100%;
-            // height: 150px;
-            // bottom: -30px;
-            // padding: 0 20px;
-            // z-index: 9999;
 
             .topInfo {
               display: flex;

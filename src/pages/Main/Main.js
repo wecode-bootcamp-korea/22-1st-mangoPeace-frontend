@@ -3,7 +3,83 @@ import React from 'react';
 import './Main.scss';
 
 class Main extends React.Component {
+  state = {
+    slideNum: 1,
+    slideWidth: 0,
+    imgInterval: 0,
+  };
+
+  //슬라이드 갯수
+  totalSlide = 3;
+
+  handleNextBtn = () => {
+    const { slideNum, slideWidth, imgInterval } = this.state;
+    const { totalSlide } = this;
+
+    this.setState({
+      slideNum: slideNum + 1,
+      slideWidth: slideWidth - 1500,
+      imgInterval: imgInterval - 30,
+    });
+  };
+
+  handlePrevBtn = () => {
+    const { slideNum, slideWidth, imgInterval } = this.state;
+    const { totalSlide } = this;
+
+    this.setState({
+      slideNum: slideNum - 1,
+      slideWidth: slideWidth + 1500,
+      imgInterval: imgInterval + 30,
+    });
+  };
+
+  handleDotBtn1 = () => {
+    const { slideNum, slideWidth, imgInterval } = this.state;
+    const gap = 1 - slideNum;
+    console.log(gap);
+
+    this.setState({
+      slideNum: 1,
+      slideWidth: slideWidth - 1500 * gap,
+      imgInterval: imgInterval - 30 * gap,
+    });
+  };
+
+  handleDotBtn2 = () => {
+    const { slideNum, slideWidth, imgInterval } = this.state;
+    const gap = 2 - slideNum;
+    console.log(gap);
+
+    this.setState({
+      slideNum: 2,
+      slideWidth: slideWidth - 1500 * gap,
+      imgInterval: imgInterval - 30 * gap,
+    });
+  };
+
+  handleDotBtn3 = () => {
+    const { slideNum, slideWidth, imgInterval } = this.state;
+    const gap = 3 - slideNum;
+
+    this.setState({
+      slideNum: 3,
+      slideWidth: slideWidth - 1500 * gap,
+      imgInterval: imgInterval - 30 * gap,
+    });
+  };
+
   render() {
+    const {
+      handlePrevBtn,
+      handleNextBtn,
+      handleDotBtn1,
+      handleDotBtn2,
+      handleDotBtn3,
+      totalSlide,
+    } = this;
+    const { slideNum, slideWidth, imgInterval } = this.state;
+
     return (
       <main>
         <section className="mainImgBar">
@@ -27,11 +103,19 @@ class Main extends React.Component {
             </span>
           </div>
           <div className="foodThemeBox">
-            <button className="arrowBtnLeft">
+            <button
+              className={slideNum > 1 ? 'arrowBtnLeft' : 'none'}
+              onClick={handlePrevBtn}
+            >
               <i class="fas fa-chevron-left fa-3x" id="arrowLeft"></i>
             </button>
             <ul className="foodThemeImgBox">
-              <div className="foodThemeImg">
+              <div
+                className="foodThemeImg"
+                style={{
+                  transform: `translateX(${slideWidth + imgInterval}px)`,
+                }}
+              >
                 <li>
                   <img
                     alt="테마이미지"
@@ -61,7 +145,31 @@ class Main extends React.Component {
                     alt="테마이미지"
                     src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/vh3szktueppvzbam.png?fit=around|600:400&crop=600:400;*,*&output-format=jpg&output-quality=80"
                   />
-                  <h3>파전 맛집 베스트 30곳</h3>
+                  <h3>파전 맛집 베스트 2곳</h3>
+                  <h4>"비 오는 날은 파전에 막걸리지"</h4>
+                </li>
+                <li>
+                  <img
+                    alt="테마이미지"
+                    src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/4y8ry99myorgriw9.jpg?fit=around|600:400&crop=600:400;*,*&output-format=jpg&output-quality=80"
+                  />
+                  <h3>선릉 맛집 베스트 30곳</h3>
+                  <h4>"구석구석 맛집으로 가득한 이 곳!"</h4>
+                </li>
+                <li>
+                  <img
+                    alt="테마이미지"
+                    src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/0zjqwsskbtpucd0i.jpg?fit=around|600:400&crop=600:400;*,*&output-format=jpg&output-quality=80"
+                  />
+                  <h3>수제버거 맛집 베스트 15곳</h3>
+                  <h4>"부실한 패스트푸드는 이제 그만!"</h4>
+                </li>
+                <li>
+                  <img
+                    alt="테마이미지"
+                    src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/vh3szktueppvzbam.png?fit=around|600:400&crop=600:400;*,*&output-format=jpg&output-quality=80"
+                  />
+                  <h3>파전 맛집 베스트 3곳</h3>
                   <h4>"비 오는 날은 파전에 막걸리지"</h4>
                 </li>
                 <li>
@@ -82,23 +190,35 @@ class Main extends React.Component {
                 </li>
               </div>
             </ul>
-            <button className="arrowBtnRight">
+            <button
+              className={slideNum < totalSlide ? 'arrowBtnRight' : 'none'}
+              onClick={handleNextBtn}
+            >
               <i class="fas fa-chevron-right fa-3x" id="arrowRight"></i>
             </button>
             <ul className="slickDots">
               <li className="slickActive">
-                <button className="dotBtn">
-                  <i class="fas fa-circle fa-xs"></i>
+                <button className="dotBtn" onClick={handleDotBtn1}>
+                  <i
+                    class="fas fa-circle fa-xs"
+                    id={slideNum === 1 ? 'colorDot' : ''}
+                  ></i>
                 </button>
               </li>
               <li className="slickActive">
-                <button className="dotBtn">
-                  <i class="fas fa-circle fa-xs"></i>
+                <button className="dotBtn" onClick={handleDotBtn2}>
+                  <i
+                    class="fas fa-circle fa-xs"
+                    id={slideNum === 2 ? 'colorDot' : ''}
+                  ></i>
                 </button>
               </li>
               <li className="slickActive">
-                <button className="dotBtn">
-                  <i class="fas fa-circle fa-xs"></i>
+                <button className="dotBtn" onClick={handleDotBtn3}>
+                  <i
+                    class="fas fa-circle fa-xs"
+                    id={slideNum === 3 ? 'colorDot' : ''}
+                  ></i>
                 </button>
               </li>
             </ul>
