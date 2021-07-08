@@ -3,6 +3,10 @@ import React from 'react';
 import './ReviewLi.scss';
 
 class ReviewLi extends React.Component {
+  // componentDidMount = () => {
+  //   window.addEventListener('scroll', this.props.infiniteScroll)
+  // }
+
   render() {
     return (
       <li className="reviewLi">

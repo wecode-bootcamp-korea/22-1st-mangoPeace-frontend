@@ -46,12 +46,11 @@
   }
 
   .storeImgUl {
-    // border: 1px solid red;
     overflow: hidden;
 
     .slideInner {
-      // border: 1px solid greenyellow;
       @include display-flex(normal, normal);
+      transition: transform 0.3s ease-out;
     }
 
     .storeImgLi {
