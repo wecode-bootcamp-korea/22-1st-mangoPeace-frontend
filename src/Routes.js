@@ -7,6 +7,7 @@ import BestList from './pages/BestList/BestList';
 import Main from './pages/Main/Main';
 import SearchResult from './pages/SearchResult/SearchResult';
 import SignUp from './pages/SignUp/SignUp';
+import Filter from './pages/Filter/Filter';
 
 class Routes extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class Routes extends React.Component {
       <Router>
         <Nav />
         <Switch>
+          <Route eaxct path="/Filter" component={Filter} />
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/" component={Main} />
           <Route exact path="/searchresult" component={SearchResult} />
