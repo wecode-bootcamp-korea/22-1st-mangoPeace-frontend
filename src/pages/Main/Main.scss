@@ -105,7 +105,7 @@ main {
 
       .arrowBtnLeft {
         position: absolute;
-        left: 50px;
+        left: 80px;
         bottom: 190px;
         border: none;
         background-color: transparent;
@@ -118,7 +118,7 @@ main {
 
       .arrowBtnRight {
         position: absolute;
-        right: 50px;
+        right: 80px;
         bottom: 190px;
         border: none;
         background-color: transparent;
@@ -152,6 +152,7 @@ main {
           li {
             @include display-flex;
             position: relative;
+            margin-left: 30px;
 
             &::before {
               content: '';
@@ -161,9 +162,12 @@ main {
               background: rgba(0, 0, 0, 0.4);
             }
 
-            & + li {
-              margin-left: 30px;
+            &:nth-child(3n + 1) {
+              margin-left: 0;
             }
+
+            // & + li {
+            // }
 
             &:hover {
               cursor: pointer;
@@ -206,14 +210,9 @@ main {
             color: $color-main;
           }
 
-          .dotBtn {
-            border: none;
-            background-color: transparent;
-
-            i {
-              color: $color-grey;
-            }
-
+          i {
+            color: $color-grey;
+            padding: 5px;
             &:hover {
               cursor: pointer;
             }

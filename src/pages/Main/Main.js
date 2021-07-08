@@ -2,83 +2,45 @@ import React from 'react';
 
 import './Main.scss';
 
+//슬라이드 갯수
+const totalSlide = 3;
+const slideWidth = 1500;
+
 class Main extends React.Component {
   state = {
     slideNum: 1,
-    slideWidth: 0,
-    imgInterval: 0,
+    slideTranslate: 0,
   };
 
-  //슬라이드 갯수
-  totalSlide = 3;
+  handleBtn = e => {
+    const { slideNum, slideTranslate } = this.state;
 
-  handleNextBtn = () => {
-    const { slideNum, slideWidth, imgInterval } = this.state;
-    const { totalSlide } = this;
-
-    this.setState({
-      slideNum: slideNum + 1,
-      slideWidth: slideWidth - 1500,
-      imgInterval: imgInterval - 30,
-    });
+    if (e.target.attributes.id.value === 'arrowRight') {
+      this.setState({
+        slideNum: slideNum + 1,
+        slideTranslate: slideTranslate - slideWidth,
+      });
+    } else {
+      this.setState({
+        slideNum: slideNum - 1,
+        slideTranslate: slideTranslate + slideWidth,
+      });
+    }
   };
 
-  handlePrevBtn = () => {
-    const { slideNum, slideWidth, imgInterval } = this.state;
-    const { totalSlide } = this;
+  handleDotBtn = e => {
+    const { slideNum, slideTranslate } = this.state;
+    const gap = e.target.attributes.index.value - slideNum;
 
     this.setState({
-      slideNum: slideNum - 1,
-      slideWidth: slideWidth + 1500,
-      imgInterval: imgInterval + 30,
-    });
-  };
-
-  handleDotBtn1 = () => {
-    const { slideNum, slideWidth, imgInterval } = this.state;
-    const gap = 1 - slideNum;
-    console.log(gap);
-
-    this.setState({
-      slideNum: 1,
-      slideWidth: slideWidth - 1500 * gap,
-      imgInterval: imgInterval - 30 * gap,
-    });
-  };
-
-  handleDotBtn2 = () => {
-    const { slideNum, slideWidth, imgInterval } = this.state;
-    const gap = 2 - slideNum;
-    console.log(gap);
-
-    this.setState({
-      slideNum: 2,
-      slideWidth: slideWidth - 1500 * gap,
-      imgInterval: imgInterval - 30 * gap,
-    });
-  };
-
-  handleDotBtn3 = () => {
-    const { slideNum, slideWidth, imgInterval } = this.state;
-    const gap = 3 - slideNum;
-
-    this.setState({
-      slideNum: 3,
-      slideWidth: slideWidth - 1500 * gap,
-      imgInterval: imgInterval - 30 * gap,
+      slideNum: parseInt(e.target.attributes.index.value),
+      slideTranslate: slideTranslate - slideWidth * gap,
     });
   };
 
   render() {
-    const {
-      handlePrevBtn,
-      handleNextBtn,
-      handleDotBtn1,
-      handleDotBtn2,
-      handleDotBtn3,
-      totalSlide,
-    } = this;
-    const { slideNum, slideWidth, imgInterval } = this.state;
+    const { handleBtn, handleDotBtn } = this;
+    const { slideNum, slideTranslate } = this.state;
 
     return (
       <main>
@@ -105,7 +67,7 @@ class Main extends React.Component {
           <div className="foodThemeBox">
             <button
               className={slideNum > 1 ? 'arrowBtnLeft' : 'none'}
-              onClick={handlePrevBtn}
+              onClick={handleBtn}
             >
               <i class="fas fa-chevron-left fa-3x" id="arrowLeft"></i>
             </button>
@@ -113,7 +75,7 @@ class Main extends React.Component {
               <div
                 className="foodThemeImg"
                 style={{
-                  transform: `translateX(${slideWidth + imgInterval}px)`,
+                  transform: `translateX(${slideTranslate}px)`,
                 }}
               >
                 <li>
@@ -192,34 +154,34 @@ class Main extends React.Component {
             </ul>
             <button
               className={slideNum < totalSlide ? 'arrowBtnRight' : 'none'}
-              onClick={handleNextBtn}
+              onClick={handleBtn}
             >
               <i class="fas fa-chevron-right fa-3x" id="arrowRight"></i>
             </button>
             <ul className="slickDots">
               <li className="slickActive">
-                <button className="dotBtn" onClick={handleDotBtn1}>
-                  <i
-                    class="fas fa-circle fa-xs"
-                    id={slideNum === 1 ? 'colorDot' : ''}
-                  ></i>
-                </button>
+                <i
+                  class="fas fa-circle fa-xs"
+                  id={slideNum === 1 ? 'colorDot' : ''}
+                  index={1}
+                  onClick={handleDotBtn}
+                ></i>
               </li>
               <li className="slickActive">
-                <button className="dotBtn" onClick={handleDotBtn2}>
-                  <i
-                    class="fas fa-circle fa-xs"
-                    id={slideNum === 2 ? 'colorDot' : ''}
-                  ></i>
-                </button>
+                <i
+                  class="fas fa-circle fa-xs"
+                  id={slideNum === 2 ? 'colorDot' : ''}
+                  index={2}
+                  onClick={handleDotBtn}
+                ></i>
               </li>
               <li className="slickActive">
-                <button className="dotBtn" onClick={handleDotBtn3}>
-                  <i
-                    class="fas fa-circle fa-xs"
-                    id={slideNum === 3 ? 'colorDot' : ''}
-                  ></i>
-                </button>
+                <i
+                  class="fas fa-circle fa-xs"
+                  id={slideNum === 3 ? 'colorDot' : ''}
+                  index={3}
+                  onClick={handleDotBtn}
+                ></i>
               </li>
             </ul>
           </div>
