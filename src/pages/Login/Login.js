@@ -20,39 +20,61 @@ class Login extends React.Component {
         passwordValue: event.target.value,
       });
     }
+  };
+
+  allValueCheck = () => {
+    console.log(this.state.emailValue);
     console.log(this.state.passwordValue);
+    const reg_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9,]+\.[a-zA-Z0-9]+$/;
+    const reg_pwd =
+      /^(?=.+[a-z])(?=.+[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*#?&]{6,25}$/;
+
+    const isEmailValid = reg_email.test(this.state.emailValue);
+    const isPasswordValid = reg_pwd.test(this.state.passwordValue);
+
+    this.setState({
+      isEmailValid,
+      isPasswordValid,
+    });
+
+    console.log(isEmailValid);
+    console.log(isPasswordValid);
   };
 
   goToMain = e => {
-    //주소받기
-    fetch({
+    console.log(this.state.emailValue);
+    console.log(this.state.passwordValue);
+
+    e.preventDefault();
+
+    if (!this.state.isEmailValid && !this.state.isPasswordValid) {
+      return;
+    }
+
+    fetch('http://10.58.3.213:8000/users/signin', {
       method: 'post',
-      body: JSON.stringfy({
+      body: JSON.stringify({
         email: this.state.emailValue,
         password: this.state.passwordValue,
       }),
     })
       .then(response => response.json())
       .then(result => {
-        //임시
+        console.log(result);
         if (result.MESSAGE !== 'SUCCESS') {
-          this.props.history.push('/');
-          //스토리지에 저장해 확인 ?
-          alert('로그인 정보를 다시 확인해 주세요 '); // 원래는 이메일 비번 각각 확인
-          //localStorage.setItem('token',result[]);
+          //this.props.history.push('/');
+          alert('다시 기입해주세요');
         }
       });
   };
 
   render() {
-    const isAllInputValueValid =
-      this.state.emailValue.includes('@') &&
-      this.state.passwordValue.length >= 6;
-    console.log(isAllInputValueValid);
+    const isAllValueValid =
+      this.state.isEmailValid && this.state.isPasswordValid;
 
     return (
       <>
-        <form className="loginForm" onChange={this.controlValue}>
+        <form className="loginForm" onSubmit={this.goToMain}>
           <div className="loginLogo">
             <img className="logoImage" alt="logo" src="images/mango.png" />
           </div>
@@ -62,17 +84,21 @@ class Login extends React.Component {
             name="inputEmail"
             className="inputEmail"
             placeholder="이메일"
+            onChange={this.controlValue}
+            onKeyUp={this.allValueCheck}
           />
           <input
             type="password"
             name="inputPassword"
             className="inputPassword"
             placeholder="비밀번호"
+            onChange={this.controlValue}
+            onKeyUp={this.allValueCheck}
           />
           <button
-            type="button"
+            type="submit"
             className="submitLoginInfoBtn"
-            disabled={isAllInputValueValid ? true : false}
+            disabled={!isAllValueValid}
           >
             로그인
           </button>
