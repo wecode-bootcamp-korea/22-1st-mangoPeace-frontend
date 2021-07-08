@@ -23,8 +23,6 @@ class Login extends React.Component {
   };
 
   allValueCheck = () => {
-    console.log(this.state.emailValue);
-    console.log(this.state.passwordValue);
     const reg_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9,]+\.[a-zA-Z0-9]+$/;
     const reg_pwd =
       /^(?=.+[a-z])(?=.+[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*#?&]{6,25}$/;
@@ -36,22 +34,16 @@ class Login extends React.Component {
       isEmailValid,
       isPasswordValid,
     });
-
-    console.log(isEmailValid);
-    console.log(isPasswordValid);
   };
 
   goToMain = e => {
-    console.log(this.state.emailValue);
-    console.log(this.state.passwordValue);
-
     e.preventDefault();
 
     if (!this.state.isEmailValid && !this.state.isPasswordValid) {
       return;
     }
 
-    fetch('http://10.58.3.213:8000/users/signin', {
+    fetch('http://10.58.3.11:8000/users/signin', {
       method: 'post',
       body: JSON.stringify({
         email: this.state.emailValue,
@@ -61,10 +53,6 @@ class Login extends React.Component {
       .then(response => response.json())
       .then(result => {
         console.log(result);
-        if (result.MESSAGE !== 'SUCCESS') {
-          //this.props.history.push('/');
-          alert('다시 기입해주세요');
-        }
       });
   };
 
