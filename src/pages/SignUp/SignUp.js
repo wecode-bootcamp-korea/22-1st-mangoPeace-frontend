@@ -8,6 +8,7 @@ class SignUp extends React.Component {
       nameValue: '',
       emailValue: '',
       passwordValue: '',
+      phoneNumValue: '',
     };
   }
 
@@ -20,20 +21,33 @@ class SignUp extends React.Component {
       this.setState({
         emailValue: event.target.value,
       });
-    } else {
+    } else if (event.target.name === 'inputPhoneNum') {
       this.setState({
-        passwordValue: event.target.value,
+        phoneNumValue: event.target.value,
       });
+    } else {
+      this.setState({ passwordValue: event.target.value });
     }
-    this.check();
+    this.isAllValueValid();
   };
 
-  check = () => {
+  isAllValueValid = () => {
     console.log('ddddd');
+
+    const reg_pwd =
+      /^(?=.+[a-z])(?=.+[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*#?&]{6,25}$/;
+    const reg_phoneNum = /^01[0|2|5|7|8|9|0][0-9]{3,4}[0-9]{4}$/;
+    const reg_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9,]+\.[a-zA-Z0-9]+$/;
+    const reg_name = /^[a-zA-Z가-힇]{2,}$/;
+    console.log(reg_name.test(this.state.nameValue));
+    console.log(reg_email.test(this.state.emailValue));
+    console.log(reg_phoneNum.test(this.state.phoneNumValue));
+
     if (
-      this.state.nameValue.length >= 2 &&
-      this.state.passwordValue.length >= 6 &&
-      this.state.emailValue.includes('@')
+      reg_name.test(this.state.nameValue) === true &&
+      reg_email.test(this.state.emailValue) === true &&
+      reg_phoneNum.test(this.state.phoneNumValue) === true &&
+      reg_pwd.test(this.state.passwordValue) === true
     ) {
       return true;
     } else {
@@ -48,6 +62,7 @@ class SignUp extends React.Component {
         name: this.state.nameValue,
         email: this.state.emailValue,
         password: this.state.passwordValue,
+        phoneNum: this.state.phoneNumValue,
       }),
     })
       .then(response => response.json())
@@ -60,12 +75,6 @@ class SignUp extends React.Component {
   };
 
   render() {
-    // const isAllValueValid =
-    //   this.state.nameValue.length >= 2 &&
-    //   this.state.passwordValue.length >= 6 &&
-    //   this.state.emailValue.includes('@');
-
-    //console.log(this.button.disabled);
     return (
       <>
         <form
@@ -91,6 +100,12 @@ class SignUp extends React.Component {
               placeholder="이메일"
             ></input>
             <input
+              type="text"
+              name="inputPhoneNum"
+              className="inputPhoneNum"
+              placeholder="전화번호"
+            ></input>
+            <input
               type="password"
               name="inputPassword"
               className="inputPassword"
@@ -99,7 +114,7 @@ class SignUp extends React.Component {
             <button
               type="submit"
               className="submitInfoBtn"
-              disabled={this.check() ? false : true}
+              disabled={this.isAllValueValid ? false : true}
               //style={{ backgroundColor: this.check() ? 'white' : 'red' }}
               // onClick={this.goToMain}
             >
