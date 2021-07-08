@@ -12,93 +12,64 @@ class SignUp extends React.Component {
     };
   }
 
-  controlValue = event => {
-    if (event.target.name === 'inputName') {
+  controlInput = event => {
+    const { value, name } = event.target;
+
+    if (name === 'inputName') {
       this.setState({
-        nameValue: event.target.value,
+        nameValue: value,
       });
-    } else if (event.target.name === 'inputEmail') {
+    } else if (name === 'inputPassword') {
       this.setState({
-        emailValue: event.target.value,
+        passwordValue: value,
       });
-    } else if (event.target.name === 'inputPhoneNum') {
+    } else if (name === 'inputEmail') {
       this.setState({
-        phoneNumValue: event.target.value,
+        emailValue: value,
       });
     } else {
-      this.setState({ passwordValue: event.target.value });
+      this.setState({
+        phoneNumValue: value,
+      });
     }
-    //this.isAllValueValid(event);
   };
 
-  // controlIdValue = event => {
-  //   this.setState({
-  //     emailValue: event.target.value,
-  //   });
-  // };
-
-  // controlPhoneNumValue =evnet>{
-  //   this.
-  // }
-
-  isAllValueValid = event => {
-    console.log('ddddd');
-
+  isAllValueValid = () => {
     const reg_pwd =
-      /^(?=.+[a-z])(?=.+[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*#?&]{6,25}$/;
+      /^(?=.+[a-z])(?=.+[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*#?&]{6,25}$/; // 영문 소문자, 대문자, 숫자, 특수문자 1개 이상, 6글자
     const reg_phoneNum = /^01[0|2|5|7|8|9|0][0-9]{3,4}[0-9]{4}$/;
     const reg_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9,]+\.[a-zA-Z0-9]+$/;
     const reg_name = /^[a-zA-Z가-힇]{2,}$/;
-    console.log(reg_name.test(event.target.name));
-    console.log(reg_email.test(event.target.emailValue));
-    console.log(reg_phoneNum.test(event.target.phoneNumValue));
-    console.log(reg_pwd.test(event.target.passwordValue));
 
-    const checkValueValid =
-      reg_email.test(event.target.value) &&
-      reg_email.test(event.target.emailValue) &&
-      reg_phoneNum.test(event.target.phoneNumValue) &&
-      reg_pwd.test(event.target.passwordValue);
+    const isPasswordValid = reg_pwd.test(this.state.passwordValue);
+    const isPhoneNumValid = reg_phoneNum.test(this.state.phoneNumValue);
+    const isEmailValid = reg_email.test(this.state.emailValue);
+    const isNameValid = reg_name.test(this.state.nameValue);
 
-    // if (
-    //   event.target.name === 'inputEmail' &&
-    //   event.target.name === 'inputName' &&
-    //   event.target.name === 'inputPhoneNum' &&
-    //   event.target.name === 'inputPassword'
-    // ) {
-    //   if (
-    //     reg_email.test(event.target.value) === true &&
-    //     reg_name.test(event.target.value) === true &&
-    //     reg_phoneNum.test(event.target.value) === true &&
-    //     reg_pwd.test(event.target.value) === true
-    //   ) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // } else {
-    //   return false;
-    // }
-    if (event.target.name === 'inputEmail') {
-      reg_email.test(event.target.value);
-    } else if (event.target.name === 'inputName') {
-      reg_name.test(event.target.value);
-    } else if (event.target.name === 'inputPhoneNum') {
-      reg_phoneNum.test(event.target.value);
-    } else if (event.target.name === 'inputPasswnpord') {
-      reg_pwd.test(event.target.value);
-    }
+    this.setState({
+      isPasswordValid,
+      isPhoneNumValid,
+      isEmailValid,
+      isNameValid,
+    });
   };
 
   goToMain = e => {
-    console.log(e.target.value);
-    fetch({
+    e.preventDefault();
+    const { nameValue, emailValue, passwordValue, phoneNumValue } = this.state;
+
+    const isValidAll =
+      nameValue && emailValue && passwordValue && phoneNumValue;
+
+    if (!isValidAll) return;
+
+    fetch('', {
       method: 'post',
       body: JSON.stringify({
-        name: this.state.nameValue,
-        email: this.state.emailValue,
-        password: this.state.passwordValue,
-        phoneNum: this.state.phoneNumValue,
+        name: nameValue,
+        email: emailValue,
+        password: passwordValue,
+        phoneNum: phoneNumValue,
       }),
     })
       .then(response => response.json())
@@ -111,13 +82,14 @@ class SignUp extends React.Component {
   };
 
   render() {
+    const { isPasswordValid, isPhoneNumValid, isEmailValid, isNameValid } =
+      this.state;
+    const isAllValueTrue =
+      isPasswordValid && isPhoneNumValid && isEmailValid && isNameValid;
+
     return (
       <>
-        <form
-          className="signUpForm"
-          onChange={this.controlValue}
-          onSubmit={this.goToMain}
-        >
+        <form className="signUpForm" onSubmit={this.goToMain}>
           <div className="signUpLogo">
             <img className="logoImage" alt="logo" src="images/mango.png" />
           </div>
@@ -128,35 +100,37 @@ class SignUp extends React.Component {
               name="inputName"
               className="inputName"
               placeholder="이름"
-              onKeyPress={this.isAllValueValid}
-            ></input>
+              onChange={this.controlInput}
+              onKeyUp={this.isAllValueValid}
+            />
             <input
               type="text"
               name="inputEmail"
               className="inputEmail"
               placeholder="이메일"
-              onKeyPress={this.isAllValueValid}
-            ></input>
+              onChange={this.controlInput}
+              onKeyUp={this.isAllValueValid}
+            />
             <input
               type="text"
               name="inputPhoneNum"
               className="inputPhoneNum"
               placeholder="전화번호"
-              onKeyPress={this.isAllValueValid}
-            ></input>
+              onChange={this.controlInput}
+              onKeyUp={this.isAllValueValid}
+            />
             <input
               type="password"
               name="inputPassword"
               className="inputPassword"
               placeholder="비밀번호"
-              onKeyPress={this.isAllValueValid}
-            ></input>
+              onChange={this.controlInput}
+              onKeyUp={this.isAllValueValid}
+            />
             <button
               type="submit"
               className="submitInfoBtn"
-              //disabled={this.isAllValueValid ? false : true}
-              //style={{ backgroundColor: this.check() ? 'white' : 'red' }}
-              // onClick={this.goToMain}
+              disabled={!isAllValueTrue}
             >
               회원가입
             </button>
