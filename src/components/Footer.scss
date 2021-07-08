@@ -1,6 +1,6 @@
 @import '../styles/common.scss';
 
-footer {
+.commonFooter {
   @include display-flex;
   background: #3e3e3e;
   color: $color-grey;
@@ -10,7 +10,7 @@ footer {
     padding: 90px 0 130px;
     width: 70%;
 
-    .footerLeft {
+    .enterInfoBox {
       .logoTitle {
         display: block;
         margin-bottom: 130px;
@@ -50,7 +50,7 @@ footer {
       }
     }
 
-    .footerRight {
+    .serviceInfoBox {
       @include display-flex(space-between, normal);
       margin-top: 28px;
       width: 60%;

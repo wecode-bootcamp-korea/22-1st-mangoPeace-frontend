@@ -5,9 +5,9 @@ import './Footer.scss';
 class Footer extends React.Component {
   render() {
     return (
-      <footer>
+      <footer className="commonFooter">
         <div className="footerInner">
-          <section className="footerLeft">
+          <section className="enterInfoBox">
             <span className="logoTitle">싸우지망고</span>
             <ul className="enterInfo">
               <li>(주) 싸우지망고컴퍼니</li>
@@ -18,7 +18,7 @@ class Footer extends React.Component {
             </ul>
             <span>© 2021 MangoPeace Co., Ltd. All rights reserved.</span>
           </section>
-          <section className="footerRight">
+          <section className="serviceInfoBox">
             <ul className="footerUl">
               <li className="dev">Front</li>
               <li>이경민 이의연 정빛열음</li>
