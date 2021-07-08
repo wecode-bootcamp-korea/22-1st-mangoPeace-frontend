@@ -8,52 +8,47 @@ class StoreImgList extends React.Component {
   };
 
   n = 7; //이미지 수
-  slideGap = 14;
-  slideMovingUnit = 500;
-  imgWidth = 400;
-  slideWidth = this.imgWidth * this.n + (this.n - 1) * this.slideGap;
+  slideWidth = IMG_WIDTH * this.n + (this.n - 1) * SLIDE_GAP;
   hiddenedSlideWidth = this.slideWidth - window.innerWidth;
   slideEnd;
 
   handlePrevBtn = () => {
-    const { slideMovingUnit } = this;
     const { slideSpot } = this.state;
 
-    if (Math.abs(slideSpot) < slideMovingUnit) {
+    if (Math.abs(slideSpot) < SLIDE_MOVING_UNIT) {
       this.setState({
         slideSpot: 0,
       });
     } else {
       this.setState({
-        slideSpot: slideSpot + slideMovingUnit,
+        slideSpot: slideSpot + SLIDE_MOVING_UNIT,
       });
     }
   };
 
   handleNextBtn = () => {
-    let { hiddenedSlideWidth, slideMovingUnit } = this;
     const { slideSpot } = this.state;
 
-    if (hiddenedSlideWidth - Math.abs(slideSpot) < slideMovingUnit) {
+    if (this.hiddenedSlideWidth - Math.abs(slideSpot) < SLIDE_MOVING_UNIT) {
       this.setState({
-        slideSpot: slideSpot - (hiddenedSlideWidth - Math.abs(slideSpot)),
+        slideSpot: slideSpot - (this.hiddenedSlideWidth - Math.abs(slideSpot)),
       });
-      this.slideEnd = slideSpot - (hiddenedSlideWidth - Math.abs(slideSpot));
+      this.slideEnd =
+        slideSpot - (this.hiddenedSlideWidth - Math.abs(slideSpot));
     } else {
       this.setState({
-        slideSpot: slideSpot - slideMovingUnit,
+        slideSpot: slideSpot - SLIDE_MOVING_UNIT,
       });
     }
   };
 
   render() {
-    const { handlePrevBtn, handleNextBtn } = this;
     const { slideSpot } = this.state;
 
     return (
       <div className="storeImgBox">
-        {slideSpot !== 0 && (
-          <button onClick={handlePrevBtn} className="slideArrow arrowLeft">
+        {!!slideSpot && (
+          <button onClick={this.handlePrevBtn} className="slideArrow arrowLeft">
             <i className="fas fa-chevron-left"></i>
           </button>
         )}
@@ -86,7 +81,10 @@ class StoreImgList extends React.Component {
           </div>
         </ul>
         {slideSpot !== this.slideEnd && (
-          <button onClick={handleNextBtn} className="slideArrow arrowRight">
+          <button
+            onClick={this.handleNextBtn}
+            className="slideArrow arrowRight"
+          >
             <i className="fas fa-chevron-right"></i>
           </button>
         )}
@@ -94,5 +92,9 @@ class StoreImgList extends React.Component {
     );
   }
 }
+
+const SLIDE_GAP = 14;
+const SLIDE_MOVING_UNIT = 500;
+const IMG_WIDTH = 400;
 
 export default StoreImgList;

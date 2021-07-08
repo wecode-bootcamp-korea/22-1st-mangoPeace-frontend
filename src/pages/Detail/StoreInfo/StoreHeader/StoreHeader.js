@@ -14,8 +14,8 @@ class StoreHeader extends React.Component {
   };
 
   render() {
-    const { handleClickWish } = this;
     const { isWish } = this.state;
+
     return (
       <header className="storeHeader">
         <div className="storeTitle">
@@ -26,7 +26,7 @@ class StoreHeader extends React.Component {
           <i className="fas fa-pen"></i>
           <span>46</span>
         </div>
-        <div onClick={handleClickWish} className="wishBox">
+        <div onClick={this.handleClickWish} className="wishBox">
           <i className={`fa-star ${isWish ? 'fas' : 'far'}`}></i>
           <span>가고싶다</span>
         </div>

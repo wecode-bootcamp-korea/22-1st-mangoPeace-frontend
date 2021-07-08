@@ -5,8 +5,8 @@ import './StoreInfoTable.scss';
 class StoreInfoTable extends React.Component {
   render() {
     return (
-      <table>
-        <caption style={{ display: 'none' }}>매장 정보</caption>
+      <table className="storeInfoTable">
+        <caption>매장 정보</caption>
         <tbody>
           <tr>
             <th>주소</th>

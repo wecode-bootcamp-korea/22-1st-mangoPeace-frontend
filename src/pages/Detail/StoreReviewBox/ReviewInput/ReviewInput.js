@@ -10,9 +10,9 @@ class ReviewInput extends React.Component {
   };
 
   handleReviewInput = e => {
-    e.target.value.length > 9
-      ? this.setState({ isTextValid: true })
-      : this.setState({ isTextValid: false });
+    const isTextValid = e.target.value.length > 9;
+
+    this.setState({ isTextValid });
   };
 
   handleReviewRating = e => {
@@ -33,52 +33,35 @@ class ReviewInput extends React.Component {
       isRatingValid: true,
       reviewRating: copiedRating,
     });
+    console.log(reviewRating);
   };
 
   render() {
-    const { handleReviewRating, handleReviewInput } = this;
     const { reviewRating, isTextValid, isRatingValid } = this.state;
 
     return (
-      <form>
+      <form className="reviewInputForm">
         <p className="reviewTitle">
           <b>더피자보이즈</b>에 대한 솔직한 리뷰를 써주세요
         </p>
         <div className="reviewRatingBox">
-          <i
-            onClick={handleReviewRating}
-            idx="0"
-            className={`fa-star ${reviewRating[0] ? 'fas' : 'far'}`}
-          ></i>
-          <i
-            onClick={handleReviewRating}
-            idx="1"
-            className={`fa-star ${reviewRating[1] ? 'fas' : 'far'}`}
-          ></i>
-          <i
-            onClick={handleReviewRating}
-            idx="2"
-            className={`fa-star ${reviewRating[2] ? 'fas' : 'far'}`}
-          ></i>
-          <i
-            onClick={handleReviewRating}
-            idx="3"
-            className={`fa-star ${reviewRating[3] ? 'fas' : 'far'}`}
-          ></i>
-          <i
-            onClick={handleReviewRating}
-            idx="4"
-            className={`fa-star ${reviewRating[4] ? 'fas' : 'far'}`}
-          ></i>
+          {reviewRating.map((star, index) => (
+            <i
+              key={index}
+              onClick={this.handleReviewRating}
+              idx={index}
+              className={`fa-star ${reviewRating[index] ? 'fas' : 'far'}`}
+            ></i>
+          ))}
         </div>
         <textarea
-          onChange={handleReviewInput}
+          onChange={this.handleReviewInput}
           className="reviewInputBox"
           placeholder="주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!"
         />
         <button
           className="reviewSubmitBtn"
-          disabled={isTextValid && isRatingValid ? false : true}
+          disabled={!(isTextValid && isRatingValid)}
         >
           리뷰작성
         </button>

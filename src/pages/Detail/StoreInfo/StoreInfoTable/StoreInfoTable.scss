@@ -1,8 +1,16 @@
 @import '../../../../styles/common.scss';
 
-table {
+.storeInfoTable {
   @include display-flex(normal, normal);
   font-size: 18px;
+
+  caption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: polygon(0 0, 0 0, 0 0);
+  }
 
   th {
     padding: 10px 70px 12px 0;
