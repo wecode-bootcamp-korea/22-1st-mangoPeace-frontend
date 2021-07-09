@@ -1,5 +1,238 @@
+* {
+  border: solid;
+}
+
 div.UpperBox {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  //align-items: center;
+  margin: 10%;
+  margin-left: 18%;
+  margin-right: 18%;
+  padding: 20px;
+  border-radius: 10px;
+  div.searchFilter {
+    div.selectHead {
+      display: flex;
+      justify-content: space-between;
+      span.Title {
+      }
+      span.multipleChoice {
+      }
+    }
+
+    div.selectSection {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      border-bottom: solid;
+
+      .rating {
+        display: inline-block;
+        margin: 20px;
+        margin-left: 20px;
+        border-radius: 50px;
+        width: 200px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      .popularity {
+        display: inline-block;
+        margin: 20px;
+        border-radius: 50px;
+        width: 200px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+    }
+  }
+
+  div.priceForOnePerson {
+    border-bottom: solid;
+    div.selectHead {
+      span.title {
+      }
+      span.multipleChoice {
+      }
+    }
+    div.priceSelectSection {
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+
+      span.lessThan10000 {
+        display: inline-block;
+        margin: 20px;
+        border-radius: 50px;
+        width: 200px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+
+      .over10000 {
+        display: inline-block;
+        margin: 20px;
+        border-radius: 50px;
+        width: 200px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      .over20000 {
+        display: inline-block;
+        margin: 20px;
+        border-radius: 100px;
+        width: 200px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      .over30000 {
+        display: inline-block;
+        margin: 20px;
+        border-radius: 100px;
+        width: 200px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+    }
+  }
+
+  div.menuCategory {
+    .selectHead {
+      .title {
+      }
+      .multipleChoice {
+      }
+    }
+    .western {
+      display: flex;
+      justify-content: space-between;
+
+      .selectWestern {
+        // display: inline-block;
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      .pizza {
+        //display: inline-block;
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      .pasta {
+        //display: inline-block;
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      .hamburger {
+        //display: inline-block;
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+    }
+    div.korean {
+      display: flex;
+      justify-content: space-between;
+      span.selectKorean {
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      span.soup {
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      span.barbeque {
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      span.noodle {
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+    }
+    div.japanese {
+      display: flex;
+      justify-content: space-between;
+      span.selectJapanese {
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      span.sushi {
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      span.cutlet {
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+      span.donburi {
+        margin: 20px;
+        border-radius: 50px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid;
+      }
+    }
+    div.cancelOrConfirm {
+      display: flex;
+      justify-content: center;
+      .cancel {
+        width: 50%;
+        display: inline-block;
+      }
+      .confirm {
+        width: 50%;
+        display: inline-block;
+      }
+    }
+  }
 }
