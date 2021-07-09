@@ -1,8 +1,7 @@
 @import '../../styles/common.scss';
 
 main {
-  display: flex;
-  flex-direction: column;
+  display: block;
 
   .mainImgBar {
     @include display-flex;
@@ -165,9 +164,6 @@ main {
             &:nth-child(3n + 1) {
               margin-left: 0;
             }
-
-            // & + li {
-            // }
 
             &:hover {
               cursor: pointer;
