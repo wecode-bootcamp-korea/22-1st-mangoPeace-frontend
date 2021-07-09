@@ -1,7 +1,29 @@
 import React from 'react';
 import './SearchResult.scss';
-
+import RESULT from '../Data/resultData';
+import SearchResultComponent from '../SearchResultComponent/SearchResultComponent';
 class SearchResult extends React.Component {
+  constructor() {
+    console.log('생성자:');
+    super();
+    this.state = {
+      resultList: [],
+      searchResultMainImage: null,
+      menuName: '',
+      star: null, 
+      location: '',
+      category: '',
+      id: null,
+    };
+  }
+
+  componentDidMount() {
+   
+    this.setState({
+      resultList: RESULT, 
+    });
+  }
+
   render() {
     return (
       <>
@@ -21,168 +43,22 @@ class SearchResult extends React.Component {
 
           <div className="searchResultBody">
             <div className="searchResultList">
-              <span className="searchResultListContent">
-                <img
-                  className="searchResultMainImage"
-                  src="https://mp-seoul-image-production-s3.mangoplate.com/1760/imcyl_8.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80"
-                ></img>
-                <div className="menuInfoContainer">
-                  <div className="basicInfo">
-                    <span className="menuName">메뉴명</span>
-                    <span className="star">별점</span>
-                  </div>
-                  <div className="menuDetail">
-                    <span className="location">위치</span>
-                    <span className="category">카테고리</span>
-                  </div>
-                </div>
-              </span>
-              <span className="searchResultListContent">
-                <img
-                  className="searchResultMainImage"
-                  src="https://mp-seoul-image-production-s3.mangoplate.com/1760/imcyl_8.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80"
-                ></img>
-                <div className="menuInfoContainer">
-                  <div className="basicInfo">
-                    <span className="menuName">메뉴명</span>
-                    <span className="star">별점</span>
-                  </div>
-                  <div className="menuDetail">
-                    <span className="location">위치</span>
-                    <span className="category">카테고리</span>
-                  </div>
-                </div>
-              </span>
-              <span className="searchResultListContent">
-                <img
-                  className="searchResultMainImage"
-                  src="https://mp-seoul-image-production-s3.mangoplate.com/1760/imcyl_8.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80"
-                ></img>
-                <div className="menuInfoContainer">
-                  <div className="basicInfo">
-                    <span className="menuName">메뉴명</span>
-                    <span className="star">별점</span>
-                  </div>
-                  <div className="menuDetail">
-                    <span className="location">위치</span>
-                    <span className="category">카테고리</span>
-                  </div>
-                </div>
-              </span>
-              <span className="searchResultListContent">
-                <img
-                  className="searchResultMainImage"
-                  src="https://mp-seoul-image-production-s3.mangoplate.com/1760/imcyl_8.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80"
-                ></img>
-                <div className="menuInfoContainer">
-                  <div className="basicInfo">
-                    <span className="menuName">메뉴명</span>
-                    <span className="star">별점</span>
-                  </div>
-                  <div className="menuDetail">
-                    <span className="location">위치</span>
-                    <span className="category">카테고리</span>
-                  </div>
-                </div>
-              </span>
-              <span className="searchResultListContent">
-                <img
-                  className="searchResultMainImage"
-                  src="https://mp-seoul-image-production-s3.mangoplate.com/1760/imcyl_8.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80"
-                ></img>
-                <div className="menuInfoContainer">
-                  <div className="basicInfo">
-                    <span className="menuName">메뉴명</span>
-                    <span className="star">별점</span>
-                  </div>
-                  <div className="menuDetail">
-                    <span className="location">위치</span>
-                    <span className="category">카테고리</span>
-                  </div>
-                </div>
-              </span>
-              <span className="searchResultListContent">
-                <img
-                  className="searchResultMainImage"
-                  src="https://mp-seoul-image-production-s3.mangoplate.com/1760/imcyl_8.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80"
-                ></img>
-                <div className="menuInfoContainer">
-                  <div className="basicInfo">
-                    <span className="menuName">메뉴명</span>
-                    <span className="star">별점</span>
-                  </div>
-                  <div className="menuDetail">
-                    <span className="location">위치</span>
-                    <span className="category">카테고리</span>
-                  </div>
-                </div>
-              </span>
-              <span className="searchResultListContent">
-                <img
-                  className="searchResultMainImage"
-                  src="https://mp-seoul-image-production-s3.mangoplate.com/1760/imcyl_8.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80"
-                ></img>
-                <div className="menuInfoContainer">
-                  <div className="basicInfo">
-                    <span className="menuName">메뉴명</span>
-                    <span className="star">별점</span>
-                  </div>
-                  <div className="menuDetail">
-                    <span className="location">위치</span>
-                    <span className="category">카테고리</span>
-                  </div>
-                </div>
-              </span>
-              <span className="searchResultListContent">
-                <img
-                  className="searchResultMainImage"
-                  src="https://mp-seoul-image-production-s3.mangoplate.com/1760/imcyl_8.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80"
-                ></img>
-                <div className="menuInfoContainer">
-                  <div className="basicInfo">
-                    <span className="menuName">메뉴명</span>
-                    <span className="star">별점</span>
-                  </div>
-                  <div className="menuDetail">
-                    <span className="location">위치</span>
-                    <span className="category">카테고리</span>
-                  </div>
-                </div>
-              </span>
-              <span className="searchResultListContent">
-                <img
-                  className="searchResultMainImage"
-                  src="https://mp-seoul-image-production-s3.mangoplate.com/1760/imcyl_8.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80"
-                ></img>
-                <div className="menuInfoContainer">
-                  <div className="basicInfo">
-                    <span className="menuName">메뉴명</span>
-                    <span className="star">별점</span>
-                  </div>
-                  <div className="menuDetail">
-                    <span className="location">위치</span>
-                    <span className="category">카테고리</span>
-                  </div>
-                </div>
-              </span>
-              <span className="searchResultListContent">
-                <img
-                  className="searchResultMainImage"
-                  src="https://mp-seoul-image-production-s3.mangoplate.com/1760/imcyl_8.jpg?fit=around|359:240&crop=359:240;*,*&output-format=jpg&output-quality=80"
-                ></img>
-                <div className="menuInfoContainer">
-                  <div className="basicInfo">
-                    <span className="menuName">메뉴명</span>
-                    <span className="star">별점</span>
-                  </div>
-                  <div className="menuDetail">
-                    <span className="location">위치</span>
-                    <span className="category">카테고리</span>
-                  </div>
-                </div>
-              </span>
+              {this.state.resultList.map(result => {
+                return (
+                  //<span className="searchResultListContent" key={result.id}>
+                  <SearchResultComponent
+                    searchResultMainImage={result.searchResultMainImage}
+                    menuName={result.menuName}
+                    star={result.star} // 숫자의 기본값이 얼마인지 모름 !
+                    location={result.location}
+                    category={result.category}
+                    id={result.id}
+                  />
+                  //</span>
+                );
+              })}
             </div>
-            {/* <div className="searchResultPaging">
+            <div className="searchResultPaging">
               <span className="paging">1</span>
               <span className="paging">2</span>
               <span className="paging">3</span>
@@ -193,7 +69,7 @@ class SearchResult extends React.Component {
               <span className="paging">8</span>
               <span className="paging">9</span>
               <span className="paging">10</span>
-            </div> */}
+            </div>
           </div>
         </div>
       </>
