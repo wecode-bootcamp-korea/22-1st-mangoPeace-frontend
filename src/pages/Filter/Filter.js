@@ -35,19 +35,17 @@ class Filter extends React.Component {
               <span className="multipleChoice">중복 선택 불가능</span>
             </div>
             <div className="western">
-              <span className="selectWestern">양식</span>
               <span className="pizza">피자</span>
               <span className="pasta">파스타</span>
               <span className="hamburger">햄버거</span>
             </div>
             <div className="korean">
-              <span className="selectKorean">한식</span>
               <span className="soup">국밥</span>
               <span className="barbeque">고기</span>
               <span className="noodle">국수</span>
             </div>
             <div className="japanese">
-              <span className="selectJapanese">일식</span>
+              {/* <span className="selectJapanese">일식</span> */}
               <span className="sushi">스시</span>
               <span className="cutlet">돈가스</span>
               <span className="donburi">덮밥</span>
