@@ -2,32 +2,28 @@ $color-main: #fb7d27;
 $color-white: #ececec;
 $color-grey: #9b9b9b;
 
-// * {
-//   border: solid;
-// }
-
 div.UpperBox {
   display: flex;
   flex-direction: column;
   border: solid;
   border-width: thin;
-  border-color: $color-grey;
-
-  //align-items: center;
+  border-radius: 10px;
   margin: 10%;
   margin-left: 18%;
   margin-right: 18%;
-  // padding: 20px;
-  border-radius: 10px;
+  border-color: $color-grey;
+
   div.searchFilter {
     div.selectHead {
       display: flex;
       justify-content: space-between;
+
       span.title {
         margin-left: 20px;
         margin-top: 10px;
         padding: 10px;
       }
+
       span.multipleChoice {
         margin-right: 15px;
         margin-top: 10px;
@@ -46,22 +42,23 @@ div.UpperBox {
 
       .rating {
         display: inline-block;
-        margin: 20px;
-        margin-left: 20px;
-        border-radius: 50px;
         width: 200px;
         height: 45px;
+        margin: 20px;
+        margin-left: 20px;
         padding: 10px;
+        border-radius: 50px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
       }
+
       .popularity {
         display: inline-block;
-        margin: 20px;
-        border-radius: 50px;
         width: 200px;
         height: 45px;
+        margin: 20px;
+        border-radius: 50px;
         padding: 10px;
         border: solid;
         border-width: thin;
@@ -74,18 +71,22 @@ div.UpperBox {
     border-bottom: solid;
     border-color: $color-grey;
     border-width: thin;
+
     div.selectHead {
       display: flex;
       justify-content: space-between;
+
       span.title {
         margin-left: 20px;
         margin-top: 10px;
       }
+
       span.multipleChoice {
         margin-right: 20px;
         margin-top: 10px;
       }
     }
+
     div.priceSelectSection {
       display: flex;
       justify-content: space-around;
@@ -93,10 +94,10 @@ div.UpperBox {
 
       span.lessThan10000 {
         display: inline-block;
-        margin: 20px;
-        border-radius: 50px;
         width: 200px;
         height: 45px;
+        margin: 20px;
+        border-radius: 50px;
         padding: 10px;
         border: solid;
         border-width: thin;
@@ -106,32 +107,34 @@ div.UpperBox {
       .over10000 {
         display: inline-block;
         margin: 20px;
-        border-radius: 50px;
         width: 200px;
         height: 45px;
+        border-radius: 50px;
         padding: 10px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
       }
+
       .over20000 {
         display: inline-block;
-        margin: 20px;
-        border-radius: 100px;
         width: 200px;
         height: 45px;
+        margin: 20px;
+        border-radius: 100px;
         padding: 10px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
       }
+
       .over30000 {
         display: inline-block;
-        margin: 20px;
-        border-radius: 100px;
         width: 200px;
         height: 45px;
         padding: 10px;
+        margin: 20px;
+        border-radius: 100px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
@@ -152,136 +155,119 @@ div.UpperBox {
         margin-top: 10px;
       }
     }
+
     .western {
       display: flex;
       justify-content: space-between;
       text-align: center;
       margin-top: 25px;
 
-      // .selectWestern {
-      //   // display: inline-block;
-      //   margin: 20px;
-      //   border-radius: 50px;
-      //   width: 200px;
-      //   height: 45px;
-      //   padding: 10px;
-      //   border: solid;
-      // }
       .pizza {
-        //display: inline-block;
         margin: 20px;
-        border-radius: 50px;
         width: 200px;
         height: 45px;
+        border-radius: 50px;
         padding: 10px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
       }
+
       .pasta {
-        //display: inline-block;
-        margin: 20px;
-        border-radius: 50px;
         width: 200px;
         height: 45px;
+        margin: 20px;
+        border-radius: 50px;
         padding: 10px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
       }
+
       .hamburger {
-        //display: inline-block;
-        margin: 20px;
-        border-radius: 50px;
         width: 200px;
         height: 45px;
+        margin: 20px;
+        border-radius: 50px;
         padding: 10px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
       }
     }
+
     div.korean {
       display: flex;
       justify-content: space-between;
       text-align: center;
-      // span.selectKorean {
-      //   margin: 20px;
-      //   border-radius: 50px;
-      //   width: 200px;
-      //   height: 45px;
-      //   padding: 10px;
-      //   border: solid;
-      // }
+
       span.soup {
-        margin: 20px;
-        border-radius: 50px;
         width: 200px;
         height: 45px;
+        margin: 20px;
+        border-radius: 50px;
         padding: 10px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
       }
+
       span.barbeque {
-        margin: 20px;
-        border-radius: 50px;
         width: 200px;
         height: 45px;
+        margin: 20px;
+        border-radius: 50px;
         padding: 10px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
       }
+
       span.noodle {
-        margin: 20px;
-        border-radius: 50px;
         width: 200px;
         height: 45px;
+        margin: 20px;
+        border-radius: 50px;
         padding: 10px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
       }
     }
+
     div.japanese {
       display: flex;
       justify-content: space-between;
       text-align: center;
       margin-bottom: 25px;
-      // span.selectJapanese {
-      //   margin: 20px;
-      //   border-radius: 50px;
-      //   width: 200px;
-      //   height: 45px;
-      //   padding: 10px;
-      //   border: solid;
-      // }
+
       span.sushi {
+        width: 200px;
+        height: 45px;
         margin: 20px;
         border-radius: 50px;
-        width: 200px;
-        height: 45px;
         padding: 10px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
       }
+
       span.cutlet {
-        margin: 20px;
-        border-radius: 25px;
         width: 200px;
         height: 45px;
+        margin: 20px;
+        border-radius: 25px;
         padding: 10px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
       }
+
       span.donburi {
-        margin: 20px;
-        border-radius: 25px;
         width: 200px;
         height: 45px;
+        margin: 20px;
+        border-radius: 25px;
         padding: 10px;
         border: solid;
         border-width: thin;
@@ -289,26 +275,28 @@ div.UpperBox {
       }
     }
   }
+
   div.cancelOrConfirm {
     //border-top: solid;
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: 30%;
     text-align: center;
+
     .cancel {
-      //border-right: solid;
       padding: 30px;
-      background-color: $color-grey;
       border-bottom-left-radius: 9px;
+      background-color: $color-grey;
       color: #ececec;
       font-size: 25px;
     }
+
     .confirm {
+      padding: 30px;
+      border-bottom-right-radius: 9px;
+      background-color: $color-main;
       color: #ececec;
       font-size: 25px;
-      padding: 30px;
-      background-color: $color-main;
-      border-bottom-right-radius: 9px;
     }
   }
 }
