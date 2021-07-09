@@ -11,7 +11,7 @@ class Nav extends React.Component {
           <img className="logoImg" src="images/mango.png" alt="로고이미지" />
         </div>
         <div className="navSearchBar">
-          <i class="fas fa-search" id="searchIcon"></i>
+          <i class="fas fa-search searchIcon"></i>
           <input className="mainSearchInput" placeholder="맛집 검색"></input>
         </div>
         <div className="navProfileBox">

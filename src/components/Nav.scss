@@ -3,8 +3,8 @@
 .navBar {
   display: flex;
   justify-content: space-between;
-  position: fixed;
   align-items: center;
+  position: fixed;
   height: 60px;
   width: 100%;
   background-color: white;
@@ -34,7 +34,7 @@
     margin-right: 100px;
     width: 60%;
 
-    #searchIcon {
+    .searchIcon {
       color: $color-grey;
     }
 
@@ -53,7 +53,8 @@
 
   .navProfileBox {
     @include display-flex(space-between, center);
-    width: 275px;
+    width: 17%;
+    margin-right: 20px;
 
     button {
       margin-right: 40px;
