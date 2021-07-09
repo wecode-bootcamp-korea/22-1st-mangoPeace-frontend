@@ -6,6 +6,7 @@ import Detail from './pages/Detail/Detail';
 import BestList from './pages/BestList/BestList';
 import Main from './pages/Main/Main';
 import SearchResult from './pages/SearchResult/SearchResult';
+import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 
 class Routes extends React.Component {
@@ -14,6 +15,7 @@ class Routes extends React.Component {
       <Router>
         <Nav />
         <Switch>
+          <Route exact path="/login" component={Login} />
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/" component={Main} />
           <Route exact path="/searchresult" component={SearchResult} />
