@@ -19,7 +19,7 @@ div.UpperBox {
       justify-content: space-between;
 
       span.title {
-        margin-left: 20px;
+        margin-left: 15px;
         margin-top: 10px;
         padding: 10px;
       }
@@ -39,6 +39,8 @@ div.UpperBox {
       border-bottom: solid;
       border-width: thin;
       border-color: $color-grey;
+      padding-top: 20px;
+      padding-bottom: 20px;
 
       .rating {
         display: inline-block;
@@ -58,8 +60,9 @@ div.UpperBox {
         width: 200px;
         height: 45px;
         margin: 20px;
-        border-radius: 50px;
+        margin-left: 20px;
         padding: 10px;
+        border-radius: 50px;
         border: solid;
         border-width: thin;
         border-color: $color-grey;
@@ -80,17 +83,14 @@ div.UpperBox {
         margin-left: 20px;
         margin-top: 10px;
       }
-
-      span.multipleChoice {
-        margin-right: 20px;
-        margin-top: 10px;
-      }
     }
 
     div.priceSelectSection {
       display: flex;
       justify-content: space-around;
       text-align: center;
+      padding-bottom: 30px;
+      padding-top: 10px;
 
       span.lessThan10000 {
         display: inline-block;
@@ -148,10 +148,6 @@ div.UpperBox {
       justify-content: space-between;
       .title {
         margin-left: 20px;
-        margin-top: 10px;
-      }
-      .multipleChoice {
-        margin-right: 20px;
         margin-top: 10px;
       }
     }
@@ -277,7 +273,6 @@ div.UpperBox {
   }
 
   div.cancelOrConfirm {
-    //border-top: solid;
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: 30%;

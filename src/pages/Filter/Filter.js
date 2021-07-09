@@ -9,17 +9,15 @@ class Filter extends React.Component {
           <div className="searchFilter">
             <div className="selectHead">
               <span className="title">검색필터</span>
-              <span className="multipleChoice">중복 선택 불가능</span>
             </div>
             <div className="selectSection">
               <div className="rating">평점순</div>
-              <div className="popularity">코멘트</div>
+              <div className="popularity">코멘트순</div>
             </div>
           </div>
           <div className="priceForOnePerson">
             <div className="selectHead">
               <span className="title">가격/1인당</span>
-              <span className="multipleChoice">중복 선택 불가능</span>
             </div>
             <div className="priceSelectSection">
               <span className="lessThan10000">만원이하</span>
@@ -32,7 +30,6 @@ class Filter extends React.Component {
           <div className="menuCategory">
             <div className="selectHead">
               <span className="title">음식종류</span>
-              <span className="multipleChoice">중복 선택 불가능</span>
             </div>
             <div className="western">
               <span className="pizza">피자</span>
@@ -45,7 +42,6 @@ class Filter extends React.Component {
               <span className="noodle">국수</span>
             </div>
             <div className="japanese">
-              {/* <span className="selectJapanese">일식</span> */}
               <span className="sushi">스시</span>
               <span className="cutlet">돈가스</span>
               <span className="donburi">덮밥</span>
