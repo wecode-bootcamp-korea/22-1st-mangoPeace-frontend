@@ -60,6 +60,7 @@
 
             .storeHeadline {
               display: flex;
+              margin-bottom: 10px;
 
               h2 {
                 display: inline;
@@ -80,7 +81,7 @@
 
             h3 {
               color: $color-grey;
-              font-size: 20px;
+              font-size: 18px;
             }
           }
 
