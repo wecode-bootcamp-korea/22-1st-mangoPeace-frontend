@@ -8,8 +8,8 @@ class Filter extends React.Component {
         <div className="UpperBox">
           <div className="searchFilter">
             <div className="selectHead">
-              <span className="Title">검색필터</span>
-              <span className="multipleChoice">중복선택불가능</span>
+              <span className="title">검색필터</span>
+              <span className="multipleChoice">중복 선택 불가능</span>
             </div>
             <div className="selectSection">
               <div className="rating">평점순</div>
@@ -19,7 +19,7 @@ class Filter extends React.Component {
           <div className="priceForOnePerson">
             <div className="selectHead">
               <span className="title">가격/1인당</span>
-              <span className="multipleChoice">중복선택불가능</span>
+              <span className="multipleChoice">중복 선택 불가능</span>
             </div>
             <div className="priceSelectSection">
               <span className="lessThan10000">만원이하</span>
@@ -54,8 +54,8 @@ class Filter extends React.Component {
             </div>
           </div>
           <div className="cancelOrConfirm">
-            <span className="cancel">취소</span>
-            <span className="confirm">선택</span>
+            <div className="cancel">취소</div>
+            <div className="confirm">선택</div>
           </div>
         </div>
       </>
