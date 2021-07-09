@@ -2,7 +2,7 @@ import React from 'react';
 
 class SearchResultComponent extends React.Component {
   render() {
-    console.log(this.props.id); 
+    console.log(this.props.id);
     return (
       <>
         <span className="searchResultListContent" key={this.props.id}>

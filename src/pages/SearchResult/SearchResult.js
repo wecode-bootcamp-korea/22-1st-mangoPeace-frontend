@@ -1,6 +1,6 @@
 import React from 'react';
 import './SearchResult.scss';
-import RESULT from '../Data/resultData';
+//import RESULT from '../Data/resultData';
 import SearchResultComponent from '../SearchResultComponent/SearchResultComponent';
 class SearchResult extends React.Component {
   constructor() {
@@ -10,18 +10,29 @@ class SearchResult extends React.Component {
       resultList: [],
       searchResultMainImage: null,
       menuName: '',
-      star: null, 
+      star: null,
       location: '',
       category: '',
       id: null,
     };
   }
 
+  // componentDidMount() {
+  //   this.setState({
+  //     resultList: RESULT,
+  //   });
+  // }
+
   componentDidMount() {
-   
-    this.setState({
-      resultList: RESULT, 
-    });
+    fetch('http://localhost:3001/data/resultData.json', {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          resultList: data,
+        });
+      });
   }
 
   render() {
