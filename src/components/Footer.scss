@@ -1,0 +1,72 @@
+@import '../styles/common.scss';
+
+.commonFooter {
+  @include display-flex;
+  background: #3e3e3e;
+  color: $color-grey;
+
+  .footerInner {
+    @include display-flex(space-between, center);
+    padding: 90px 0 130px;
+    width: 70%;
+
+    .enterInfoBox {
+      .logoTitle {
+        display: block;
+        margin-bottom: 130px;
+        position: relative;
+        color: $color-white;
+        font-family: 'Gamja Flower', cursive;
+        font-size: 38px;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 70px;
+          left: 0;
+          width: 30px;
+          border-top: 1px solid $color-grey;
+        }
+
+        &::after {
+          content: "Eat share, Don't fight";
+          position: absolute;
+          top: 85px;
+          left: 0;
+          font-family: 'Noto Sans KR', sans-serif;
+          font-size: 15px;
+          color: $color-grey;
+          letter-spacing: -0.5px;
+        }
+      }
+
+      .enterInfo {
+        margin-bottom: 30px;
+        font-size: 15px;
+
+        li + li {
+          margin-top: 10px;
+        }
+      }
+    }
+
+    .serviceInfoBox {
+      @include display-flex(space-between, normal);
+      margin-top: 28px;
+      width: 60%;
+
+      .footerUl {
+        li {
+          cursor: pointer;
+
+          & + li {
+            margin-top: 18px;
+          }
+          &.dev {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+}

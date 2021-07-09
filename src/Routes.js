@@ -8,6 +8,7 @@ import Main from './pages/Main/Main';
 import SearchResult from './pages/SearchResult/SearchResult';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
+import Footer from './components/Footer';
 
 class Routes extends React.Component {
   render() {
@@ -22,6 +23,7 @@ class Routes extends React.Component {
           <Route exact path="/bestlist/:id" component={BestList} />
           <Route exact path="/detail/:id" component={Detail} />
         </Switch>
+        <Footer />
       </Router>
     );
   }
