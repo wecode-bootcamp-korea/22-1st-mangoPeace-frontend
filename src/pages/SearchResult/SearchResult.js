@@ -29,38 +29,31 @@ class SearchResult extends React.Component {
   // }
 
   componentDidMount() {
-    fetch('http://172.30.1.6:8000/restaurants/search?category_id=1', {
+    fetch('http://localhost:3000/data/resultData.json', {
       method: 'GET',
     })
       .then(res => res.json())
       .then(data => {
         this.setState({
-          resultList: data.category_info,
+          resultList: data,
         });
       });
   }
-  // fetch('http://10.58.3.11:8000/users/signin', {
-  //   method: 'post',
-  //   body: JSON.stringify({
-  //     email: this.state.emailValue,
-  //     password: this.state.passwordValue,
-  //   }),
-  // })
 
-  // componentDidUpdate() {
-  //   fetch('http://localhost:3001/data/resultData.json', {
-  //     method: 'GET',
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       this.setState({
-  //         resultList: data,
-  //       });
-  //     });
-  // }
+  updateResult = e => {
+    fetch('http://localhost:3000/data/resultData_2.json', {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          resultList: data,
+        });
+      });
+  };
 
   render() {
-    console.log(this.state.resultList);
+    // console.log(this.state.resultList);
     return (
       <>
         <nav>SearchResult</nav>
@@ -81,16 +74,13 @@ class SearchResult extends React.Component {
             <div className="searchResultList">
               {this.state.resultList.map(result => {
                 return (
-                  //<span className="searchResultListContent" key={result.id}>
                   <SearchResultComponent
-                    //searchResultMainImage={result.searchResultMainImage}
-                    menuName={result.name}
-                    //star={result.star} // 숫자의 기본값이 얼마인지 모름 !
-                    //location={result.location}
-                    //category={result.category}
-                    id={result.menu_id}
+                    searchResultMainImage={result.searchResultMainImage}
+                    menuName={result.menuName}
+                    star={result.star} // 숫자의 기본값이 얼마인지 모름 !
+                    location={result.location}
+                    category={result.category}
                   />
-                  //</span>
                 );
               })}
             </div>
@@ -98,11 +88,18 @@ class SearchResult extends React.Component {
               <button
                 type="button"
                 className="paging"
-                currentIndex={this.state.currentIdx}
+                //currentIndex={this.state.currentIdx}
+                //onClick={this.updateResult}
               >
                 1
               </button>
-              <span className="paging">2</span>
+              <button
+                type="button"
+                className="paging"
+                onClick={this.updateResult}
+              >
+                2
+              </button>
               <span className="paging">3</span>
               <span className="paging">4</span>
               <span className="paging">5</span>
