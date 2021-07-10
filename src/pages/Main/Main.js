@@ -12,6 +12,13 @@ class Main extends React.Component {
     slideTranslate: 0,
   };
 
+  //CDM 사용
+  //const foo = () => { fetch(`${cartAPI}/quantity`) .then((res) => res.json()) };
+
+  // componentDidMount() {
+  //   fetch('api주소(localhost/ 다음부터');
+  // }
+
   handleBtn = e => {
     const { slideNum, slideTranslate } = this.state;
 
