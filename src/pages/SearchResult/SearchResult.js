@@ -14,6 +14,8 @@ class SearchResult extends React.Component {
       location: '',
       category: '',
       id: null,
+      //페이징
+      currentIdx: 1,
     };
   }
 
@@ -34,6 +36,18 @@ class SearchResult extends React.Component {
         });
       });
   }
+
+  // componentDidUpdate() {
+  //   fetch('http://localhost:3001/data/resultData.json', {
+  //     method: 'GET',
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       this.setState({
+  //         resultList: data,
+  //       });
+  //     });
+  // }
 
   render() {
     return (
@@ -70,7 +84,13 @@ class SearchResult extends React.Component {
               })}
             </div>
             <div className="searchResultPaging">
-              <span className="paging">1</span>
+              <button
+                type="button"
+                className="paging"
+                currentIndex={this.state.currentIdx}
+              >
+                1
+              </button>
               <span className="paging">2</span>
               <span className="paging">3</span>
               <span className="paging">4</span>
