@@ -2,6 +2,7 @@ import React from 'react';
 import './SearchResult.scss';
 //import RESULT from '../Data/resultData';
 import SearchResultComponent from '../SearchResultComponent/SearchResultComponent';
+//import Button from './Button';
 const LIMIT = 10;
 class SearchResult extends React.Component {
   constructor() {
@@ -25,15 +26,16 @@ class SearchResult extends React.Component {
 
   //최초렌더링후에 생기는 화면
   componentDidMount() {
-    fetch('http://localhost:3000/data/resultData1.json', {
+    fetch('http://localhost:3000/data/resultData2.json', {
       method: 'GET',
     })
       .then(res => res.json())
       .then(data => {
         this.setState({
-          resultList: data,
+          resultList: data.page1,
         });
       });
+    console.log(this.state.resultList);
   }
   //페이지 2 눌렀을때 나오는 화면
   updateResult = () => {
@@ -43,7 +45,7 @@ class SearchResult extends React.Component {
       .then(res => res.json())
       .then(data => {
         this.setState({
-          resultList: data,
+          resultList: data.page2,
         });
       });
   };
@@ -67,7 +69,7 @@ class SearchResult extends React.Component {
 
   render() {
     console.log('렌더:' + this.state.backgroundcolor);
-
+    //const { updatePage } = this.state;
     return (
       <>
         <nav>SearchResult</nav>
@@ -102,29 +104,21 @@ class SearchResult extends React.Component {
               })}
             </div>
             <div className="searchResultPaging">
-              <button
-                type="button1"
-                className="paging"
-                onClick={this.updatePage}
-                currentindex={this.state.currentidx}
-                style={{ backgroundColor: this.state.backgroundcolor }}
-              >
-                1
-              </button>
-
-              <button
-                name="button2"
-                type="button"
-                className="paging"
-                onClick={this.updatePage}
-                style={{ backgroundColor: this.state.backgroundcolor }}
-                currentidx={this.state.currentidx}
-              >
-                2
-              </button>
-              <span className="paging">3</span>
-              <span className="paging">4</span>
-              <span className="paging">5</span>
+              {this.state.resultList.map(result => {
+                return (
+                  <span key={result.id}>
+                    <button
+                      type="button"
+                      className="paging"
+                      onClick={this.updatePage}
+                      currentindex={this.props.currentidx}
+                      style={{ backgroundColor: this.props.backgroundcolor }}
+                    >
+                      1
+                    </button>
+                  </span>
+                );
+              })}
             </div>
           </div>
         </div>
