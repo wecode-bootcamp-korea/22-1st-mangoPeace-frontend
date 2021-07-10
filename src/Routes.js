@@ -8,7 +8,6 @@ import Main from './pages/Main/Main';
 import SearchResult from './pages/SearchResult/SearchResult';
 import SignUp from './pages/SignUp/SignUp';
 import Filter from './pages/Filter/Filter';
-import App from './pages/PaginationExample/App';
 
 class Routes extends React.Component {
   render() {
@@ -16,7 +15,6 @@ class Routes extends React.Component {
       <Router>
         <Nav />
         <Switch>
-          <Route eaxct path="/App" component={App} />
           <Route eaxct path="/Filter" component={Filter} />
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/" component={Main} />

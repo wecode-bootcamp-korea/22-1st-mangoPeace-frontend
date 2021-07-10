@@ -19,17 +19,14 @@ class SearchResult extends React.Component {
       //
       name: '',
       menu_id: '',
+      backgroundcolor: null,
     };
   }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     resultList: RESULT,
-  //   });
-  // }
-
+  //최초렌더링후에 생기는 화면
   componentDidMount() {
-    fetch('http://localhost:3000/data/resultData.json', {
+    console.log('componentDidMount:' + this.state.backgroundcolor);
+    fetch('http://localhost:3000/data/resultData1.json', {
       method: 'GET',
     })
       .then(res => res.json())
@@ -39,9 +36,10 @@ class SearchResult extends React.Component {
         });
       });
   }
-
-  updateResult = e => {
-    fetch('http://localhost:3000/data/resultData_2.json', {
+  //페이지 2 눌렀을때 나오는 화면
+  updateResult = () => {
+    console.log('updateResult:' + this.state.backgroundcolor);
+    fetch('http://localhost:3000/data/resultData2.json', {
       method: 'GET',
     })
       .then(res => res.json())
@@ -52,8 +50,24 @@ class SearchResult extends React.Component {
       });
   };
 
+  // 2번 버튼 클릭시 검색결과 변경 , 버튼 컬러 변경
+  updatePage = e => {
+    console.log('updatePage:' + this.state.backgroundcolor);
+    this.updateResult();
+    this.changeButtonColor(e);
+  };
+  changeButtonColor = e => {
+    console.log('changeButtonColor:' + this.state.backgroundcolor);
+    if (e.target.name === 'button2') {
+      this.setState({
+        backgroundcolor: '#0095F6',
+      });
+    }
+  };
+
   render() {
-    // console.log(this.state.resultList);
+    console.log('렌더:' + this.state.backgroundcolor);
+
     return (
       <>
         <nav>SearchResult</nav>
@@ -74,13 +88,16 @@ class SearchResult extends React.Component {
             <div className="searchResultList">
               {this.state.resultList.map(result => {
                 return (
-                  <SearchResultComponent
-                    searchResultMainImage={result.searchResultMainImage}
-                    menuName={result.menuName}
-                    star={result.star} // 숫자의 기본값이 얼마인지 모름 !
-                    location={result.location}
-                    category={result.category}
-                  />
+                  <span className="searchResultListContent" key={result.id}>
+                    <SearchResultComponent
+                      searchResultMainImage={result.searchResultMainImage}
+                      menuName={result.menuName}
+                      star={result.star} // 숫자의 기본값이 얼마인지 모름 !
+                      location={result.location}
+                      category={result.category}
+                      //id={result.id}
+                    />
+                  </span>
                 );
               })}
             </div>
@@ -94,20 +111,17 @@ class SearchResult extends React.Component {
                 1
               </button>
               <button
+                name="button2"
                 type="button"
                 className="paging"
-                onClick={this.updateResult}
+                onClick={this.updatePage}
+                style={{ backgroundColor: this.state.backgroundcolor }}
               >
                 2
               </button>
               <span className="paging">3</span>
               <span className="paging">4</span>
               <span className="paging">5</span>
-              <span className="paging">6</span>
-              <span className="paging">7</span>
-              <span className="paging">8</span>
-              <span className="paging">9</span>
-              <span className="paging">10</span>
             </div>
           </div>
         </div>
