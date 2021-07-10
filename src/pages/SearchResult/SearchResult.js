@@ -16,6 +16,9 @@ class SearchResult extends React.Component {
       id: null,
       //페이징
       currentIdx: 1,
+      //
+      name: '',
+      menu_id: '',
     };
   }
 
@@ -26,16 +29,23 @@ class SearchResult extends React.Component {
   // }
 
   componentDidMount() {
-    fetch('http://localhost:3001/data/resultData.json', {
+    fetch('http://172.30.1.6:8000/restaurants/search?category_id=1', {
       method: 'GET',
     })
       .then(res => res.json())
       .then(data => {
         this.setState({
-          resultList: data,
+          resultList: data.category_info,
         });
       });
   }
+  // fetch('http://10.58.3.11:8000/users/signin', {
+  //   method: 'post',
+  //   body: JSON.stringify({
+  //     email: this.state.emailValue,
+  //     password: this.state.passwordValue,
+  //   }),
+  // })
 
   // componentDidUpdate() {
   //   fetch('http://localhost:3001/data/resultData.json', {
@@ -50,6 +60,7 @@ class SearchResult extends React.Component {
   // }
 
   render() {
+    console.log(this.state.resultList);
     return (
       <>
         <nav>SearchResult</nav>
@@ -72,12 +83,12 @@ class SearchResult extends React.Component {
                 return (
                   //<span className="searchResultListContent" key={result.id}>
                   <SearchResultComponent
-                    searchResultMainImage={result.searchResultMainImage}
-                    menuName={result.menuName}
-                    star={result.star} // 숫자의 기본값이 얼마인지 모름 !
-                    location={result.location}
-                    category={result.category}
-                    id={result.id}
+                    //searchResultMainImage={result.searchResultMainImage}
+                    menuName={result.name}
+                    //star={result.star} // 숫자의 기본값이 얼마인지 모름 !
+                    //location={result.location}
+                    //category={result.category}
+                    id={result.menu_id}
                   />
                   //</span>
                 );
