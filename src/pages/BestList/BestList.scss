@@ -1,12 +1,7 @@
 @import '../../styles/common.scss';
 
-// .bestList * {
-//   border: 1px solid red;
-// }
-
 .bestList {
-  @include display-flex;
-  flex-direction: column;
+  display: block;
 
   .titleBox {
     @include display-flex;
@@ -34,8 +29,7 @@
     width: 100%;
 
     .storeList {
-      @include display-flex;
-      flex-direction: column;
+      display: block;
       width: 50%;
 
       .storeCard {
@@ -54,8 +48,7 @@
           height: 300px;
 
           .storeInfoBox {
-            display: flex;
-            flex-direction: column;
+            display: block;
             margin-bottom: 20px;
 
             .storeHeadline {
