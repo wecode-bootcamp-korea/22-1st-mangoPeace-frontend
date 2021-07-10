@@ -2,9 +2,9 @@ import React from 'react';
 import './SearchResult.scss';
 //import RESULT from '../Data/resultData';
 import SearchResultComponent from '../SearchResultComponent/SearchResultComponent';
+const LIMIT = 10;
 class SearchResult extends React.Component {
   constructor() {
-    console.log('생성자:');
     super();
     this.state = {
       resultList: [],
@@ -25,7 +25,7 @@ class SearchResult extends React.Component {
 
   //최초렌더링후에 생기는 화면
   componentDidMount() {
-    console.log('componentDidMount:' + this.state.backgroundcolor);
+    // console.log('componentDidMount:' + this.state.backgroundcolor);
     fetch('http://localhost:3000/data/resultData1.json', {
       method: 'GET',
     })
@@ -38,8 +38,9 @@ class SearchResult extends React.Component {
   }
   //페이지 2 눌렀을때 나오는 화면
   updateResult = () => {
-    console.log('updateResult:' + this.state.backgroundcolor);
-    fetch('http://localhost:3000/data/resultData2.json', {
+    //console.log('updateResult:' + this.state.backgroundcolor);
+
+    fetch('http://localhost:3000/data/resultData2.json/page=${LIMIT}', {
       method: 'GET',
     })
       .then(res => res.json())
@@ -52,12 +53,12 @@ class SearchResult extends React.Component {
 
   // 2번 버튼 클릭시 검색결과 변경 , 버튼 컬러 변경
   updatePage = e => {
-    console.log('updatePage:' + this.state.backgroundcolor);
+    console.log('첫번째 버튼 누른 후에도 작동하는 지 확인 '); //된다 !!! 이제는 첫번쨰 버튼 누르고 첫 화면 나오게 하기
     this.updateResult();
     this.changeButtonColor(e);
   };
   changeButtonColor = e => {
-    console.log('changeButtonColor:' + this.state.backgroundcolor);
+    //console.log('changeButtonColor:' + this.state.backgroundcolor);
     if (e.target.name === 'button2') {
       this.setState({
         backgroundcolor: '#0095F6',
@@ -105,17 +106,18 @@ class SearchResult extends React.Component {
               <button
                 type="button"
                 className="paging"
-                //currentIndex={this.state.currentIdx}
-                //onClick={this.updateResult}
+                onClick={this.updatePage}
               >
                 1
               </button>
+
               <button
                 name="button2"
                 type="button"
                 className="paging"
                 onClick={this.updatePage}
                 style={{ backgroundColor: this.state.backgroundcolor }}
+                //currentIdx={}
               >
                 2
               </button>
