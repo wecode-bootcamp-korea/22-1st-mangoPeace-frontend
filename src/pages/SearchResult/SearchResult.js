@@ -16,7 +16,7 @@ class SearchResult extends React.Component {
       category: '',
       id: null,
       //페이징
-      currentidx: 1,
+      // currentidx: 1,
       //
       name: '',
       menu_id: '',
@@ -39,22 +39,21 @@ class SearchResult extends React.Component {
   }
 
   // 2번 버튼 클릭시 검색결과 변경 , 버튼 컬러 변경
-  updatePage = e => {
-    this.updateResult();
-    this.changeButtonColor(e);
-  };
 
-  changeButtonColor = e => {
+  changeButtonColor = () => {
     this.setState({
       backgroundcolor: '#0095F6',
     });
   };
 
   //페이지 2 눌렀을때 나오는 화면
-  updateResult = () => {
+  updateResult = (e, currentidx) => {
     // const LIMIT = 4;
     //const offset = e?.target.dataset.idx;
-    fetch(`http://localhost:3000/data/resultData${3}.json`, {
+
+    // this.setState({ currentidx: currentidx });
+    // console.log(this.state.currentidx); // 1출력됨
+    fetch(`http://localhost:3000/data/resultData${currentidx}.json`, {
       method: 'GET',
     })
       .then(res => res.json())
@@ -63,7 +62,8 @@ class SearchResult extends React.Component {
           resultList: data,
         });
       });
-    console.log(this.state.resultList);
+
+    this.changeButtonColor(e);
   };
 
   render() {
@@ -118,8 +118,8 @@ class SearchResult extends React.Component {
               <button
                 type="button"
                 className="paging"
-                onClick={this.updatePage}
-                currentindex={this.state.currentidx}
+                onClick={e => this.updateResult(e, 1)}
+                //={this.state.currentidx}
                 style={{ backgroundColor: this.state.backgroundcolor }}
               >
                 1
@@ -127,8 +127,8 @@ class SearchResult extends React.Component {
               <button
                 type="button"
                 className="paging"
-                onClick={this.updatePage}
-                currentindex={this.state.currentidx}
+                onClick={e => this.updateResult(e, 2)}
+                //currentindex={this.state.currentidx}
                 style={{ backgroundColor: this.state.backgroundcolor }}
               >
                 2
@@ -136,8 +136,11 @@ class SearchResult extends React.Component {
               <button
                 type="button"
                 className="paging"
-                onClick={this.updatePage}
-                currentindex={this.state.currentidx}
+                // onClick={e => this.updateResult(e, 3)}
+                onClick={e => this.updateResult(e, 3)}
+                //괄호가없을때 this.updateResult - 호출되지 않는다. 온클릭에 해당하는 행위가 일어나지 않는 이상 호출 안하고 읽기만함
+                //currentindex={this.state.currentidx}
+                //() => this.updateResult(e, 3) // 새로운 함수안에 넣어준 이유 - 바로 호출되지 않게하려고
                 style={{ backgroundColor: this.state.backgroundcolor }}
               >
                 3
