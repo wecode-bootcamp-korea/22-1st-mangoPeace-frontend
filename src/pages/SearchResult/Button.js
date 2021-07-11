@@ -3,20 +3,25 @@ import React from 'react';
 class Button extends React.Component {
   constructor(props) {
     super(props);
-    this.updatePage = this.updatePage.bind(this);
+    this.state = {};
   }
   render() {
+    console.log(this.props);
     return (
       <>
-        <button
-          type="button"
-          className="paging"
-          onClick={this.updatePage}
-          currentindex={this.props.currentidx}
-          style={{ backgroundColor: this.props.backgroundcolor }}
-        >
-          1
-        </button>
+        <span>
+          <button
+            type="button"
+            className="paging"
+            onClick={e =>
+              this.props.updateResult(e, this.props.resultList.data.id)
+            }
+            data-index={this.props.resultList.data.id}
+            style={{ backgroundColor: this.state.backgroundcolor }}
+          >
+            {this.props.resultList.data.id}
+          </button>
+        </span>
       </>
     );
   }

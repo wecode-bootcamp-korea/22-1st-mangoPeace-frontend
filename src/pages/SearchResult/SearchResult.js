@@ -2,7 +2,7 @@ import React from 'react';
 import './SearchResult.scss';
 //import RESULT from '../Data/resultData';
 import SearchResultComponent from '../SearchResultComponent/SearchResultComponent';
-//import Button from './Button';
+import Button from './Button';
 
 class SearchResult extends React.Component {
   constructor() {
@@ -59,9 +59,10 @@ class SearchResult extends React.Component {
         });
       });
 
-    console.log(e.target.getAttribute('data-index')); // 이미 인덱스가 지정되어있으므로 굳이 어떤 인덱스인지 밝힐필요없다
-    console.log(currentidx);
+    // console.log(e.target.getAttribute('data-index')); // 이미 인덱스가 지정되어있으므로 굳이 어떤 인덱스인지 밝힐필요없다
+    // console.log(currentidx);
     // if (e.target.getAttribute('data-index') === currentidx) //둘이 같다
+
     this.setState({
       backgroundcolor: '#0095F6',
     });
@@ -101,25 +102,27 @@ class SearchResult extends React.Component {
               })}
             </div>
             <div className="searchResultPaging">
-              {this.state.resultList.map(data => {
-                console.log(data.id); // 아이디가 모두 찍힘 모든 맵이 돌아가는듯
-                console.log(this.state.resultList);
-                return (
-                  <span key={data.id}>
-                    <button
-                      type="button"
-                      className="paging"
+              {/* //&&앞이 true여야 뒤가 실행이 된다. 배열이 처음부터 true
+              이기떄문에 다 돌아버림 - 조건부 렌더링 // */}
+              {this.state.resultList.length > 0 &&
+                this.state.resultList.map(data => {
+                  return (
+                    <Button
+                      //key={data.id}
                       onClick={e => this.updateResult(e, data.id)}
-                      data-index={data.id}
+                      data-index={
+                        //버튼인덱스임 // 이렇게 하면 안됨//이렇게해서 값으로 넣어주기
+                        //
+                        this.state.resultList.length % 4 === 0
+                          ? this.state.resultList.length / 4
+                          : this.state.resultList.length / 4 + 1
+                      }
                       style={{ backgroundColor: this.state.backgroundcolor }}
-                    >
-                      {data.id}
-                    </button>
-                  </span>
-                );
-              })}
+                    />
+                  );
+                })}
               {/* 맵함수로 바꾸는 이유  : 같은 버튼 태그들을 늘어놓았을때 - 모두 같은 백그라운드 컬러를 바라보기 때문에 색도 동시에 모두 바뀌어 버림 
-                하지만 맵으로 돌려서 하나씩 뱉으면 각각의 스테이트를 가지게 된다   */}
+                하지만 맵으로 돌려서 하나씩 뱉으면 각각의 스테이트를 가지게 된다 ,또한 모두가 한 값을 바라보지 않게 하기위해서는 컴포넌트로 따로 분리를 해야한다   */}
               {/* <button
                 type="button"
                 className="paging"
