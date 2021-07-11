@@ -40,11 +40,7 @@ class SearchResult extends React.Component {
 
   // 2번 버튼 클릭시 검색결과 변경 , 버튼 컬러 변경
 
-  changeButtonColor = () => {
-    this.setState({
-      backgroundcolor: '#0095F6',
-    });
-  };
+  // changeButtonColor = (e, currentidx) => {};
 
   //페이지 2 눌렀을때 나오는 화면
   updateResult = (e, currentidx) => {
@@ -63,7 +59,12 @@ class SearchResult extends React.Component {
         });
       });
 
-    this.changeButtonColor(e);
+    console.log(e.target.getAttribute('data-index')); // 이미 인덱스가 지정되어있으므로 굳이 어떤 인덱스인지 밝힐필요없다
+    console.log(currentidx);
+    // if (e.target.getAttribute('data-index') === currentidx) //둘이 같다
+    this.setState({
+      backgroundcolor: '#0095F6',
+    });
   };
 
   render() {
@@ -100,26 +101,30 @@ class SearchResult extends React.Component {
               })}
             </div>
             <div className="searchResultPaging">
-              {/* {this.state.resultList.map(data => {
+              {this.state.resultList.map(data => {
+                console.log(data.id); // 아이디가 모두 찍힘 모든 맵이 돌아가는듯
+                console.log(this.state.resultList);
                 return (
                   <span key={data.id}>
                     <button
                       type="button"
                       className="paging"
-                      onClick={this.updatePage}
-                      currentindex={this.state.currentidx}
+                      onClick={e => this.updateResult(e, data.id)}
+                      data-index={data.id}
                       style={{ backgroundColor: this.state.backgroundcolor }}
                     >
-                      1
+                      {data.id}
                     </button>
                   </span>
                 );
-              })} */}
-              <button
+              })}
+              {/* 맵함수로 바꾸는 이유  : 같은 버튼 태그들을 늘어놓았을때 - 모두 같은 백그라운드 컬러를 바라보기 때문에 색도 동시에 모두 바뀌어 버림 
+                하지만 맵으로 돌려서 하나씩 뱉으면 각각의 스테이트를 가지게 된다   */}
+              {/* <button
                 type="button"
                 className="paging"
                 onClick={e => this.updateResult(e, 1)}
-                //={this.state.currentidx}
+                data-index={1}
                 style={{ backgroundColor: this.state.backgroundcolor }}
               >
                 1
@@ -128,7 +133,7 @@ class SearchResult extends React.Component {
                 type="button"
                 className="paging"
                 onClick={e => this.updateResult(e, 2)}
-                //currentindex={this.state.currentidx}
+                data-index={2}
                 style={{ backgroundColor: this.state.backgroundcolor }}
               >
                 2
@@ -136,15 +141,14 @@ class SearchResult extends React.Component {
               <button
                 type="button"
                 className="paging"
-                // onClick={e => this.updateResult(e, 3)}
                 onClick={e => this.updateResult(e, 3)}
                 //괄호가없을때 this.updateResult - 호출되지 않는다. 온클릭에 해당하는 행위가 일어나지 않는 이상 호출 안하고 읽기만함
-                //currentindex={this.state.currentidx}
+                data-index={3}
                 //() => this.updateResult(e, 3) // 새로운 함수안에 넣어준 이유 - 바로 호출되지 않게하려고
                 style={{ backgroundColor: this.state.backgroundcolor }}
               >
                 3
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
