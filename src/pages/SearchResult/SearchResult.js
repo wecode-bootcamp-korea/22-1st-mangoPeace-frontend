@@ -3,6 +3,9 @@ import './SearchResult.scss';
 //import RESULT from '../Data/resultData';
 import SearchResultComponent from '../SearchResultComponent/SearchResultComponent';
 //import Button from './Button';
+import StoryModal from './StoryModal/StoryModal';
+import Dimmer from './Dimmer/Dimmer';
+import Filter from '../Filter/Filter';
 
 class SearchResult extends React.Component {
   constructor() {
@@ -20,6 +23,8 @@ class SearchResult extends React.Component {
       menu_id: '',
       backgroundcolor: null,
       idx: '1',
+      storyModalStatus: false,
+      storyModal: null,
     };
   }
 
@@ -80,7 +85,15 @@ class SearchResult extends React.Component {
               <div className="resultRank"> 맛집 인기 검색 순위</div>
             </div>
             <div className="searchResultFilter">
-              <i className="fas fa-list"></i>
+              {this.state.storyModalStatus && (
+                <StoryModal storyModal={this.state.storyModal} />
+              )}
+              {this.state.storyModalStatus && (
+                <Dimmer modalOff={this.modalOff} />
+              )}
+              <i className="fas fa-list">
+                <Filter modalOff={this.modalOff} />
+              </i>
               <span className="letterFilter">filter</span>
             </div>
           </div>
@@ -104,7 +117,7 @@ class SearchResult extends React.Component {
               })}
             </div>
             <div className="searchResultPaging">
-              {newArr.map(idx => {
+              {/* {newArr.map(idx => {
                 console.log(idx);
                 return (
                   //<Button
@@ -122,7 +135,7 @@ class SearchResult extends React.Component {
                     {idx}
                   </button> //내가 지금 이걸 굳이 해야하나 ?
                 );
-              })}
+              })} */}
             </div>
           </div>
         </div>
