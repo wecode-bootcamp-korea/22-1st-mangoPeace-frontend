@@ -13,13 +13,11 @@ class Button extends React.Component {
           <button
             type="button"
             className="paging"
-            onClick={e =>
-              this.props.updateResult(e, this.props.resultList.data.id)
-            }
-            data-index={this.props.resultList.data.id}
+            onClick={e => this.props.updateResult(e, idx)}
+            data-index={idx}
             style={{ backgroundColor: this.state.backgroundcolor }}
           >
-            {this.props.resultList.data.id}
+            {idx}
           </button>
         </span>
       </>
