@@ -1,9 +1,4 @@
-$color-grey: #9b9b9b;
-$color-main: #fb7d27;
-
-* {
-  border: solid;
-}
+@import '../../styles/common.scss';
 
 .loginForm {
   display: flex;
@@ -12,6 +7,7 @@ $color-main: #fb7d27;
   margin: 30%;
   padding: 20px;
   border-radius: 10px;
+  border-color: $color-grey;
   .loginLogo {
     margin: 25px;
     .logoImage {
@@ -24,18 +20,8 @@ $color-main: #fb7d27;
     font-weight: bold;
   }
 
-  .inputEmail {
-    width: 300px;
-    height: 40px;
-    margin: 10px;
-    padding-left: 10px;
-    border-radius: 10px;
-    border: none;
-    background-color: #e8eaec;
-  }
-
-  .inputPassword {
-    width: 300px;
+  input {
+    width: 60%;
     height: 40px;
     margin: 10px;
     padding-left: 10px;
