@@ -16,7 +16,7 @@ class Detail extends React.Component {
 
   storeId = 1; //받아올 음식점 아이디
   reviewRequestNum = 1;
-  reviewRequestNumLimit; //초기값 뭘로 줘야 되는지
+  reviewRequestNumLimit; //한 번에 10개씩 띄울 경우 총 리뷰 페이지 수
 
   restaurantsAddr = `restaurants/${this.storeId}`;
   foodsAddr = `restaurants/${this.storeId}/food`;

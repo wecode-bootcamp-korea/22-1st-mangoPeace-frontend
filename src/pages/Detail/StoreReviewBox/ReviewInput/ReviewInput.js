@@ -6,22 +6,21 @@ class ReviewInput extends React.Component {
   state = {
     isTextValid: false,
     isRatingValid: false,
-    _reviewRating: [false, false, false, false, false],
+    reviewRating: 0,
     reviewInput: '',
-    ratedScore: 0,
   };
 
   storeId = 1; //받아올 음식점 아이디
   restaurantsAddr = `restaurants/${this.storeId}`;
 
   fetchReviewInput = (addr, method) => {
-    const { ratedScore, reviewInput } = this.state;
+    const { reviewRating, reviewInput } = this.state;
     const { fetchData } = this.props;
 
     fetch(`http://${IP_ADDRESS}:8000/${addr}`, {
       method: method,
       body: JSON.stringify({
-        rating: ratedScore,
+        rating: reviewRating,
         content: reviewInput,
       }),
     })
@@ -41,7 +40,7 @@ class ReviewInput extends React.Component {
     this.fetchReviewInput(this.reviewInputAddr, 'POST');
     this.setState({
       reviewInput: '',
-      _reviewRating: [false, false, false, false, false],
+      reviewRating: 0,
       isRatingValid: false,
       isTextValid: false,
     });
@@ -52,30 +51,14 @@ class ReviewInput extends React.Component {
     this.setState({ isTextValid, reviewInput: e.target.value });
   };
 
-  handleReviewRating = e => {
-    const { _reviewRating } = this.state;
-
-    const clickedIndex = parseInt(e.target.attributes.idx.value);
-    const copiedRating = [..._reviewRating];
-
-    for (let i = 0; i < clickedIndex + 1; i++) {
-      copiedRating[i] = true;
-    }
-
-    for (let i = 6 - (5 - clickedIndex); i < 5; i++) {
-      copiedRating[i] = false;
-    }
-
+  handleReviewRating = index => {
     this.setState({
-      ratedScore: clickedIndex + 1,
-      isRatingValid: true,
-      _reviewRating: copiedRating,
+      reviewRating: index + 1,
     });
   };
 
   render() {
-    const { _reviewRating, reviewRating, isTextValid, isRatingValid } =
-      this.state;
+    const { reviewRating, isTextValid, isRatingValid } = this.state;
     const { storeId, storeName } = this.props;
 
     return (
@@ -85,12 +68,12 @@ class ReviewInput extends React.Component {
         </p>
         <div className="reviewInputBox">
           <div className="reviewRatingBox">
-            {_reviewRating.map((star, index) => (
+            {[...Array(5)].map((_, index) => (
               <i
                 key={index}
-                onClick={this.handleReviewRating}
+                onClick={() => this.handleReviewRating(index)}
                 idx={index}
-                className={`fa-star ${_reviewRating[index] ? 'fas' : 'far'}`}
+                className={`fa-star ${index < reviewRating ? 'fas' : 'far'}`}
               ></i>
             ))}
           </div>

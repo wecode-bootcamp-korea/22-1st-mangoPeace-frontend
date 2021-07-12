@@ -1,5 +1,4 @@
 import React from 'react';
-import { findDOMNode } from 'react-dom';
 
 import './StoreImgBox.scss';
 
@@ -12,8 +11,7 @@ class StoreImgList extends React.Component {
   slideWidth =
     IMG_WIDTH * this.imgQuantity + (this.imgQuantity - 1) * SLIDE_GAP;
   hiddenedSlideWidth = this.slideWidth - window.innerWidth;
-  slideEnd;
-  // slideEnd = 99999; //임의의 값을 지정해주었는데 이래도 되는 건지 확인하기
+  slideEnd = -1;
 
   componentDidMount = () => {
     this.slideWidth > window.innerWidth

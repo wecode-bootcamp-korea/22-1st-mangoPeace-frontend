@@ -1,8 +1,6 @@
 @import '../../styles/common.scss';
 
 .detailPage {
-  margin-top: 60px;
-
   .detailMain {
     @include display-flex(normal, center);
     flex-direction: column;
