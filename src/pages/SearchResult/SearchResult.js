@@ -51,7 +51,7 @@ class SearchResult extends React.Component {
       });
     this.setState({
       currentId: currentidx,
-      backgroundcolor: '#0095F6',
+      backgroundcolor: '#0095F6', //삭제해야함
     });
   };
 
@@ -61,7 +61,7 @@ class SearchResult extends React.Component {
     for (
       let idx = 1;
       idx <= Math.ceil(40 / 4);
-      //this.state.resultList.length
+      //this.state.resultList.length // 단한페이지 배열의 길이여서 틀림
       idx++
     ) {
       //수 임의로 넣어줌

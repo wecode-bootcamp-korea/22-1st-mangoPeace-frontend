@@ -1,8 +1,38 @@
 import React from 'react';
 import './Filter.scss';
+import SelectRatingComponent from '../FilterComponent/SelectRatingComponent';
 
 class Filter extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isClicked: false,
+      dataIdx: null,
+      currentId: 1,
+      idx: 1,
+    };
+  }
+
+  checkSelectRating = (e, currentidx) => {
+    // if (e.target.name === 'star')
+    //   this.setState({
+    //     isClicked: !this.state.isClicked,
+    //   });
+    // else if (e.target.name === 'popularity') {
+    //   this.setState({
+    //     isClicked: !this.state.isClicked,
+    //   });
+    // }
+    console.log(`currentidx`, currentidx);
+    this.setState({
+      currentId: currentidx,
+      isClicked: !this.state.isClicked,
+    });
+  };
+
   render() {
+    const array1 = ['별점순', '코멘트순'];
+    console.log('필터렌더', this.state.isClicked);
     return (
       <>
         <div className="UpperBox">
@@ -10,9 +40,19 @@ class Filter extends React.Component {
             <div className="selectHead">
               <span className="title">검색필터</span>
             </div>
-            <div className="selectSection">
-              <div className="rating">평점순</div>
-              <div className="popularity">코멘트순</div>
+            <div className="selectRating">
+              {array1.map(idx => {
+                console.log('idx', idx);
+                console.log(`this.state.currentId`, this.state.currentId); //계속동일-이게 문제
+                return (
+                  <SelectRatingComponent
+                    title={array1[idx]}
+                    dataIdx={idx}
+                    checkSelectRating={this.checkSelectRating}
+                    isClicked={this.state.currentId === idx}
+                  />
+                );
+              })}
             </div>
           </div>
           <div className="priceForOnePerson">
@@ -20,10 +60,10 @@ class Filter extends React.Component {
               <span className="title">가격/1인당</span>
             </div>
             <div className="priceSelectSection">
-              <span className="lessThan10000">만원이하</span>
-              <span className="over10000">만원이상</span>
-              <span className="over20000">2만원이상</span>
-              <span className="over30000">3만원이상</span>
+              <button className="lessThan10000">만원이하</button>
+              <button className="over10000">만원이상</button>
+              <button className="over20000">2만원이상</button>
+              <button className="over30000">3만원이상</button>
             </div>
           </div>
 
@@ -32,19 +72,19 @@ class Filter extends React.Component {
               <span className="title">음식종류</span>
             </div>
             <div className="western">
-              <span className="pizza">피자</span>
-              <span className="pasta">파스타</span>
-              <span className="hamburger">햄버거</span>
+              <button className="pizza">피자</button>
+              <button className="pasta">파스타</button>
+              <button className="hamburger">햄버거</button>
             </div>
             <div className="korean">
-              <span className="soup">국밥</span>
-              <span className="barbeque">고기</span>
-              <span className="noodle">국수</span>
+              <button className="soup">국밥</button>
+              <button className="barbeque">고기</button>
+              <button className="noodle">국수</button>
             </div>
             <div className="japanese">
-              <span className="sushi">스시</span>
-              <span className="cutlet">돈가스</span>
-              <span className="donburi">덮밥</span>
+              <button className="sushi">스시</button>
+              <button className="cutlet">돈가스</button>
+              <button className="donburi">덮밥</button>
             </div>
           </div>
           <div className="cancelOrConfirm">
