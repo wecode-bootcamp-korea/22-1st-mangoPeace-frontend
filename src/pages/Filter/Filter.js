@@ -12,15 +12,19 @@ class Filter extends React.Component {
       idx: 1,
     };
   }
-
+  //문제점 - 둘이 돌아가면서 색상이 변화 , 무조건 선택해야하는 상황- 음식종류에 적용하기
+  //강의 마저 보기
+  //두번 눌러도 색 그대로인 이유 - 한번 누를떄 컴포넌트 렌더 두번 일어남
   checkSelectRating = (e, currentidx) => {
     // if (e.target.name === 'star')
     //   this.setState({
     //     isClicked: !this.state.isClicked,
+    //     currentId: currentidx,
     //   });
     // else if (e.target.name === 'popularity') {
     //   this.setState({
     //     isClicked: !this.state.isClicked,
+    //     currentId: currentidx,
     //   });
     // }
     console.log(`currentidx`, currentidx);
@@ -31,8 +35,10 @@ class Filter extends React.Component {
   };
 
   render() {
-    const array1 = ['별점순', '코멘트순'];
+    // const array1 = ['별점순', '코멘트순'];
+    const array1 = [1, 2];
     console.log('필터렌더', this.state.isClicked);
+
     return (
       <>
         <div className="UpperBox">
@@ -42,14 +48,17 @@ class Filter extends React.Component {
             </div>
             <div className="selectRating">
               {array1.map(idx => {
-                console.log('idx', idx);
-                console.log(`this.state.currentId`, this.state.currentId); //계속동일-이게 문제
+                console.log('맵', this.state.isClicked);
                 return (
                   <SelectRatingComponent
                     title={array1[idx]}
                     dataIdx={idx}
+                    key={idx}
                     checkSelectRating={this.checkSelectRating}
-                    isClicked={this.state.currentId === idx}
+                    isClicked={
+                      this.state.currentId === idx && !this.state.isClicked
+                    }
+                    // this.state.currentId === idx
                   />
                 );
               })}

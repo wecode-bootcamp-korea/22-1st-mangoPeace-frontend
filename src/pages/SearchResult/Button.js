@@ -7,6 +7,7 @@ class Button extends React.Component {
   }
   render() {
     const { isButtonClicked } = this.props;
+    console.log('컴포넌트isButtonClicked', isButtonClicked);
     //console.log(isButtonClicked);
     return (
       <>

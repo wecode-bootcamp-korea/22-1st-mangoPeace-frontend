@@ -67,6 +67,7 @@ class SearchResult extends React.Component {
       //수 임의로 넣어줌
       newArr.push(idx);
     }
+    // /console.log(`this.state.isButtonClicked`, this.state.isButtonClicked);
 
     return (
       <>
@@ -88,7 +89,7 @@ class SearchResult extends React.Component {
               {/* {this.state.resultList.length>0 && */}
               {this.state.resultList.map(result => {
                 console.log(this.state.resultList);
-
+                console.log(`this.state.currentaId`, this.state.currentId);
                 return (
                   <span className="searchResultListContent" key={result.id}>
                     <SearchResultComponent
