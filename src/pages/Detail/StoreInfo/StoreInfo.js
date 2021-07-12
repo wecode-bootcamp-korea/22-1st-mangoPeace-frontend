@@ -2,47 +2,37 @@ import React from 'react';
 
 import StoreHeader from './StoreHeader/StoreHeader';
 import StoreInfoTable from './StoreInfoTable/StoreInfoTable';
+import StoreLocation from './StoreLocation/StoreLocation';
 
 import './StoreInfo.scss';
 
-/*global kakao*/
-
 class StoreInfo extends React.Component {
-  componentDidMount = () => {
-    this.initMap();
-  };
+  splitCoordinate = coordinate => {
+    const result = coordinate.split(',');
+    const lat = parseFloat(result[0]);
+    const lng = parseFloat(result[1].slice(1));
 
-  initMap = () => {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${API_APP_KEY}&autoload=false`;
-    document.head.appendChild(script);
-
-    script.onload = () => {
-      kakao.maps.load(() => {
-        const container = document.getElementsByClassName('storeLocation')[0];
-        const options = {
-          center: new kakao.maps.LatLng(37.506502, 127.053617),
-          level: 4,
-        };
-        const map = new window.kakao.maps.Map(container, options);
-
-        const markerPosition = new kakao.maps.LatLng(37.506502, 127.053617);
-        const marker = new kakao.maps.Marker({
-          position: markerPosition,
-        });
-        marker.setMap(map);
-      });
-    };
+    return [lat, lng];
   };
 
   render() {
+    const { restaurantsData, foodsData, storeId, fetchData } = this.props;
+
     return (
       <div className="storeInfo">
-        <StoreHeader />
+        <StoreHeader
+          storeId={storeId}
+          fetchData={fetchData}
+          restaurantsData={restaurantsData}
+        />
         <div className="storeInfoBottom">
-          <StoreInfoTable />
-          <div className="storeLocation"></div>
+          <StoreInfoTable
+            restaurantsData={restaurantsData}
+            foodsData={foodsData}
+          />
+          <StoreLocation
+            storeCoordinate={this.splitCoordinate(restaurantsData.coordinate)}
+          />
         </div>
       </div>
     );

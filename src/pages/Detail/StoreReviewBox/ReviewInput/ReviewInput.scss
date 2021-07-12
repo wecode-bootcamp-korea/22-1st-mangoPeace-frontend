@@ -4,7 +4,7 @@
   position: relative;
 
   .reviewTitle {
-    margin-bottom: 30px;
+    margin-right: 5px;
     font-size: 18px;
 
     b {
@@ -15,50 +15,57 @@
     }
   }
 
-  .reviewRatingBox {
-    position: absolute;
-    top: 75px;
-    left: 20px;
+  .reviewInputBox {
+    position: relative;
+    margin-top: 30px;
+    padding: 50px 20px 60px;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: -1px 14px 29px 4px rgba(155, 155, 155, 0.42);
 
-    i {
-      font-size: 19px;
-      color: $color-main;
-      cursor: pointer;
+    .reviewRatingBox {
+      position: absolute;
+      top: 16px;
+      left: 20px;
 
-      & + i {
-        margin-left: 3px;
+      i {
+        font-size: 19px;
+        color: $color-main;
+        cursor: pointer;
+
+        & + i {
+          margin-left: 3px;
+        }
+      }
+    }
+
+    textarea {
+      width: 100%;
+      height: 55px;
+      border: none;
+      resize: none;
+
+      &::placeholder {
+        font-size: 16px;
+        color: $color-grey;
+      }
+
+      &:focus {
+        outline: none;
       }
     }
   }
 
-  textarea {
-    padding: 60px 20px 10px;
-    width: 100%;
-    height: 200px;
-    border: none;
-    border-radius: 5px;
-    resize: none;
-    box-shadow: -1px 14px 29px 4px rgba(155, 155, 155, 0.42);
-
-    &::placeholder {
-      font-size: 16px;
-      color: $color-grey;
-    }
-
-    &:focus {
-      outline: none;
-    }
-  }
-
   .reviewSubmitBtn {
-    padding: 10px 20px;
     position: absolute;
-    bottom: 20px;
-    background: $color-main;
+    bottom: 15px;
     right: 20px;
-    border: none;
+    padding: 10px 15px;
     border-radius: 50px;
+    border: none;
+    background: $color-main;
     color: $color-white;
+    font-size: 12px;
     font-weight: 700;
     cursor: pointer;
 

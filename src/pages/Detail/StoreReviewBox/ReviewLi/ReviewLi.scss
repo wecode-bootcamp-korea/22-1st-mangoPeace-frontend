@@ -2,6 +2,7 @@
 
 .reviewLi {
   @include display-flex(normal, normal);
+  position: relative;
   padding: 40px 0 50px;
 
   & + li {
@@ -14,8 +15,11 @@
     padding-right: 40px;
 
     .reviewUserImg {
+      width: 70px;
+      height: 70px;
       margin-bottom: 8px;
       border-radius: 50%;
+      object-fit: cover;
     }
 
     .reviewUserName {
@@ -53,6 +57,24 @@
 
     .scoreText {
       font-weight: 700;
+    }
+  }
+
+  .reviewEditOrDel {
+    position: absolute;
+    bottom: 10px;
+    right: 3px;
+
+    .reviewBtn {
+      padding: 2px;
+      font-size: 15px;
+      color: $color-grey;
+      font-weight: 700;
+      cursor: pointer;
+
+      & + .reviewBtn {
+        margin-left: 3px;
+      }
     }
   }
 }

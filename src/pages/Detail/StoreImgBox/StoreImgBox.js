@@ -1,4 +1,5 @@
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 
 import './StoreImgBox.scss';
 
@@ -7,10 +8,18 @@ class StoreImgList extends React.Component {
     slideSpot: 0,
   };
 
-  n = 7; //이미지 수
-  slideWidth = IMG_WIDTH * this.n + (this.n - 1) * SLIDE_GAP;
+  imgQuantity = this.props.imagesData.length;
+  slideWidth =
+    IMG_WIDTH * this.imgQuantity + (this.imgQuantity - 1) * SLIDE_GAP;
   hiddenedSlideWidth = this.slideWidth - window.innerWidth;
   slideEnd;
+  // slideEnd = 99999; //임의의 값을 지정해주었는데 이래도 되는 건지 확인하기
+
+  componentDidMount = () => {
+    // this.slideWidth > window.innerWidth
+    //   ? (this.slideEnd = this.slideEnd)
+    //   : (this.slideEnd = 0);
+  };
 
   handlePrevBtn = () => {
     const { slideSpot } = this.state;
@@ -44,6 +53,7 @@ class StoreImgList extends React.Component {
 
   render() {
     const { slideSpot } = this.state;
+    const { imagesData } = this.props;
 
     return (
       <div className="storeImgBox">
@@ -57,27 +67,11 @@ class StoreImgList extends React.Component {
             style={{ transform: `translateX(${slideSpot}px)` }}
             className="slideInner"
           >
-            <li className="storeImgLi">
-              <img src="http://placehold.it/10" />
-            </li>
-            <li className="storeImgLi">
-              <img src="http://placehold.it/20" />
-            </li>
-            <li className="storeImgLi">
-              <img src="http://placehold.it/30" />
-            </li>
-            <li className="storeImgLi">
-              <img src="http://placehold.it/40" />
-            </li>
-            <li className="storeImgLi">
-              <img src="http://placehold.it/50" />
-            </li>
-            <li className="storeImgLi">
-              <img src="http://placehold.it/60" />
-            </li>
-            <li className="storeImgLi">
-              <img src="http://placehold.it/70" />
-            </li>
+            {imagesData.map((img, i) => (
+              <li key={i} className="storeImgLi">
+                <img src={img} />
+              </li>
+            ))}
           </div>
         </ul>
         {slideSpot !== this.slideEnd && (

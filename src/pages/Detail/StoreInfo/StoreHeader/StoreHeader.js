@@ -3,36 +3,45 @@ import React from 'react';
 import './StoreHeader.scss';
 
 class StoreHeader extends React.Component {
-  state = {
-    isWish: false,
-  };
+  restaurantsAddr = `restaurants/${this.props.storeId}`;
 
   handleClickWish = () => {
-    this.setState({
-      isWish: !this.state.isWish,
-    });
+    const { is_wished } = this.props.restaurantsData;
+
+    is_wished ? this.fetchIsWished('DELETE') : this.fetchIsWished('POST');
+  };
+
+  fetchIsWished = methodType => {
+    fetch(`http://${IP_ADDRESS}:8000/${this.restaurantsAddr}/wishlist`, {
+      method: methodType,
+    }).then(() => this.props.fetchData(this.restaurantsAddr));
   };
 
   render() {
-    const { isWish } = this.state;
+    const { restaurantsData } = this.props;
 
     return (
       <header className="storeHeader">
         <div className="storeTitle">
-          <h2>더피자보이즈</h2>
-          <strong>4.1</strong>
+          <h2>{restaurantsData.name}</h2>
+          <strong>{restaurantsData.average_rating.toFixed(1)}</strong>
         </div>
         <div className="storeStatus">
           <i className="fas fa-pen"></i>
-          <span>46</span>
+          <span>{restaurantsData.review_count.total}</span>
         </div>
         <div onClick={this.handleClickWish} className="wishBox">
-          <i className={`fa-star ${isWish ? 'fas' : 'far'}`}></i>
+          <i
+            className={`fa-star ${restaurantsData.is_wished ? 'fas' : 'far'}`}
+          ></i>
           <span>가고싶다</span>
         </div>
       </header>
     );
   }
 }
+
+const IP_ADDRESS = '10.58.3.213';
+// const IP_ADDRESS = 'localhost';
 
 export default StoreHeader;
