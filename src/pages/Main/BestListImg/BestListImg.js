@@ -43,7 +43,6 @@ class BestListImg extends Component {
 
   render() {
     const { bannerImg } = this.props;
-    console.log(bannerImg);
 
     return (
       <>
