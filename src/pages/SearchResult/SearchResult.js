@@ -2,7 +2,7 @@ import React from 'react';
 import './SearchResult.scss';
 //import RESULT from '../Data/resultData';
 import SearchResultComponent from '../SearchResultComponent/SearchResultComponent';
-//import Button from './Button';
+import Button from './Button';
 
 class SearchResult extends React.Component {
   constructor() {
@@ -15,6 +15,7 @@ class SearchResult extends React.Component {
       location: '',
       category: '',
       id: null,
+      totalItems: 50,
 
       name: '',
       menu_id: '',
@@ -36,12 +37,12 @@ class SearchResult extends React.Component {
       });
   }
 
-  //페이지 2 눌렀을때 나오는 화면
+  //페이지 2 눌렀을때 나오는 화면 // 전체페이지 기준으로 페이지를 나누게 되어서 current 인덱스 의미없음
   updateResult = (e, currentidx) => {
     // const LIMIT = 4;
     //const offset = e?.target.dataset.idx;
-
-    fetch(`http://localhost:3000/data/resultData${currentidx}.json`, {
+    // ${currentidx}
+    fetch(`http://localhost:3000/data/resultData3.json`, {
       method: 'GET',
     })
       .then(res => res.json())
@@ -51,10 +52,6 @@ class SearchResult extends React.Component {
         });
       });
 
-    // console.log(e.target.getAttribute('data-index')); // 이미 인덱스가 지정되어있으므로 굳이 어떤 인덱스인지 밝힐필요없다
-    // console.log(currentidx);
-    // if (e.target.getAttribute('data-index') === currentidx) //둘이 같다
-
     this.setState({
       backgroundcolor: '#0095F6',
     });
@@ -62,11 +59,7 @@ class SearchResult extends React.Component {
 
   render() {
     const newArr = [];
-    for (
-      let idx = 1;
-      idx <= Math.ceil(this.state.resultList.length / 4);
-      idx++
-    ) {
+    for (let idx = 1; idx <= Math.ceil(10 / 4); idx++) {
       newArr.push(idx);
     }
 
@@ -88,7 +81,6 @@ class SearchResult extends React.Component {
           <div className="searchResultBody">
             <div className="searchResultList">
               {this.state.resultList.map(result => {
-                console.log(this.state.resultList);
                 return (
                   <span className="searchResultListContent" key={result.id}>
                     <SearchResultComponent
@@ -104,25 +96,20 @@ class SearchResult extends React.Component {
               })}
             </div>
             <div className="searchResultPaging">
-              {/* {newArr.map(idx => {
+              {/* 전체음식점 수 기준으로 계산  */}
+
+              {newArr.map(idx => {
+                // 버튼이 돌아가면서 한번씩 나오는듯
+
                 console.log(idx);
                 return (
-                  //<Button
-                  // onClick={e => this.updateResult(e, idx)}
-                  // data-index={idx}
-                  // style={{ backgroundColor: this.state.backgroundcolor }}
-                  // />
-                  <button
-                    type="button"
-                    className="paging"
-                    onClick={e => this.props.updateResult(e, idx)}
-                    data-index={idx}
-                    style={{ backgroundColor: this.state.backgroundcolor }}
-                  >
-                    {idx}
-                  </button> //내가 지금 이걸 굳이 해야하나 ?
+                  <Button
+                    dataIndex={idx}
+                    updateResult={this.updateResult}
+                    backgroundColor={this.state.backgroundcolor}
+                  />
                 );
-              })} */}
+              })}
             </div>
           </div>
         </div>

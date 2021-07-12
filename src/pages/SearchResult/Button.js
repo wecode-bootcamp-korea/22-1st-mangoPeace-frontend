@@ -6,18 +6,17 @@ class Button extends React.Component {
     this.state = {};
   }
   render() {
-    console.log(this.props);
     return (
       <>
         <span>
           <button
             type="button"
             className="paging"
-            onClick={e => this.props.updateResult(e, idx)}
-            data-index={idx}
-            style={{ backgroundColor: this.state.backgroundcolor }}
+            onClick={e => this.props.updateResult(e, this.props.dataIndex)}
+            dataIndex={this.props.dataIndex}
+            style={{ backgroundColor: this.props.backgroundColor }}
           >
-            {idx}
+            {this.props.dataIndex}
           </button>
         </span>
       </>
