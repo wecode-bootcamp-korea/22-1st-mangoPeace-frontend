@@ -30,9 +30,9 @@ class Detail extends React.Component {
     this.fetchReviewData(1, 5);
   };
 
-  componentWillUnmount = () => {
-    this.reviewRequestNum = 1;
-  };
+  // componentWillUnmount = () => {
+  //   this.reviewRequestNum = 1;
+  // };
 
   setRequestNumLimit = () => {
     const { restaurants } = this.state;

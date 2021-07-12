@@ -16,9 +16,9 @@ class StoreImgList extends React.Component {
   // slideEnd = 99999; //임의의 값을 지정해주었는데 이래도 되는 건지 확인하기
 
   componentDidMount = () => {
-    // this.slideWidth > window.innerWidth
-    //   ? (this.slideEnd = this.slideEnd)
-    //   : (this.slideEnd = 0);
+    this.slideWidth > window.innerWidth
+      ? (this.slideEnd = this.slideEnd)
+      : (this.slideEnd = 0);
   };
 
   handlePrevBtn = () => {
