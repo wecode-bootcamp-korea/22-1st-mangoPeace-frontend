@@ -1,8 +1,6 @@
-$color-main: #fb7d27;
-$color-white: #ececec;
-$color-grey: #9b9b9b;
+@import '../../styles/common.scss';
 
-div.UpperBox {
+.UpperBox {
   display: flex;
   flex-direction: column;
   border: solid;
@@ -13,25 +11,25 @@ div.UpperBox {
   margin-right: 18%;
   border-color: $color-grey;
 
-  div.searchFilter {
-    div.selectHead {
+  .searchFilter {
+    .selectHead {
       display: flex;
       justify-content: space-between;
 
-      span.title {
+      .title {
         margin-left: 15px;
         margin-top: 10px;
         padding: 10px;
       }
 
-      span.multipleChoice {
+      .multipleChoice {
         margin-right: 15px;
         margin-top: 10px;
         padding: 10px;
       }
     }
 
-    div.selectSection {
+    .selectSection {
       display: flex;
       justify-content: center;
       text-align: center;
@@ -70,29 +68,29 @@ div.UpperBox {
     }
   }
 
-  div.priceForOnePerson {
+  .priceForOnePerson {
     border-bottom: solid;
     border-color: $color-grey;
     border-width: thin;
 
-    div.selectHead {
+    .selectHead {
       display: flex;
       justify-content: space-between;
 
-      span.title {
+      .title {
         margin-left: 20px;
         margin-top: 10px;
       }
     }
 
-    div.priceSelectSection {
+    .priceSelectSection {
       display: flex;
       justify-content: space-around;
       text-align: center;
       padding-bottom: 30px;
       padding-top: 10px;
 
-      span.lessThan10000 {
+      .lessThan10000 {
         display: inline-block;
         width: 200px;
         height: 45px;
@@ -142,7 +140,7 @@ div.UpperBox {
     }
   }
 
-  div.menuCategory {
+  .menuCategory {
     .selectHead {
       display: flex;
       justify-content: space-between;
@@ -192,12 +190,12 @@ div.UpperBox {
       }
     }
 
-    div.korean {
+    .korean {
       display: flex;
       justify-content: space-between;
       text-align: center;
 
-      span.soup {
+      .soup {
         width: 200px;
         height: 45px;
         margin: 20px;
@@ -208,7 +206,7 @@ div.UpperBox {
         border-color: $color-grey;
       }
 
-      span.barbeque {
+      .barbeque {
         width: 200px;
         height: 45px;
         margin: 20px;
@@ -219,7 +217,7 @@ div.UpperBox {
         border-color: $color-grey;
       }
 
-      span.noodle {
+      .noodle {
         width: 200px;
         height: 45px;
         margin: 20px;
@@ -231,7 +229,7 @@ div.UpperBox {
       }
     }
 
-    div.japanese {
+    .japanese {
       display: flex;
       justify-content: space-between;
       text-align: center;
@@ -272,7 +270,7 @@ div.UpperBox {
     }
   }
 
-  div.cancelOrConfirm {
+  .cancelOrConfirm {
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: 30%;

@@ -3,17 +3,6 @@ import './Filter.scss';
 
 class Filter extends React.Component {
   render() {
-    const { storyModal } = this.props;
-
-    componentDidMount() {
-      body.setAttribute("style", "overflow: hidden;"); // body 태그에 overflow hidden 값을 주어서 scroll 되지 않도록 함.
-      this.setState({ status: true });
-    }
-
-    componentWillUnmount() {
-      body.removeAttribute("style"); // 모달창이 종료되 될 때 body 태그에 준 속성을 제거 해준다.
-      this.setState({ status: false });
-    }
     return (
       <>
         <div className="UpperBox">
