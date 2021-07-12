@@ -1,7 +1,79 @@
 @import '../styles/common.scss';
 
-div h1 {
-  font-family: 'Gamja Flower', cursive;
-  color: $color-main;
-  font-size: 50px;
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+
+  .logoBox {
+    display: flex;
+    align-items: center;
+    width: 160px;
+    padding-left: 10px;
+
+    h1 {
+      margin-left: 15px;
+      font-family: 'Gamja Flower', cursive;
+      color: $color-main;
+      font-size: 25px;
+    }
+
+    .logoImg {
+      width: 20px;
+      margin: 5px 0px 30px 0px;
+    }
+  }
+
+  .navSearchBar {
+    @include display-flex(flex-start, center);
+    margin-right: 100px;
+    width: 60%;
+
+    .searchIcon {
+      color: $color-grey;
+    }
+
+    input {
+      margin-left: 15px;
+      padding-left: 15px;
+      height: 30px;
+      width: 70%;
+      border: none;
+      border-left: 1px solid $color-grey;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .navProfileBox {
+    @include display-flex(space-between, center);
+    width: 17%;
+    margin-right: 20px;
+
+    button {
+      margin-right: 40px;
+      border: none;
+      background-color: transparent;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 16px;
+      color: $color-main;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    img {
+      margin-right: 30px;
+      width: 35px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }
