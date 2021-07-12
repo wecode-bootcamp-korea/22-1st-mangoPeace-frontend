@@ -60,6 +60,7 @@ class SearchResult extends React.Component {
   render() {
     const newArr = [];
     for (let idx = 1; idx <= Math.ceil(10 / 4); idx++) {
+      //수 임의로 넣어줌
       newArr.push(idx);
     }
 
