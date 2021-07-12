@@ -6,6 +6,8 @@ class Button extends React.Component {
     this.state = {};
   }
   render() {
+    const { isButtonClicked } = this.props;
+    //console.log(isButtonClicked);
     return (
       <>
         <span>
@@ -14,7 +16,7 @@ class Button extends React.Component {
             className="paging"
             onClick={e => this.props.updateResult(e, this.props.dataIndex)}
             dataIndex={this.props.dataIndex}
-            style={{ backgroundColor: this.props.backgroundColor }}
+            style={{ backgroundColor: isButtonClicked ? 'red' : 'blue' }}
           >
             {this.props.dataIndex}
           </button>
