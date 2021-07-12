@@ -126,15 +126,6 @@ class StoreReviewBox extends React.Component {
             </span>
           </div>
         )}
-
-        {
-          // loadingStatus && (
-          //   <div className="loadingView">
-          //     {/* 아이콘 */}
-          //     <span className="loadingText">리뷰를 불러오고 있습니다</span>
-          //   </div>
-          // )
-        }
       </div>
     );
   }

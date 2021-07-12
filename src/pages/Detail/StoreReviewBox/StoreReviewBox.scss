@@ -55,16 +55,4 @@
       cursor: pointer;
     }
   }
-
-  .loadingView {
-    @include display-flex(space-between, center);
-    flex-direction: column;
-    height: 70px;
-    margin-bottom: 50px;
-
-    .loadingText {
-      color: $color-grey;
-      font-weight: 700;
-    }
-  }
 }

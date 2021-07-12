@@ -11,9 +11,9 @@ class StoreHeader extends React.Component {
     is_wished ? this.fetchIsWished('DELETE') : this.fetchIsWished('POST');
   };
 
-  fetchIsWished = methodType => {
+  fetchIsWished = method => {
     fetch(`http://${IP_ADDRESS}:8000/${this.restaurantsAddr}/wishlist`, {
-      method: methodType,
+      method: method,
     }).then(() => this.props.fetchData(this.restaurantsAddr));
   };
 

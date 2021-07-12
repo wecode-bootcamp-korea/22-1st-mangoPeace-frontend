@@ -3,10 +3,6 @@ import React from 'react';
 import './ReviewLi.scss';
 
 class ReviewLi extends React.Component {
-  componentDidMount = () => {
-    // window.addEventListener('scroll', this.props.infiniteScroll)
-  };
-
   splitCreatedDate = createdDate => {
     return createdDate.slice(0, 10);
   };
@@ -19,14 +15,6 @@ class ReviewLi extends React.Component {
     } else if (rate < 3) {
       return ['fa-frown', '별로'];
     }
-    // switch (rate) {
-    //   case rate > 3:
-    //     return ['fa-laugh-squint', '맛있다'];
-    //   case rate === 3:
-    //     return ['fa-smile', '괜찮다'];
-    //   case rate < 3:
-    //     return ['fa-frown', '별로'];
-    // }
   };
 
   render() {
