@@ -40,7 +40,7 @@ class Main extends React.Component {
   // }
 
   componentDidMount() {
-    fetch('http://10.58.5.140:8000/restaurants/categories/1/mainlist')
+    fetch('http://10.58.5.140:8000/restaurants/sub_categories')
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -86,7 +86,7 @@ class Main extends React.Component {
   render() {
     const { handleBtn, handleDotBtn } = this;
     const { slideNum, slideTranslate, popStore, bestListImg } = this.state;
-    console.log(popStore);
+    console.log(bestListImg);
 
     return (
       <main>
@@ -124,9 +124,9 @@ class Main extends React.Component {
                   transform: `translateX(${slideTranslate}px)`,
                 }}
               >
-                {bestListImg.map(e => (
-                  <BestListImg bannerImg={e.image} />
-                ))}
+                {bestListImg.length !== 0 && (
+                  <BestListImg bannerImg={bestListImg} />
+                )}
                 {/* <li>
                   <img
                     alt="테마이미지"
