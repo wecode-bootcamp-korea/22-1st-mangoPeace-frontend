@@ -8,10 +8,10 @@ class Nav extends React.Component {
       <div className="navBar">
         <div className="logoBox">
           <h1>싸우지망고</h1>
-          <img className="logoImg" src="images/mango.png" alt="로고이미지" />
+          <img className="logoImg" src="/images/mango.png" alt="로고이미지" />
         </div>
         <div className="navSearchBar">
-          <i class="fas fa-search searchIcon"></i>
+          <i className="fas fa-search searchIcon"></i>
           <input className="mainSearchInput" placeholder="맛집 검색"></input>
         </div>
         <div className="navProfileBox">
