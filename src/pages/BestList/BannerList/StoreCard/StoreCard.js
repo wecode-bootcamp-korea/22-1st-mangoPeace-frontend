@@ -18,7 +18,7 @@ class StoreCard extends Component {
                   <h2 className="storeName">
                     {index + 1}. {store.name}
                   </h2>
-                  <i class="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
                   <h2 className="storeGrade">{store.rating.toFixed(1)}</h2>
                 </div>
                 <h3 className="storeLocate">{store.address}</h3>
