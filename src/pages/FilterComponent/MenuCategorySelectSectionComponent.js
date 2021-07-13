@@ -24,9 +24,9 @@ class MenuCategorySelectSectionComponent extends React.Component {
   checkuttonSelected = () => {
     const { currentIdx, idx } = this.props;
     if (Array.isArray(currentIdx)) {
-      return currentIdx.includes(idx);
+      return currentIdx.includes(idx); //포함된 경우 true반환 , 아니면 false 반환
     } else {
-      return currentIdx === idx; //집가서 고치자
+      return currentIdx === idx; // 배열이 아닌경우 같은지 아닌지만 반환 - 해야하나 ?
     }
   };
 
@@ -36,7 +36,7 @@ class MenuCategorySelectSectionComponent extends React.Component {
       stateKey,
       currentIdx,
       checkMenuCategorySelectSection,
-      currentIdxArr,
+      menuCurrentIdxArr,
     } = this.props;
     return (
       <button
@@ -45,7 +45,7 @@ class MenuCategorySelectSectionComponent extends React.Component {
         stateKey="menuCurrentIdx"
         onClick={() => checkMenuCategorySelectSection(stateKey, idx)}
         className={
-          currentIdx === idx ? 'categoryMenuList on' : 'categoryMenuList'
+          this.checkuttonSelected() ? 'categoryMenuList on' : 'categoryMenuList'
         }
       >
         {this.props.title}

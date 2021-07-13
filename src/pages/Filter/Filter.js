@@ -10,7 +10,7 @@ class Filter extends React.Component {
       dataIdx: null,
 
       ratingCurrentIdx: 0,
-      menuCurrentIdxArr: [],
+      menuCurrentIdxArr: [1, 2, 3],
     };
   }
 
@@ -51,7 +51,7 @@ class Filter extends React.Component {
       'cutlet',
       'donburi',
     ];
-    const { ratingCurrentIdx, priceCurrentIdx, currentIdxArr } = this.state;
+    const { ratingCurrentIdx, priceCurrentIdx, menuCurrentIdxArr } = this.state;
     return (
       <>
         <div className="UpperBox">
@@ -99,7 +99,10 @@ class Filter extends React.Component {
                 return (
                   <MenuCategorySelectSectionComponent
                     idx={idx}
-                    currentIdx={currentIdxArr}
+                    currentIdxArr={menuCurrentIdxArr}
+                    checkMenuCategorySelectSection={
+                      this.checkMenuCategorySelectSection
+                    }
                   />
                 );
               })}
