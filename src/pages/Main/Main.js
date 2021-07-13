@@ -1,15 +1,11 @@
-//public에 data 삭제!!
-
 import React, { Component } from 'react';
 
 import MainImgBar from './MainImgBar/MainImgBar';
-import BestListImg from './BestListImg/BestListImg';
+import FoodThemeListSection from './FoodThemeListSection/FoodThemeListSection';
 import PopStoreSection from './PopStoreSection/PopStoreSection';
 
 import './Main.scss';
 
-//슬라이드 갯수
-const totalSlide = 3;
 const slideWidth = 1500;
 
 class Main extends React.Component {
@@ -24,22 +20,13 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://10.58.5.140:8000/restaurants/sub_categories')
+    fetch('http://10.58.0.218:8000/restaurants/sub_categories')
       .then(res => res.json())
       .then(data => {
         this.setState({
           bestListImg: data.result,
         });
       });
-
-    // 찐 fetch
-    // fetch('http://10.58.5.140:8000/restaurants/1/high_ratings')
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     this.setState({
-    //       popStore: data.result,
-    //     });
-    //   });
 
     // TOP 5 배너
     fetch('http://localhost:3000/data/topGrade.json')
@@ -80,79 +67,20 @@ class Main extends React.Component {
   render() {
     const { handleBtn, handleDotBtn } = this;
     const { slideNum, slideTranslate, popStore, bestListImg } = this.state;
-    console.log(popStore);
 
     return (
       <main>
         <MainImgBar />
-        <section className="foodThemeListBox">
-          <div className="topBar">
-            <h2 className="listText">믿고 보는 맛집 리스트</h2>
-            <span className="listMore">
-              <u>리스트 더보기</u>
-            </span>
-          </div>
-          <div className="foodThemeBox">
-            <button
-              className={slideNum > 1 ? 'arrowBtnLeft' : 'none'}
-              onClick={handleBtn}
-            >
-              <i class="fas fa-chevron-left fa-3x" id="arrowLeft"></i>
-            </button>
-            <ul className="foodThemeImgBox">
-              <div
-                className="foodThemeImg"
-                style={{
-                  transform: `translateX(${slideTranslate}px)`,
-                }}
-              >
-                {bestListImg.length !== 0 && (
-                  <BestListImg bannerImg={bestListImg} />
-                )}
-              </div>
-            </ul>
-            <button
-              className={slideNum < totalSlide ? 'arrowBtnRight' : 'none'}
-              onClick={handleBtn}
-            >
-              <i class="fas fa-chevron-right fa-3x" id="arrowRight"></i>
-            </button>
-            <ul className="slickDots">
-              <li className="slickActive">
-                <i
-                  class="fas fa-circle fa-xs"
-                  id={slideNum === 1 ? 'colorDot' : ''}
-                  index={1}
-                  onClick={handleDotBtn}
-                ></i>
-              </li>
-              <li className="slickActive">
-                <i
-                  class="fas fa-circle fa-xs"
-                  id={slideNum === 2 ? 'colorDot' : ''}
-                  index={2}
-                  onClick={handleDotBtn}
-                ></i>
-              </li>
-              <li className="slickActive">
-                <i
-                  class="fas fa-circle fa-xs"
-                  id={slideNum === 3 ? 'colorDot' : ''}
-                  index={3}
-                  onClick={handleDotBtn}
-                ></i>
-              </li>
-            </ul>
-          </div>
-        </section>
-        <PopStoreSection
-          sub_category={popStore.sub_category}
-          category={popStore.category}
-          restaurant_name={popStore.restaurant_name}
-          address={popStore.address}
-          rating={popStore.rating}
-          image={popStore.image}
-        />
+        {bestListImg.length !== 0 && (
+          <FoodThemeListSection
+            handleBtn={handleBtn}
+            handleDotBtn={handleDotBtn}
+            slideNum={slideNum}
+            slideTranslate={slideTranslate}
+            bestListImg={bestListImg}
+          />
+        )}
+        {popStore.length !== 0 && <PopStoreSection popStore={popStore} />}
       </main>
     );
   }

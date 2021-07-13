@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './BestListImg.scss';
 
-class BestListImg extends Component {
+class bestListImg extends Component {
   bannerText = [
     {
       headLine: '피자',
@@ -42,13 +42,13 @@ class BestListImg extends Component {
   ];
 
   render() {
-    const { bannerImg } = this.props;
+    const { bestListImg } = this.props;
 
     return (
       <>
         {this.bannerText.map((text, index) => (
-          <li>
-            <img alt="테마이미지" src={bannerImg[index].image} />
+          <li className="bannerList">
+            <img alt="테마이미지" src={bestListImg[index].image} />
             <h3>{text.headLine} 맛집 베스트 5곳</h3>
             <h4>"{text.subLine}"</h4>
           </li>
@@ -58,4 +58,4 @@ class BestListImg extends Component {
   }
 }
 
-export default BestListImg;
+export default bestListImg;
