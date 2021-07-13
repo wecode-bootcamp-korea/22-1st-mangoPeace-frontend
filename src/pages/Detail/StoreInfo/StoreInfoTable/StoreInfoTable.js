@@ -5,7 +5,7 @@ import './StoreInfoTable.scss';
 class StoreInfoTable extends React.Component {
   render() {
     const { restaurantsData, foodsData } = this.props;
-
+    console.log(foodsData);
     return (
       <table className="storeInfoTable">
         <caption>매장 정보</caption>
@@ -30,11 +30,9 @@ class StoreInfoTable extends React.Component {
             <th>영업시간</th>
             <td>{restaurantsData.open_time}</td>
           </tr>
-          {foodsData.foods.map((food, index) => (
+          {foodsData.map((food, index) => (
             <tr className="menuInfo" key={food.id}>
-              {index === 0 && (
-                <th rowSpan={`${foodsData.foods.length}`}>메뉴</th>
-              )}
+              {index === 0 && <th rowSpan={`${foodsData.length}`}>메뉴</th>}
               <td>{food.name}</td>
               <td>{Math.floor(food.price)}</td>
             </tr>

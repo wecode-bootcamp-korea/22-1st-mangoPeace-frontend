@@ -7,7 +7,6 @@ import './StoreReviewBox.scss';
 
 class StoreReviewBox extends React.Component {
   state = {
-    loadingStatus: false,
     selectedRateGroup: 0,
     viewMore: true,
   };
@@ -54,11 +53,20 @@ class StoreReviewBox extends React.Component {
       : this.setState({ viewMore: true });
   };
 
+  componentDidUpdate = prevProps => {
+    if (prevProps.reviewRequestNum !== this.props.reviewRequestNum) {
+      if (this.props.reviewRequestNum === this.props.reviewRequestNumLimit) {
+        this.setState({
+          viewMore: false,
+        });
+      }
+    }
+  };
+
   handleClickSortScore = index => {
     this.scoreRangeMin = this.sortScoreData[index].min;
     this.scoreRangeMax = this.sortScoreData[index].max;
-    this.props.fetchReviewData(this.scoreRangeMin, this.scoreRangeMax);
-
+    this.props.reFetchReviewData(this.scoreRangeMin, this.scoreRangeMax);
     this.setState({
       selectedRateGroup: index,
     });
@@ -66,12 +74,6 @@ class StoreReviewBox extends React.Component {
 
   handleClickViewMore = () => {
     this.props.fetchReviewData(this.scoreRangeMin, this.scoreRangeMax);
-
-    if (this.props.reviewRequestNum === this.props.reviewRequestNumLimit) {
-      this.setState({
-        viewMore: false,
-      });
-    }
   };
 
   render() {
@@ -80,16 +82,23 @@ class StoreReviewBox extends React.Component {
       restaurantsData,
       handleReviewDel,
       handleReviewEdit,
+      fetchReviewData,
+      reFetchReviewData,
       fetchData,
+      storeId,
     } = this.props;
-    const { loadingStatus, selectedRateGroup, viewMore } = this.state;
+    const { selectedRateGroup, viewMore } = this.state;
 
     return (
       <div className="storeReviewBox">
         <ReviewInput
           fetchData={fetchData}
-          storeId={restaurantsData.id}
+          fetchReviewData={fetchReviewData}
+          reFetchReviewData={reFetchReviewData}
+          storeId={storeId}
           storeName={restaurantsData.name}
+          scoreRangeMin={this.scoreRangeMin}
+          scoreRangeMax={this.scoreRangeMax}
         />
         <section className="reviewListBox">
           <ul className="sortScore">

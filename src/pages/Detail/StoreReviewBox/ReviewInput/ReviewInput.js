@@ -10,33 +10,30 @@ class ReviewInput extends React.Component {
     reviewInput: '',
   };
 
-  storeId = 1; //받아올 음식점 아이디
+  reviewsAddr = `restaurants/${this.props.toreId}/review?limit=${this.reviewRequestNum}`;
 
-  fetchReviewInput = addr => {
+  fetchReviewInput = () => {
     const { reviewRating, reviewInput } = this.state;
-    const { fetchData } = this.props;
+    const { reFetchReviewData } = this.props;
 
-    fetch(`http://${IP_ADDRESS}:8000/restaurants/${this.storeId}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        rating: reviewRating,
-        content: reviewInput,
-      }),
-    })
+    fetch(
+      `http://${IP_ADDRESS}:8000/restaurants/${this.props.storeId}/review`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          rating: reviewRating,
+          content: reviewInput,
+        }),
+      }
+    )
       .then(res => res.json())
-      .then(() => fetchData(this.restaurantsAddr));
-  };
-
-  handleInputBoxOn = () => {
-    this.setState({
-      isInputBoxOn: !this.state.isInputBoxOn,
-    });
+      .then(() => reFetchReviewData(1, 5));
   };
 
   handleReviewSubmit = e => {
     e.preventDefault();
 
-    this.fetchReviewInput(this.reviewInputAddr);
+    this.fetchReviewInput();
     this.setState({
       reviewInput: '',
       reviewRating: 0,
