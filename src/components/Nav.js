@@ -1,15 +1,18 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
 import './Nav.scss';
 
 class Nav extends React.Component {
   render() {
     return (
       <div className="navBar">
-        <div className="logoBox">
-          <h1>싸우지망고</h1>
-          <img className="logoImg" src="/images/mango.png" alt="로고이미지" />
-        </div>
+        <Link className="title" to="/">
+          <div className="logoBox">
+            <h1>싸우지망고</h1>
+            <img className="logoImg" src="/images/mango.png" alt="로고이미지" />
+          </div>
+        </Link>
         <div className="navSearchBar">
           <i className="fas fa-search searchIcon"></i>
           <input className="mainSearchInput" placeholder="맛집 검색"></input>
