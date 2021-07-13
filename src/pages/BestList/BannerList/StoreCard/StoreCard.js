@@ -27,7 +27,7 @@ class StoreCard extends Component {
                 <img
                   className="userProfileImg"
                   alt="user_img"
-                  src={store.profile_url}
+                  src="/images/muyaho.jpeg"
                 />
                 <div className="storeReview">
                   <span className="userNickname">{store.nickname}</span>
