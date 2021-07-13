@@ -5,10 +5,12 @@ import './BannerList.scss';
 
 class BannerList extends Component {
   render() {
+    const { storeList } = this.props;
+
     return (
       <section className="listBox">
         <ul className="storeList">
-          <StoreCard />
+          <StoreCard storeList={storeList} />
         </ul>
       </section>
     );

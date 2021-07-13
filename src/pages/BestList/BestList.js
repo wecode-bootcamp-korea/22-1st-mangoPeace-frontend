@@ -13,13 +13,14 @@ class BestList extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   fetch('api 주소')
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       this.setState({ storeList: data.result });
-  //     });
-  // }
+  componentDidMount() {
+    fetch('http://localhost:3000/data/bestlist.json')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ storeList: data.result });
+      });
+  }
+
   render() {
     const { storeList } = this.state;
     console.log(storeList);
