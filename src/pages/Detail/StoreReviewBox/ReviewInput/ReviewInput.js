@@ -10,11 +10,12 @@ class ReviewInput extends React.Component {
     reviewInput: '',
   };
 
-  reviewsAddr = `restaurants/${this.props.toreId}/review?limit=${this.reviewRequestNum}`;
+  reviewsAddr = `restaurants/${this.props.storeId}/review?limit=${this.reviewRequestNum}`;
+  restaurantsAddr = `restaurants/${this.props.storeId}`;
 
   fetchReviewInput = () => {
     const { reviewRating, reviewInput } = this.state;
-    const { reFetchReviewData } = this.props;
+    const { fetchReviewData } = this.props;
 
     fetch(
       `http://${IP_ADDRESS}:8000/restaurants/${this.props.storeId}/review`,
@@ -27,7 +28,7 @@ class ReviewInput extends React.Component {
       }
     )
       .then(res => res.json())
-      .then(() => reFetchReviewData(1, 5));
+      .then(() => fetchReviewData(1, 5, 1));
   };
 
   handleReviewSubmit = e => {
@@ -56,7 +57,7 @@ class ReviewInput extends React.Component {
 
   render() {
     const { reviewRating, isTextValid, isRatingValid } = this.state;
-    const { storeId, storeName } = this.props;
+    const { storeName } = this.props;
 
     return (
       <form className="reviewInputForm" onClick={this.handleInputBoxOn}>

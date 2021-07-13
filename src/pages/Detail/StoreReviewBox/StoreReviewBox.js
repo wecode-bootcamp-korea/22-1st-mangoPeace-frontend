@@ -13,6 +13,7 @@ class StoreReviewBox extends React.Component {
 
   scoreRangeMin = 1;
   scoreRangeMax = 5;
+  reviewRequestNum = 2;
 
   sortScoreData = [
     {
@@ -46,34 +47,38 @@ class StoreReviewBox extends React.Component {
   ];
 
   componentDidMount = () => {
-    this.props.restaurantsData.review_count.total < 11
+    const { restaurantsData } = this.props;
+
+    restaurantsData.review_count.total < 11
       ? this.setState({
           viewMore: false,
         })
       : this.setState({ viewMore: true });
   };
 
-  componentDidUpdate = prevProps => {
-    if (prevProps.reviewRequestNum !== this.props.reviewRequestNum) {
-      if (this.props.reviewRequestNum === this.props.reviewRequestNumLimit) {
-        this.setState({
-          viewMore: false,
-        });
-      }
-    }
-  };
+  componentDidUpdate = () => {};
 
   handleClickSortScore = index => {
+    this.setState({
+      viewMore: true,
+    });
+    this.reviewRequestNum = 1;
+
     this.scoreRangeMin = this.sortScoreData[index].min;
     this.scoreRangeMax = this.sortScoreData[index].max;
-    this.props.reFetchReviewData(this.scoreRangeMin, this.scoreRangeMax);
+    this.props.fetchReviewData(this.scoreRangeMin, this.scoreRangeMax, 1);
     this.setState({
       selectedRateGroup: index,
     });
   };
 
   handleClickViewMore = () => {
-    this.props.fetchReviewData(this.scoreRangeMin, this.scoreRangeMax);
+    this.props.fetchReviewData(
+      this.scoreRangeMin,
+      this.scoreRangeMax,
+      this.reviewRequestNum + 1
+    );
+    this.reviewRequestNum += 1;
   };
 
   render() {

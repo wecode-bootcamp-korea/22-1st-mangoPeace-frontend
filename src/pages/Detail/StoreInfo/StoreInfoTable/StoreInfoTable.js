@@ -5,7 +5,7 @@ import './StoreInfoTable.scss';
 class StoreInfoTable extends React.Component {
   render() {
     const { restaurantsData, foodsData } = this.props;
-    console.log(foodsData);
+
     return (
       <table className="storeInfoTable">
         <caption>매장 정보</caption>

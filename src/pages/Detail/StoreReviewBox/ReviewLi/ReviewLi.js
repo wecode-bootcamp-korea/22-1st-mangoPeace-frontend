@@ -49,7 +49,10 @@ class ReviewLi extends React.Component {
           </span>
         </div>
         <div className="reviewEditOrDel">
-          <i className="reviewBtn fas fa-edit" onClick={handleReviewEdit}></i>
+          <i
+            className="reviewBtn fas fa-edit"
+            onClick={() => handleReviewEdit(reviewId)}
+          ></i>
           <i
             className="reviewBtn fas fa-eraser"
             onClick={() => handleReviewDel(reviewId)}

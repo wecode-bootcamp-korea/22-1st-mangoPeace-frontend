@@ -14,44 +14,36 @@ class Detail extends React.Component {
     review: [],
   };
 
-  reviewRequestNum = 1;
-  reviewRequestNumLimit; //한 번에 10개씩 띄울 경우 총 리뷰 페이지 수
-
   restaurantsAddr = `restaurants/${this.props.match.params.id}`;
-  foodsAddr = `restaurants/${this.props.match.params.id}/food`;
+  foodsAddr = `restaurants/${this.props.match.params.id}/foods`;
   imgAddr = `restaurants/${this.props.match.params.id}/food/image`;
-  reviewsAddr = `restaurants/${this.props.match.params.id}/review?limit=${this.reviewRequestNum}`;
 
   componentDidMount = () => {
     this.fetchData(this.restaurantsAddr);
     this.fetchData(this.foodsAddr);
     this.fetchData(this.imgAddr);
-    this.fetchReviewData(1, 5);
+    this.fetchReviewData(1, 5, 1);
   };
 
-  setRequestNumLimit = () => {
-    const { restaurants } = this.state;
-
-    restaurants.review_count.total % 10 === 0
-      ? (this.reviewRequestNumLimit = restaurants.review_count.total / 10)
-      : (this.reviewRequestNumLimit =
-          Math.floor(restaurants.review_count.total / 10) + 1);
-  };
-
-  handleReviewEdit = () => {
-    console.log('edit');
+  handleReviewEdit = reviewId => {
+    console.log(reviewId);
+    fetch(
+      `http://${IP_ADDRESS}:8000/restaurants/${this.props.match.params.id}/review/${reviewId}`,
+      {
+        method: 'PATCH',
+      }
+    )
+      .then(res => res.json())
+      .then(res => console.log(res));
   };
 
   handleReviewDel = reviewId => {
     fetch(
-      `http://${IP_ADDRESS}:8000/restaurants/${this.props.match.params.id}/review`,
+      `http://${IP_ADDRESS}:8000/restaurants/${this.props.match.params.id}/review/${reviewId}`,
       {
         method: 'DELETE',
-        body: JSON.stringify({
-          review_id: reviewId,
-        }),
       }
-    ).then(() => this.reFetchReviewData(1, 5));
+    ).then(() => this.fetchReviewData(1, 5, 1));
   };
 
   sortAddr = addr => {
@@ -63,30 +55,21 @@ class Detail extends React.Component {
       : splitAddr[splitAddr.length - 1];
   };
 
-  fetchReviewData = (min, max) => {
+  fetchReviewData = (min, max, requestNum) => {
     fetch(
-      `http://${IP_ADDRESS}:8000/restaurants/${this.props.match.params.id}/review?limit=${this.reviewRequestNum}&rating-min=${min}&rating-max=${max}`,
+      `http://${IP_ADDRESS}:8000/restaurants/${this.props.match.params.id}/review?limit=${requestNum}&rating-min=${min}&rating-max=${max}`,
       {
         method: 'GET',
       }
     )
       .then(res => res.json())
       .then(res => {
-        this.setState({ review: [...this.state.review, ...res.result] });
-        this.reviewRequestNum += 1;
-      });
-  };
-
-  reFetchReviewData = (min, max) => {
-    fetch(
-      `http://${IP_ADDRESS}:8000/restaurants/${this.props.match.params.id}/review?limit=1&rating-min=${min}&rating-max=${max}`,
-      {
-        method: 'GET',
-      }
-    )
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ review: res.result });
+        if (requestNum !== 1) {
+          this.setState({ review: [...this.state.review, ...res.result] });
+        } else if (requestNum === 1) {
+          this.setState({ review: res.result });
+          // this.fetchData(this.restaurantsAddr);
+        }
       });
   };
 
@@ -97,7 +80,6 @@ class Detail extends React.Component {
       .then(res => res.json())
       .then(res => {
         const name = this.sortAddr(addr);
-        console.log(name, res);
         this.setState({
           [name]: res.result,
         });
@@ -106,8 +88,6 @@ class Detail extends React.Component {
 
   render() {
     const { restaurants, food, image, review } = this.state;
-    this.state.restaurants && this.setRequestNumLimit();
-    console.log(this.props);
 
     return (
       <section className="detailPage">
@@ -121,22 +101,19 @@ class Detail extends React.Component {
               foodsData={food}
             />
           )}
-          {review.length !== 0 &&
-            restaurants &&
-            this.reviewRequestNumLimit !== undefined && (
-              <StoreReviewBox
-                storeId={this.props.match.params.id}
-                fetchData={this.fetchData}
-                fetchReviewData={this.fetchReviewData}
-                reFetchReviewData={this.reFetchReviewData}
-                reviewRequestNum={this.reviewRequestNum}
-                reviewRequestNumLimit={this.reviewRequestNumLimit}
-                handleReviewDel={this.handleReviewDel}
-                handleReviewEdit={this.handleReviewEdit}
-                restaurantsData={restaurants}
-                reviewsData={review}
-              />
-            )}
+          {review.length !== 0 && restaurants && (
+            <StoreReviewBox
+              storeId={this.props.match.params.id}
+              fetchData={this.fetchData}
+              fetchReviewData={this.fetchReviewData}
+              reFetchReviewData={this.reFetchReviewData}
+              reviewRequestNum={this.reviewRequestNum}
+              handleReviewDel={this.handleReviewDel}
+              handleReviewEdit={this.handleReviewEdit}
+              restaurantsData={restaurants}
+              reviewsData={review}
+            />
+          )}
         </div>
       </section>
     );
