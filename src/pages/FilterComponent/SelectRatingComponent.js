@@ -1,22 +1,15 @@
 import React from 'react';
-
+import '../Filter/Filter.scss';
 class SelectRatingComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   render() {
-    console.log(this.props.isClicked); // 멥에서 아무것도 안하고 그냥 넘어옴 ..
+    console.log(this.props.isClicked);
     const { isClicked } = this.props; //
-    // console.log(this.props.title);
 
     console.log('컴포넌트렌더문', isClicked);
-    //     //첫 버튼 필터렌더 false
-    // SelectRatingComponent.js:12 컴포넌트렌더문 true
-    // SelectRatingComponent.js:12 컴포넌트렌더문 false//고정값
-    //두번쨰;필터렌더 true
-    // SelectRatingComponent.js:12 컴포넌트렌더문 false
-    // SelectRatingComponent.js:12 컴포넌트렌더문 true
 
     return (
       <>
@@ -25,10 +18,11 @@ class SelectRatingComponent extends React.Component {
           dataIdx={this.props.dataIdx}
           key={this.props.dataIdx}
           onClick={e => this.props.checkSelectRating(e, this.props.dataIdx)}
-          style={{
-            backgroundColor: isClicked ? '#fb7d27' : 'white',
-          }}
-          className="star"
+          // style={{
+          //   backgroundColor: isClicked ? '#fb7d27' : 'white',
+          // }}
+          className={isClicked ? 'pagingBtn on' : 'pagingBtn'}
+          //className="star pagingBtn"
           name="star"
         >
           {this.props.title}

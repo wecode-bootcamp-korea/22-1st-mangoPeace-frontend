@@ -40,7 +40,7 @@
       padding-top: 20px;
       padding-bottom: 20px;
 
-      .star {
+      .pagingBtn {
         display: inline-block;
         width: 200px;
         height: 45px;
@@ -51,20 +51,24 @@
         border: solid;
         border-width: thin;
         border-color: $color-grey;
+
+        &.on {
+          background-color: red;
+        }
       }
 
-      .popularity {
-        display: inline-block;
-        width: 200px;
-        height: 45px;
-        margin: 20px;
-        margin-left: 20px;
-        padding: 10px;
-        border-radius: 50px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
-      }
+      // .popularity {
+      //   display: inline-block;
+      //   width: 200px;
+      //   height: 45px;
+      //   margin: 20px;
+      //   margin-left: 20px;
+      //   padding: 10px;
+      //   border-radius: 50px;
+      //   border: solid;
+      //   border-width: thin;
+      //   border-color: $color-grey;
+      // }
     }
   }
 
