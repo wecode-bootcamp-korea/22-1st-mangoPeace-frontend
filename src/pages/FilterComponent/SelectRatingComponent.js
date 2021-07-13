@@ -6,7 +6,8 @@ class SelectRatingComponent extends React.Component {
     this.state = {};
   }
   render() {
-    const { isClicked } = this.props;
+    console.log(this.props.isClicked); // 멥에서 아무것도 안하고 그냥 넘어옴 ..
+    const { isClicked } = this.props; //
     // console.log(this.props.title);
 
     console.log('컴포넌트렌더문', isClicked);
@@ -23,10 +24,10 @@ class SelectRatingComponent extends React.Component {
           type="button"
           dataIdx={this.props.dataIdx}
           key={this.props.dataIdx}
+          onClick={e => this.props.checkSelectRating(e, this.props.dataIdx)}
           style={{
             backgroundColor: isClicked ? '#fb7d27' : 'white',
           }}
-          onClick={e => this.props.checkSelectRating(e, this.props.dataIdx)}
           className="star"
           name="star"
         >

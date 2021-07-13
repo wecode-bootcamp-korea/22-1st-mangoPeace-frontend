@@ -19,15 +19,15 @@ class Filter extends React.Component {
     // if (e.target.name === 'star')
     //   this.setState({
     //     isClicked: !this.state.isClicked,
-    //     currentId: currentidx,
+    //     //currentId: currentidx,
     //   });
     // else if (e.target.name === 'popularity') {
     //   this.setState({
     //     isClicked: !this.state.isClicked,
-    //     currentId: currentidx,
+    //     //currentId: currentidx,
     //   });
     // }
-    console.log(`currentidx`, currentidx);
+    console.log(` checkSelectRating`);
     this.setState({
       currentId: currentidx,
       isClicked: !this.state.isClicked,
@@ -35,10 +35,10 @@ class Filter extends React.Component {
   };
 
   render() {
-    // const array1 = ['별점순', '코멘트순'];
+    //const array1 = ['별점순', '코멘트순'];
     const array1 = [1, 2];
-    console.log('필터렌더', this.state.isClicked);
-
+    //console.log('필터렌더', this.state.isClicked);
+    console.log(`필터렌더`);
     return (
       <>
         <div className="UpperBox">
@@ -49,6 +49,8 @@ class Filter extends React.Component {
             <div className="selectRating">
               {array1.map(idx => {
                 console.log('맵', this.state.isClicked);
+                //맵이 두 번 돌면서 값을 돌려놓는다 ?
+                //문제접 스테이트로서의 isClicked 가 이후로는 안쓰임 ...
                 return (
                   <SelectRatingComponent
                     title={array1[idx]}
@@ -56,9 +58,10 @@ class Filter extends React.Component {
                     key={idx}
                     checkSelectRating={this.checkSelectRating}
                     isClicked={
-                      this.state.currentId === idx && !this.state.isClicked
+                      this.state.currentId === idx && this.state.isClicked
                     }
                     // this.state.currentId === idx
+                    // this.state.currentId === idx && !this.state.isClicked
                   />
                 );
               })}
