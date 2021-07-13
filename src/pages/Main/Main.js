@@ -32,7 +32,17 @@ class Main extends React.Component {
         });
       });
 
-    fetch('http://10.58.5.140:8000/restaurants/1/high_ratings')
+    // 찐 fetch
+    // fetch('http://10.58.5.140:8000/restaurants/1/high_ratings')
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     this.setState({
+    //       popStore: data.result,
+    //     });
+    //   });
+
+    // TOP 5 배너
+    fetch('http://localhost:3000/data/topGrade.json')
       .then(res => res.json())
       .then(data => {
         this.setState({

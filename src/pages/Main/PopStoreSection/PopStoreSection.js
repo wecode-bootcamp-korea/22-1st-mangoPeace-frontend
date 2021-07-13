@@ -13,7 +13,6 @@ class PopStoreSection extends React.Component {
     this.setState({ popStore: this.props.popStore });
   }
   render() {
-    console.log(this.props);
     const { restaurant_name, rating, category, sub_category, image, address } =
       this.props;
     return (
