@@ -1,0 +1,80 @@
+@import '../../../../styles/common.scss';
+
+.reviewLi {
+  @include display-flex(normal, normal);
+  position: relative;
+  padding: 40px 0 50px;
+
+  & + li {
+    border-top: 1px solid $color-grey;
+  }
+
+  .reviewUserInfo {
+    @include display-flex;
+    flex-direction: column;
+    padding-right: 40px;
+
+    .reviewUserImg {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 8px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .reviewUserName {
+      color: $color-darkgrey;
+    }
+  }
+
+  .reviewContent {
+    width: calc(100% - 220px);
+    margin-top: -15px;
+
+    .reviewContentDate {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 17px;
+      color: $color-grey;
+    }
+
+    .reviewContentText {
+      color: $color-black;
+      line-height: 28px;
+    }
+  }
+
+  .reviewScoreBox {
+    @include display-flex;
+    flex-direction: column;
+    padding-left: 60px;
+    color: $color-main;
+
+    .scoreIcon {
+      margin-bottom: 10px;
+      font-size: 52px;
+    }
+
+    .scoreText {
+      font-weight: 700;
+    }
+  }
+
+  .reviewEditOrDel {
+    position: absolute;
+    bottom: 10px;
+    right: 3px;
+
+    .reviewBtn {
+      padding: 2px;
+      font-size: 15px;
+      color: $color-grey;
+      font-weight: 700;
+      cursor: pointer;
+
+      & + .reviewBtn {
+        margin-left: 3px;
+      }
+    }
+  }
+}
