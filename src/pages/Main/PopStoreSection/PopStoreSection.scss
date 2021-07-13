@@ -1,0 +1,25 @@
+@import '../../../styles/common.scss';
+
+.popStoreSection {
+  display: flex;
+  flex-direction: column;
+  padding: 60px 0;
+  border-bottom: 1px solid #dbdbdb;
+
+  h2 {
+    display: block;
+    padding: 0 150px;
+    color: $color-main;
+    font-size: 25px;
+    font-weight: 500;
+  }
+
+  .popStoreListBox {
+    @include display-flex;
+    padding: 60px 0 40px 0;
+
+    ul {
+      @include display-flex;
+    }
+  }
+}
