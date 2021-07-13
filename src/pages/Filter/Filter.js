@@ -1,42 +1,59 @@
 import React from 'react';
 import './Filter.scss';
 import SelectRatingComponent from '../FilterComponent/SelectRatingComponent';
-
+import PriceSelectSectionComponent from '../FilterComponent/PriceSelectSectionComponent';
+import MenuCategorySelectSectionComponent from '../FilterComponent/MenuCategorySelectSectionComponent';
 class Filter extends React.Component {
   constructor() {
     super();
     this.state = {
-      isClicked: false,
+      isClicked2: false,
+      isClicked3: false,
       dataIdx: null,
-      currentId: 1,
-      idx: 1,
+      currentId: 0,
+      currentId2: 0,
+      currentId3: 0,
+      ratingCurrentIdx: 0,
     };
   }
 
-  checkSelectRating = (e, currentidx) => {
-    // if (e.target.name === 'star')
-    //   this.setState({
-    //     isClicked: !this.state.isClicked,
-    //     //currentId: currentidx,
-    //   });
-    // else if (e.target.name === 'popularity') {
-    //   this.setState({
-    //     isClicked: !this.state.isClicked,
-    //     //currentId: currentidx,
-    //   });
-    // }
-    console.log(` checkSelectRating`);
+  handleIdx = (stateKey, idx) => {
+    const isSameIndex = this.state[stateKey] === idx;
     this.setState({
-      currentId: currentidx, //어떤 버튼의 불을 켜야하는지 정하기위해 현재 인덱스에
-      //isClicked: !this.state.isClicked, //
+      [stateKey]: isSameIndex ? 0 : idx,
+    });
+  };
+
+  checkPriceSelectSection = (e, currentidx) => {
+    this.setState({
+      currentId2: currentidx,
+    });
+  };
+
+  checkMenuCategorySelectSection = (e, currentidx) => {
+    this.setState({
+      currentId3: currentidx,
+      isClicked3: !this.state.isClicked3,
     });
   };
 
   render() {
-    //const array1 = ['별점순', '코멘트순'];
     const array1 = [1, 2];
-    //console.log('필터렌더', this.state.isClicked);
-    console.log(`필터렌더`);
+    const array2 = ['만원 이하', '만원 이상', '2만원 이상', '3만원 이상'];
+    //const array2 = [1, 2, 3, 4];
+
+    const array3 = [
+      'pizza',
+      'pasta',
+      'hamburger',
+      'soup',
+      'barbeque',
+      'noodle',
+      'sushi',
+      'cutlet',
+      'donburi',
+    ];
+    const { ratingCurrentIdx } = this.state;
     return (
       <>
         <div className="UpperBox">
@@ -46,20 +63,12 @@ class Filter extends React.Component {
             </div>
             <div className="selectRating">
               {array1.map(idx => {
-                console.log('맵', this.state.isClicked);
-
                 return (
                   <SelectRatingComponent
-                    title={array1[idx]}
-                    dataIdx={idx}
-                    key={idx}
-                    checkSelectRating={this.checkSelectRating}
-                    isClicked={
-                      this.state.currentId === idx
-                      //this.state.isClicked
-                    }
-                    // this.state.currentId === idx
-                    // this.state.currentId === idx && !this.state.isClicked
+                    stateKey="ratingCurrentIdx"
+                    currentIdx={ratingCurrentIdx}
+                    handleIdx={this.handleIdx}
+                    idx={idx}
                   />
                 );
               })}
@@ -70,10 +79,17 @@ class Filter extends React.Component {
               <span className="title">가격/1인당</span>
             </div>
             <div className="priceSelectSection">
-              <button className="lessThan10000">만원이하</button>
-              <button className="over10000">만원이상</button>
-              <button className="over20000">2만원이상</button>
-              <button className="over30000">3만원이상</button>
+              {array2.map(idx => {
+                return (
+                  <PriceSelectSectionComponent
+                    title={array2[idx]}
+                    dataIdx2={idx}
+                    key={idx}
+                    checkPriceSelectSection={this.checkPriceSelectSection}
+                    isClicked2={this.state.currentId2 === idx}
+                  />
+                );
+              })}
             </div>
           </div>
 
@@ -81,20 +97,20 @@ class Filter extends React.Component {
             <div className="selectHead">
               <span className="title">음식종류</span>
             </div>
-            <div className="western">
-              <button className="pizza">피자</button>
-              <button className="pasta">파스타</button>
-              <button className="hamburger">햄버거</button>
-            </div>
-            <div className="korean">
-              <button className="soup">국밥</button>
-              <button className="barbeque">고기</button>
-              <button className="noodle">국수</button>
-            </div>
-            <div className="japanese">
-              <button className="sushi">스시</button>
-              <button className="cutlet">돈가스</button>
-              <button className="donburi">덮밥</button>
+            <div className="menuCategorySelectSection">
+              {array3.map(idx => {
+                return (
+                  <MenuCategorySelectSectionComponent
+                    title={array3[idx]}
+                    dataIdx3={idx}
+                    key={idx}
+                    checkMenuCategorySelectSection={
+                      this.checkMenuCategorySelectSection
+                    }
+                    isClicked3={this.state.currentId3 === idx}
+                  />
+                );
+              })}
             </div>
           </div>
           <div className="cancelOrConfirm">

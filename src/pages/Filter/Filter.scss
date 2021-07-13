@@ -40,7 +40,7 @@
       padding-top: 20px;
       padding-bottom: 20px;
 
-      .pagingBtn {
+      .selectList {
         display: inline-block;
         width: 200px;
         height: 45px;
@@ -56,19 +56,6 @@
           background-color: red;
         }
       }
-
-      // .popularity {
-      //   display: inline-block;
-      //   width: 200px;
-      //   height: 45px;
-      //   margin: 20px;
-      //   margin-left: 20px;
-      //   padding: 10px;
-      //   border-radius: 50px;
-      //   border: solid;
-      //   border-width: thin;
-      //   border-color: $color-grey;
-      // }
     }
   }
 
@@ -94,7 +81,7 @@
       padding-bottom: 30px;
       padding-top: 10px;
 
-      .lessThan10000 {
+      .selectPriceList {
         display: inline-block;
         width: 200px;
         height: 45px;
@@ -104,42 +91,9 @@
         border: solid;
         border-width: thin;
         border-color: $color-grey;
-      }
-
-      .over10000 {
-        display: inline-block;
-        margin: 20px;
-        width: 200px;
-        height: 45px;
-        border-radius: 50px;
-        padding: 10px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
-      }
-
-      .over20000 {
-        display: inline-block;
-        width: 200px;
-        height: 45px;
-        margin: 20px;
-        border-radius: 100px;
-        padding: 10px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
-      }
-
-      .over30000 {
-        display: inline-block;
-        width: 200px;
-        height: 45px;
-        padding: 10px;
-        margin: 20px;
-        border-radius: 100px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
+        &.on {
+          background-color: red;
+        }
       }
     }
   }
@@ -154,13 +108,13 @@
       }
     }
 
-    .western {
+    .menuCategorySelectSection {
       display: flex;
       justify-content: space-between;
       text-align: center;
       margin-top: 25px;
 
-      .pizza {
+      .categoryMenuList {
         margin: 20px;
         width: 200px;
         height: 45px;
@@ -169,108 +123,96 @@
         border: solid;
         border-width: thin;
         border-color: $color-grey;
+        &.on {
+          background-color: red;
+        }
       }
 
-      .pasta {
-        width: 200px;
-        height: 45px;
-        margin: 20px;
-        border-radius: 50px;
-        padding: 10px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
-      }
+      // .pasta {
+      //   width: 200px;
+      //   height: 45px;
+      //   margin: 20px;
+      //   border-radius: 50px;
+      //   padding: 10px;
+      //   border: solid;
+      //   border-width: thin;
+      //   border-color: $color-grey;
+      // }
 
-      .hamburger {
-        width: 200px;
-        height: 45px;
-        margin: 20px;
-        border-radius: 50px;
-        padding: 10px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
-      }
-    }
+      // .hamburger {
+      //   width: 200px;
+      //   height: 45px;
+      //   margin: 20px;
+      //   border-radius: 50px;
+      //   padding: 10px;
+      //   border: solid;
+      //   border-width: thin;
+      //   border-color: $color-grey;
+      // }
+      // .soup {
+      //   width: 200px;
+      //   height: 45px;
+      //   margin: 20px;
+      //   border-radius: 50px;
+      //   padding: 10px;
+      //   border: solid;
+      //   border-width: thin;
+      //   border-color: $color-grey;
+      // }
 
-    .korean {
-      display: flex;
-      justify-content: space-between;
-      text-align: center;
+      // .barbeque {
+      //   width: 200px;
+      //   height: 45px;
+      //   margin: 20px;
+      //   border-radius: 50px;
+      //   padding: 10px;
+      //   border: solid;
+      //   border-width: thin;
+      //   border-color: $color-grey;
+      // }
 
-      .soup {
-        width: 200px;
-        height: 45px;
-        margin: 20px;
-        border-radius: 50px;
-        padding: 10px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
-      }
+      // .noodle {
+      //   width: 200px;
+      //   height: 45px;
+      //   margin: 20px;
+      //   border-radius: 50px;
+      //   padding: 10px;
+      //   border: solid;
+      //   border-width: thin;
+      //   border-color: $color-grey;
+      // }
+      // span.sushi {
+      //   width: 200px;
+      //   height: 45px;
+      //   margin: 20px;
+      //   border-radius: 50px;
+      //   padding: 10px;
+      //   border: solid;
+      //   border-width: thin;
+      //   border-color: $color-grey;
+      // }
 
-      .barbeque {
-        width: 200px;
-        height: 45px;
-        margin: 20px;
-        border-radius: 50px;
-        padding: 10px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
-      }
+      // span.cutlet {
+      //   width: 200px;
+      //   height: 45px;
+      //   margin: 20px;
+      //   border-radius: 25px;
+      //   padding: 10px;
+      //   border: solid;
+      //   border-width: thin;
+      //   border-color: $color-grey;
+      // }
 
-      .noodle {
-        width: 200px;
-        height: 45px;
-        margin: 20px;
-        border-radius: 50px;
-        padding: 10px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
-      }
-    }
-
-    .japanese {
-      display: flex;
-      justify-content: space-between;
-      text-align: center;
-      margin-bottom: 25px;
-
-      span.sushi {
-        width: 200px;
-        height: 45px;
-        margin: 20px;
-        border-radius: 50px;
-        padding: 10px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
-      }
-
-      span.cutlet {
-        width: 200px;
-        height: 45px;
-        margin: 20px;
-        border-radius: 25px;
-        padding: 10px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
-      }
-
-      span.donburi {
-        width: 200px;
-        height: 45px;
-        margin: 20px;
-        border-radius: 25px;
-        padding: 10px;
-        border: solid;
-        border-width: thin;
-        border-color: $color-grey;
-      }
+      // span.donburi {
+      //   width: 200px;
+      //   height: 45px;
+      //   margin: 20px;
+      //   border-radius: 25px;
+      //   padding: 10px;
+      //   border: solid;
+      //   border-width: thin;
+      //   border-color: $color-grey;
+      // }
     }
   }
 
