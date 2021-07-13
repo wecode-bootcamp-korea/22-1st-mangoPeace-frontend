@@ -7,17 +7,16 @@ class Button extends React.Component {
   }
   render() {
     const { isButtonClicked } = this.props;
-    console.log('컴포넌트isButtonClicked', isButtonClicked);
-    //console.log(isButtonClicked);
+
     return (
       <>
         <span>
           <button
             type="button"
-            className="paging"
+            className="pagingButton"
             onClick={e => this.props.updateResult(e, this.props.dataIndex)}
             dataIndex={this.props.dataIndex}
-            style={{ backgroundColor: isButtonClicked ? 'red' : 'blue' }}
+            className={isButtonClicked ? 'pagingButton on' : 'pagingButton'}
           >
             {this.props.dataIndex}
           </button>

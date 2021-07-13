@@ -20,7 +20,7 @@ class PriceSelectSectionComponent extends React.Component {
           priceCurrentIdx === idx ? 'selectPriceList on' : 'selectPriceList'
         }
       >
-        {this.props.title}
+        {idx.title}
       </button>
     );
   }

@@ -4,16 +4,26 @@ import SelectRatingComponent from '../FilterComponent/SelectRatingComponent';
 import PriceSelectSectionComponent from '../FilterComponent/PriceSelectSectionComponent';
 import MenuCategorySelectSectionComponent from '../FilterComponent/MenuCategorySelectSectionComponent';
 
-const BUTTONS = [
-  { id: 0, title: 'pizza' },
-  { id: 1, title: 'pasta' },
-  { id: 2, title: 'hamburger' },
-  { id: 3, title: 'soup' },
-  { id: 4, title: 'barbeque' },
-  { id: 5, title: 'noodle' },
-  { id: 6, title: 'sushi' },
-  { id: 7, title: 'cutlet' },
-  { id: 8, title: 'donburi' },
+const RATING = [
+  { idx: 0, title: '#별점순' },
+  { idx: 1, title: '#코멘트순' },
+];
+const PRICE = [
+  { idx: 0, title: '#1만원 이하' },
+  { idx: 1, title: '#1만원 이상' },
+  { idx: 2, title: '#2만원 이상' },
+  { idx: 3, title: '#3만원 이상' },
+];
+const MENU = [
+  { idx: 0, title: '#피자' },
+  { idx: 1, title: '#파스타' },
+  { idx: 2, title: '#햄버거' },
+  { idx: 3, title: '#국밥' },
+  { idx: 4, title: '#불고기' },
+  { idx: 5, title: '#국수' },
+  { idx: 6, title: '#초밥' },
+  { idx: 7, title: '#돈가스' },
+  { idx: 8, title: '#덮밥' },
 ];
 
 class Filter extends React.Component {
@@ -56,24 +66,19 @@ class Filter extends React.Component {
   };
 
   render() {
-    const array1 = [1, 2];
-    const array2 = ['만원 이하', '만원 이상', '2만원 이상', '3만원 이상'];
-    //const array2 = [1, 2, 3, 4];
-
     const { ratingCurrentIdx, priceCurrentIdx, values } = this.state;
     const isAllSectionNotValid =
       ratingCurrentIdx === 0 && priceCurrentIdx === 0 && values.length === 0;
 
-    console.log(`isAllSectionNotValid`, isAllSectionNotValid);
     return (
       <>
-        <div className="UpperBox">
+        <span className="FilterBox">
           <div className="searchFilter">
             <div className="selectHead">
               <span className="title">검색필터</span>
             </div>
             <div className="selectRating">
-              {array1.map(idx => {
+              {RATING.map(idx => {
                 return (
                   <SelectRatingComponent
                     stateKey="ratingCurrentIdx"
@@ -90,7 +95,7 @@ class Filter extends React.Component {
               <span className="title">가격/1인당</span>
             </div>
             <div className="priceSelectSection">
-              {array2.map(idx => {
+              {PRICE.map(idx => {
                 return (
                   <PriceSelectSectionComponent
                     stateKey="priceCurrentIdx"
@@ -108,7 +113,7 @@ class Filter extends React.Component {
               <span className="title">음식종류</span>
             </div>
             <div className="menuCategorySelectSection">
-              {BUTTONS.map(idx => {
+              {MENU.map(idx => {
                 return (
                   <MenuCategorySelectSectionComponent
                     values={values}
@@ -120,18 +125,15 @@ class Filter extends React.Component {
             </div>
           </div>
           <div className="cancelOrConfirm">
-            <div className="cancel">취소</div>
             <button
               className="confirm"
               disabled={isAllSectionNotValid}
-              style={{
-                backgroundColor: isAllSectionNotValid ? 'gray' : 'orange',
-              }}
+              className={isAllSectionNotValid ? 'confirm' : 'confirm on'}
             >
               선택
             </button>
           </div>
-        </div>
+        </span>
       </>
     );
   }
