@@ -11,7 +11,7 @@ class SelectRatingComponent extends React.Component {
       <>
         <button
           type="button"
-          currentIdx={this.props.currentIdx}
+          currentIdx={currentIdx}
           stateKey="ratingCurrentIdx"
           onClick={() => handleIdx(stateKey, idx)}
           className={currentIdx === idx ? 'selectList on' : 'selectList'}

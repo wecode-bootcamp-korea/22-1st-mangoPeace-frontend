@@ -85,7 +85,7 @@ class Filter extends React.Component {
                   <PriceSelectSectionComponent
                     stateKey="priceCurrentIdx"
                     currentIdx={priceCurrentIdx}
-                    handleIdx={this.checkPriceSelectSection}
+                    checkPriceSelectSection={this.checkPriceSelectSection}
                     idx={idx}
                   />
                 );
