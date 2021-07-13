@@ -66,14 +66,15 @@ class SignUp extends React.Component {
     fetch('', {
       method: 'post',
       body: JSON.stringify({
-        name: nameValue,
+        full_name: nameValue,
         email: emailValue,
         password: passwordValue,
-        phoneNum: phoneNumValue,
+        phone_number: phoneNumValue,
       }),
     })
       .then(response => response.json())
       .then(result => {
+        console.log(result);
         if (result.MESSAGE !== 'SUCCESS') {
           //this.props.history.push('/');
           alert('다시 기입해주세요');
