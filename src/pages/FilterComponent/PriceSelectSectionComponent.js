@@ -7,16 +7,17 @@ class PriceSelectSectionComponent extends React.Component {
   }
 
   render() {
-    const { idx, stateKey, currentIdx, checkPriceSelectSection } = this.props;
+    const { idx, stateKey, priceCurrentIdx, checkPriceSelectSection } =
+      this.props;
 
     return (
       <button
         type="button"
-        currentIdx={currentIdx}
+        priceCurrentIdx={priceCurrentIdx}
         stateKey="priceCurrentIdx"
         onClick={() => checkPriceSelectSection(stateKey, idx)}
         className={
-          currentIdx === idx ? 'selectPriceList on' : 'selectPriceList'
+          priceCurrentIdx === idx ? 'selectPriceList on' : 'selectPriceList'
         }
       >
         {this.props.title}
