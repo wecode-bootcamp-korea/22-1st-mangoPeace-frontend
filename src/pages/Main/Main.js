@@ -29,7 +29,7 @@ class Main extends React.Component {
       });
 
     // TOP 5 배너
-    fetch('http://localhost:3000/data/topGrade.json')
+    fetch('http://10.58.0.218:8000/restaurants/1/high_ratings')
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -67,6 +67,7 @@ class Main extends React.Component {
   render() {
     const { handleBtn, handleDotBtn } = this;
     const { slideNum, slideTranslate, popStore, bestListImg } = this.state;
+    console.log(popStore);
 
     return (
       <main>
