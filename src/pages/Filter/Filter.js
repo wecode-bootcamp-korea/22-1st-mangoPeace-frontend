@@ -10,7 +10,7 @@ class Filter extends React.Component {
       dataIdx: null,
 
       ratingCurrentIdx: 0,
-      menuCurrentIdxArr: [1, 2, 3],
+      values: [],
     };
   }
 
@@ -28,11 +28,18 @@ class Filter extends React.Component {
     });
   };
 
-  checkMenuCategorySelectSection = (stateKey, idx) => {
-    const isSameIndex = this.state[stateKey] === idx;
-    this.setState({
-      [stateKey]: isSameIndex ? 0 : idx,
-    });
+  handleButton = button => {
+    let tmp = this.state.values;
+    if (this.state.values.includes(button)) {
+      this.setState({
+        values: this.state.values.filter(el => el !== button),
+      });
+    } else {
+      tmp.push(button);
+      this.setState({
+        values: tmp,
+      });
+    }
   };
 
   render() {
@@ -98,11 +105,9 @@ class Filter extends React.Component {
               {array3.map(idx => {
                 return (
                   <MenuCategorySelectSectionComponent
+                    values={this.state.values}
                     idx={idx}
-                    currentIdxArr={menuCurrentIdxArr}
-                    checkMenuCategorySelectSection={
-                      this.checkMenuCategorySelectSection
-                    }
+                    handleButton={this.handleButton}
                   />
                 );
               })}
