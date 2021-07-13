@@ -8,7 +8,7 @@ class PriceSelectSectionComponent extends React.Component {
 
   render() {
     const { idx, stateKey, currentIdx, checkPriceSelectSection } = this.props;
-    console.log(checkPriceSelectSection);
+
     return (
       <button
         type="button"

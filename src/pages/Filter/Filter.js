@@ -7,13 +7,10 @@ class Filter extends React.Component {
   constructor() {
     super();
     this.state = {
-      isClicked2: false,
-      isClicked3: false,
       dataIdx: null,
-      currentId: 0,
-      currentId2: 0,
-      currentId3: 0,
+
       ratingCurrentIdx: 0,
+      menuCurrentIdxArr: [],
     };
   }
 
@@ -31,10 +28,10 @@ class Filter extends React.Component {
     });
   };
 
-  checkMenuCategorySelectSection = (e, currentidx) => {
+  checkMenuCategorySelectSection = (stateKey, idx) => {
+    const isSameIndex = this.state[stateKey] === idx;
     this.setState({
-      currentId3: currentidx,
-      isClicked3: !this.state.isClicked3,
+      [stateKey]: isSameIndex ? 0 : idx,
     });
   };
 
@@ -54,7 +51,7 @@ class Filter extends React.Component {
       'cutlet',
       'donburi',
     ];
-    const { ratingCurrentIdx, priceCurrentIdx } = this.state;
+    const { ratingCurrentIdx, priceCurrentIdx, currentIdxArr } = this.state;
     return (
       <>
         <div className="UpperBox">
@@ -101,13 +98,8 @@ class Filter extends React.Component {
               {array3.map(idx => {
                 return (
                   <MenuCategorySelectSectionComponent
-                    title={array3[idx]}
-                    dataIdx3={idx}
-                    key={idx}
-                    checkMenuCategorySelectSection={
-                      this.checkMenuCategorySelectSection
-                    }
-                    isClicked3={this.state.currentId3 === idx}
+                    idx={idx}
+                    currentIdx={currentIdxArr}
                   />
                 );
               })}

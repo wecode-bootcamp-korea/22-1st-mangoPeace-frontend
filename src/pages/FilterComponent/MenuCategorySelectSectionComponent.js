@@ -21,18 +21,32 @@ class MenuCategorySelectSectionComponent extends React.Component {
     };
   }
 
+  checkuttonSelected = () => {
+    const { currentIdx, idx } = this.props;
+    if (Array.isArray(currentIdx)) {
+      return currentIdx.includes(idx);
+    } else {
+      return currentIdx === idx; //집가서 고치자
+    }
+  };
+
   render() {
-    const { isClicked3 } = this.props;
-    console.log(`isClicked3`, isClicked3);
+    const {
+      idx,
+      stateKey,
+      currentIdx,
+      checkMenuCategorySelectSection,
+      currentIdxArr,
+    } = this.props;
     return (
       <button
         type="button"
-        dataIdx3={this.props.dataIdx3}
-        key={this.props.dataIdx3}
-        onClick={e =>
-          this.props.checkMenuCategorySelectSection(e, this.props.dataIdx3)
+        currentIdx={currentIdx}
+        stateKey="menuCurrentIdx"
+        onClick={() => checkMenuCategorySelectSection(stateKey, idx)}
+        className={
+          currentIdx === idx ? 'categoryMenuList on' : 'categoryMenuList'
         }
-        className={isClicked3 ? 'categoryMenuList on' : 'categoryMenuList'}
       >
         {this.props.title}
       </button>
