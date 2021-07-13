@@ -1,0 +1,83 @@
+@import '../../../../styles/common.scss';
+
+.storeCard {
+  @include display-flex(space-between, center);
+  height: 400px;
+  border-bottom: 1px solid #dbdbdb;
+
+  img {
+    width: 300px;
+  }
+
+  .storeBox {
+    @include display-flex(space-between, normal);
+    flex-direction: column;
+    margin-left: 30px;
+    height: 300px;
+
+    .storeInfoBox {
+      display: block;
+      margin-bottom: 20px;
+
+      .storeHeadline {
+        display: flex;
+        margin-bottom: 10px;
+
+        h2 {
+          display: inline;
+          margin-bottom: 10px;
+          font-family: 'Noto Sans KR', sans-serif;
+          font-size: 30px;
+        }
+
+        .storeName {
+          margin-right: 20px;
+          color: $color-darkgrey;
+        }
+
+        .storeGrade {
+          color: $color-main;
+        }
+      }
+
+      h3 {
+        color: $color-grey;
+        font-size: 18px;
+      }
+    }
+
+    .storeReviewBox {
+      @include display-flex(space-between, normal);
+      height: 45%;
+
+      img {
+        margin-right: 15px;
+        width: 40px;
+        height: 40px;
+      }
+
+      .storeReview {
+        .userNickname {
+          margin-right: 5px;
+          font-weight: bold;
+        }
+
+        .userReview {
+          line-height: 150%;
+        }
+      }
+    }
+
+    .storeMore {
+      @include display-flex(flex-end, normal);
+      margin-bottom: 20px;
+      color: $color-grey;
+      text-align: center;
+      font-size: 18px;
+
+      i {
+        margin-left: 5px;
+      }
+    }
+  }
+}
