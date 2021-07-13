@@ -24,9 +24,10 @@ class Filter extends React.Component {
     });
   };
 
-  checkPriceSelectSection = (e, currentidx) => {
+  checkPriceSelectSection = (stateKey, idx) => {
+    const isSameIndex = this.state[stateKey] === idx;
     this.setState({
-      currentId2: currentidx,
+      [stateKey]: isSameIndex ? 0 : idx,
     });
   };
 
@@ -53,7 +54,7 @@ class Filter extends React.Component {
       'cutlet',
       'donburi',
     ];
-    const { ratingCurrentIdx } = this.state;
+    const { ratingCurrentIdx, priceCurrentIdx } = this.state;
     return (
       <>
         <div className="UpperBox">
@@ -82,11 +83,10 @@ class Filter extends React.Component {
               {array2.map(idx => {
                 return (
                   <PriceSelectSectionComponent
-                    title={array2[idx]}
-                    dataIdx2={idx}
-                    key={idx}
-                    checkPriceSelectSection={this.checkPriceSelectSection}
-                    isClicked2={this.state.currentId2 === idx}
+                    stateKey="priceCurrentIdx"
+                    currentIdx={priceCurrentIdx}
+                    handleIdx={this.checkPriceSelectSection}
+                    idx={idx}
                   />
                 );
               })}
