@@ -15,6 +15,7 @@ class StoreCard extends Component {
           <div className="storeInfoBox">
             <div className="storeHeadline">
               <h2 className="storeName">1. 누룩나무</h2>
+              <i class="fas fa-star"></i>
               <h2 className="storeGrade">4.3</h2>
             </div>
             <h3 className="storeLocate">서울특별시 종로구 인사동16길 13</h3>

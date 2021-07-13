@@ -21,17 +21,26 @@
 
       .storeHeadline {
         display: flex;
+        justify-content: space-between;
+        position: relative;
         margin-bottom: 10px;
 
         h2 {
           display: inline;
           margin-bottom: 10px;
-          font-family: 'Noto Sans KR', sans-serif;
           font-size: 30px;
+          font-weight: 500;
+        }
+
+        i {
+          position: absolute;
+          right: 50px;
+          bottom: 12px;
+          color: $color-main;
+          font-size: 25px;
         }
 
         .storeName {
-          margin-right: 20px;
           color: $color-darkgrey;
         }
 
@@ -43,6 +52,7 @@
       h3 {
         color: $color-grey;
         font-size: 18px;
+        font-weight: 500;
       }
     }
 
@@ -54,6 +64,7 @@
         margin-right: 15px;
         width: 40px;
         height: 40px;
+        border-radius: 20px;
       }
 
       .storeReview {
