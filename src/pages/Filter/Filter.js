@@ -5,25 +5,25 @@ import PriceSelectSectionComponent from '../FilterComponent/PriceSelectSectionCo
 import MenuCategorySelectSectionComponent from '../FilterComponent/MenuCategorySelectSectionComponent';
 
 const RATING = [
-  { idx: 0, title: '#별점순' },
-  { idx: 1, title: '#코멘트순' },
+  { id: 0, title: '#별점순' }, // id 라고 해야하는거야 id 라고 해야하는 거야 ?
+  { id: 1, title: '#코멘트순' },
 ];
 const PRICE = [
-  { idx: 0, title: '#1만원 이하' },
-  { idx: 1, title: '#1만원 이상' },
-  { idx: 2, title: '#2만원 이상' },
-  { idx: 3, title: '#3만원 이상' },
+  { id: 0, title: '#1만원 미만' },
+  { id: 1, title: '#1만원 이상' },
+  { id: 2, title: '#2만원 이상' },
+  { id: 3, title: '#3만원 이상' },
 ];
 const MENU = [
-  { idx: 0, title: '#피자' },
-  { idx: 1, title: '#파스타' },
-  { idx: 2, title: '#햄버거' },
-  { idx: 3, title: '#국밥' },
-  { idx: 4, title: '#불고기' },
-  { idx: 5, title: '#국수' },
-  { idx: 6, title: '#초밥' },
-  { idx: 7, title: '#돈가스' },
-  { idx: 8, title: '#덮밥' },
+  { id: 0, title: '#피자' },
+  { id: 1, title: '#파스타' },
+  { id: 2, title: '#햄버거' },
+  { id: 3, title: '#국밥' },
+  { id: 4, title: '#불고기' },
+  { id: 5, title: '#국수' },
+  { id: 6, title: '#초밥' },
+  { id: 7, title: '#돈가스' },
+  { id: 8, title: '#덮밥' },
 ];
 
 class Filter extends React.Component {
@@ -70,6 +70,10 @@ class Filter extends React.Component {
     const isAllSectionNotValid =
       ratingCurrentIdx === 0 && priceCurrentIdx === 0 && values.length === 0;
 
+    console.log(`ratingCurrentIdx`, ratingCurrentIdx);
+    console.log(`priceCurrentIdx`, priceCurrentIdx);
+    console.log(`values`, values);
+
     return (
       <>
         <span className="FilterBox">
@@ -84,7 +88,8 @@ class Filter extends React.Component {
                     stateKey="ratingCurrentIdx"
                     ratingCurrentIdx={ratingCurrentIdx}
                     handleIdx={this.handleIdx}
-                    idx={idx}
+                    idx={idx} //idx 라는건 뭘까 ??
+                    key={idx.title}
                   />
                 );
               })}
@@ -102,6 +107,7 @@ class Filter extends React.Component {
                     priceCurrentIdx={priceCurrentIdx}
                     checkPriceSelectSection={this.checkPriceSelectSection}
                     idx={idx}
+                    key={idx.title}
                   />
                 );
               })}
@@ -119,6 +125,7 @@ class Filter extends React.Component {
                     values={values}
                     idx={idx}
                     handleButton={this.handleButton}
+                    key={idx.title}
                   />
                 );
               })}
@@ -126,7 +133,6 @@ class Filter extends React.Component {
           </div>
           <div className="cancelOrConfirm">
             <button
-              className="confirm"
               disabled={isAllSectionNotValid}
               className={isAllSectionNotValid ? 'confirm' : 'confirm on'}
             >

@@ -1,6 +1,6 @@
 import React from 'react';
 import './SearchResult.scss';
-import SearchResultComponent from '../SearchResultComponent/SearchResultComponent';
+import SearchResultComponent from '../SearchResultComponent/SearchResultListComponent';
 import Button from './PagingButtonComponent';
 import Filter from '../Filter/Filter';
 
@@ -10,8 +10,8 @@ class SearchResult extends React.Component {
     this.state = {
       resultList: [],
       searchResultMainImage: null,
-      menuName: '',
-      star: null,
+      restaurantName: '',
+      starRating: null,
       location: '',
       category: '',
       id: null,
@@ -25,29 +25,51 @@ class SearchResult extends React.Component {
   }
   //메인화면에서 검색어 가져옴
   componentDidMount() {
-    fetch('http://localhost:3000/data/resultData3.json', {
-      //this.props.location.search
+    fetch(
+      'http://10.58.4.170:8000/search?keyword=%EC%9D%BC%EC%8B%9D&offset=0&limit=6',
+      {
+        //this.props.location.search
 
-      method: 'GET',
-    })
+        method: 'GET',
+      }
+    )
       .then(res => res.json())
       .then(data => {
+        console.log('data', data['count']);
         this.setState({
-          resultList: data,
+          resultList: [
+            ...data.category_result,
+            ...data.sub_category_result,
+            ...data.restaurant_result,
+          ],
         });
       });
   }
-  //
+
   updateResult = (e, currentidx) => {
-    fetch('http://localhost:3000/data/resultData3.json', {
-      method: 'GET',
-    })
+    const limit = 6;
+    let offset = (currentidx - 1) % 6;
+    fetch(
+      `http://10.58.4.170:8000/search?keyword=%EC%9D%BC%EC%8B%9D&offset=${offset}&limit=${limit}`,
+      {
+        method: 'GET',
+      }
+    )
       .then(res => res.json())
       .then(data => {
+        console.log(
+          `seardchResult fetch :this.state.resultList`,
+          this.state.resultList
+        );
         this.setState({
-          resultList: data,
+          resultList: [
+            ...data.category_result,
+            ...data.sub_category_result,
+            ...data.restaurant_result,
+          ],
         });
       });
+
     this.setState({
       currentId: currentidx,
     });
@@ -56,9 +78,14 @@ class SearchResult extends React.Component {
   render() {
     const newArr = [];
 
+    console.log(
+      `seardchResult Render :this.state.resultList`,
+      this.state.resultList
+    );
+
     for (
       let idx = 1;
-      idx <= Math.ceil(40 / 4);
+      idx <= Math.ceil(18 / 6);
       //this.state.resultList.length // 단한페이지 배열의 길이여서 틀림
       idx++
     ) {
@@ -82,14 +109,15 @@ class SearchResult extends React.Component {
               <div className="searchResultList">
                 {/* {this.state.resultList.length>0 && */}
                 {this.state.resultList.map(result => {
+                  console.log('map', this.state.resultList);
                   return (
                     <span className="searchResultListContent" key={result.id}>
                       <SearchResultComponent
-                        searchResultMainImage={result.searchResultMainImage}
-                        menuName={result.menuName}
-                        star={result.star}
-                        location={result.location}
-                        category={result.category}
+                        searchResultMainImage={result.food_image_url}
+                        restaurantName={result.restaurantName}
+                        starRating={result.average_rating}
+                        location={result.restaurantAddress}
+                        //category={result.}
                       />
                     </span>
                   );
@@ -104,6 +132,7 @@ class SearchResult extends React.Component {
               {newArr.map(idx => {
                 return (
                   <Button
+                    key={idx}
                     dataIndex={idx}
                     updateResult={this.updateResult}
                     isButtonClicked={this.state.currentId === idx}

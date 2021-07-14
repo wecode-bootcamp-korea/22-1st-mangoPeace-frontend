@@ -7,12 +7,13 @@ class SelectRatingComponent extends React.Component {
   }
   render() {
     const { idx, stateKey, handleIdx, ratingCurrentIdx } = this.props;
+
     return (
       <>
         <button
           type="button"
           ratingCurrentIdx={ratingCurrentIdx}
-          stateKey="ratingCurrentIdx"
+          //stateKey="ratingCurrentIdx"
           onClick={() => handleIdx(stateKey, idx)}
           className={ratingCurrentIdx === idx ? 'selectList on' : 'selectList'}
         >

@@ -10,8 +10,8 @@ class SearchResultComponent extends React.Component {
         ></img>
         <div className="menuInfoContainer">
           <div className="basicInfo">
-            <span className="menuName">{this.props.menuName}</span>
-            <span className="star">{this.props.star}</span>
+            <span className="menuName">{this.props.restaurantName}</span>
+            <span className="star">{this.props.starRating}</span>
           </div>
           <div className="menuDetail">
             <span className="location">{this.props.location}</span>
