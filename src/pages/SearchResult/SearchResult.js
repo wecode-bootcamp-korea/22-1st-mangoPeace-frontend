@@ -75,13 +75,21 @@ class SearchResult extends React.Component {
     });
   };
 
+  SearchByFilter = (ratingCurrentIdx, priceCurrentIdx, values) => {
+    //각각의 경우가 없는 경우 (밸류는 0 인경우를 고려해야한다) - 이때에 따라서 쿼리스트링을 다르게 해야한다
+    //셋다 값이 없는 경우는 없다
+    // 각각의 앞의 두개는 숫자가 들어있으므로 처리를 해준다. 값은 하나만 가짐.
+
+    let query = '';
+
+    if (ratingCurrentIdx.title) {
+      query += '$' + ratingCurrentIdx.title.slice(1, ratingCurrentIdx.length);
+      console.log(query);
+    }
+  };
+
   render() {
     const newArr = [];
-
-    console.log(
-      `seardchResult Render :this.state.resultList`,
-      this.state.resultList
-    );
 
     for (
       let idx = 1;
@@ -124,7 +132,7 @@ class SearchResult extends React.Component {
                 })}
               </div>
               <span className="SideFilter">
-                <Filter />
+                <Filter SearchByFilter={this.SearchByFilter} />
               </span>
             </div>
 

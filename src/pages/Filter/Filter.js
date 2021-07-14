@@ -70,9 +70,9 @@ class Filter extends React.Component {
     const isAllSectionNotValid =
       ratingCurrentIdx === 0 && priceCurrentIdx === 0 && values.length === 0;
 
-    console.log(`ratingCurrentIdx`, ratingCurrentIdx);
-    console.log(`priceCurrentIdx`, priceCurrentIdx);
-    console.log(`values`, values);
+    console.log(`ratingCurrentIdx`, ratingCurrentIdx.title);
+    // console.log(`priceCurrentIdx`, priceCurrentIdx);
+    // console.log(`values`, values);
 
     return (
       <>
@@ -135,6 +135,11 @@ class Filter extends React.Component {
             <button
               disabled={isAllSectionNotValid}
               className={isAllSectionNotValid ? 'confirm' : 'confirm on'}
+              onClick={this.props.SearchByFilter(
+                ratingCurrentIdx,
+                priceCurrentIdx,
+                values
+              )}
             >
               선택
             </button>
