@@ -1,19 +1,18 @@
 import React from 'react';
+import { withRouter } from 'react-router';
+
+import { stringToQuery } from '../../../utilities/query';
 
 import ReviewInput from './ReviewInput/ReviewInput';
 import ReviewLi from './ReviewLi/ReviewLi';
+import ReviewEmpty from './ReviewEmpty/ReviewEmpty';
 
 import './StoreReviewBox.scss';
 
 class StoreReviewBox extends React.Component {
   state = {
     selectedRateGroup: 0,
-    viewMore: true,
   };
-
-  scoreRangeMin = 1;
-  scoreRangeMax = 5;
-  reviewRequestNum = 1;
 
   sortScoreData = [
     {
@@ -46,39 +45,26 @@ class StoreReviewBox extends React.Component {
     },
   ];
 
-  componentDidMount = () => {
-    const { restaurantsData } = this.props;
-
-    restaurantsData.review_count.total < 11
-      ? this.setState({
-          viewMore: false,
-        })
-      : this.setState({ viewMore: true });
-  };
-
-  componentDidUpdate = () => {};
-
   handleClickSortScore = index => {
-    this.setState({
-      viewMore: true,
-    });
-    this.reviewRequestNum = 1;
+    const { history } = this.props;
 
-    this.scoreRangeMin = this.sortScoreData[index].min;
-    this.scoreRangeMax = this.sortScoreData[index].max;
-    this.props.fetchReviewData(this.scoreRangeMin, this.scoreRangeMax, 1);
-    this.setState({
-      selectedRateGroup: index,
-    });
+    history.push(
+      `?offset=0&limit=10&rating-min=${this.sortScoreData[index].min}&rating-max=${this.sortScoreData[index].max}`
+    );
+    this.props.fetchReviewData();
+    this.setState({ selectedRateGroup: index });
   };
 
   handleClickViewMore = () => {
-    this.props.fetchReviewData(
-      this.scoreRangeMin,
-      this.scoreRangeMax,
-      this.reviewRequestNum + 1
+    const { history } = this.props;
+    const queryObj = stringToQuery(history.location.search);
+
+    history.push(
+      `?offset=${Number(queryObj.offset) + 10}&limit=10&rating-min=${
+        queryObj['rating-min']
+      }&rating-max=${queryObj['rating-max']}`
     );
-    this.reviewRequestNum += 1;
+    this.props.fetchReviewData();
   };
 
   render() {
@@ -90,8 +76,10 @@ class StoreReviewBox extends React.Component {
       fetchReviewData,
       fetchData,
       storeId,
+      history,
     } = this.props;
-    const { selectedRateGroup, viewMore } = this.state;
+    const { selectedRateGroup } = this.state;
+    const queryObj = stringToQuery(history.location.search);
 
     return (
       <div className="storeReviewBox">
@@ -100,8 +88,6 @@ class StoreReviewBox extends React.Component {
           fetchReviewData={fetchReviewData}
           storeId={storeId}
           storeName={restaurantsData.name}
-          scoreRangeMin={this.scoreRangeMin}
-          scoreRangeMax={this.scoreRangeMax}
         />
         <section className="reviewListBox">
           <ul className="sortScore">
@@ -117,21 +103,27 @@ class StoreReviewBox extends React.Component {
             ))}
           </ul>
           <ul className="reviewUl">
-            {reviewsData.map(review => (
-              <ReviewLi
-                key={review.id}
-                handleReviewDel={handleReviewDel}
-                handleReviewEdit={handleReviewEdit}
-                reviewId={review.id}
-                reviewUserInfo={review.user}
-                reviewContent={review.content}
-                reviewRate={review.rating}
-                createdAt={review.created_at}
-              />
-            ))}
+            {reviewsData.length === 0 ? (
+              <ReviewEmpty />
+            ) : (
+              reviewsData.map(review => (
+                <ReviewLi
+                  key={review.id}
+                  storeId={storeId}
+                  handleReviewDel={handleReviewDel}
+                  handleReviewEdit={handleReviewEdit}
+                  reviewId={review.id}
+                  reviewUserInfo={review.user}
+                  reviewContent={review.content}
+                  reviewRate={review.rating}
+                  createdAt={review.created_at}
+                />
+              ))
+            )}
           </ul>
         </section>
-        {viewMore && (
+        {queryObj.offset + queryObj.limit <
+          this.sortScoreData[selectedRateGroup].quantity && (
           <div className="viewMoreBox">
             <span onClick={this.handleClickViewMore} className="viewMoreText">
               더보기
@@ -143,4 +135,4 @@ class StoreReviewBox extends React.Component {
   }
 }
 
-export default StoreReviewBox;
+export default withRouter(StoreReviewBox);

@@ -1,36 +1,40 @@
 import React from 'react';
 
+import { stringToQuery } from '../../utilities/query';
+
 import StoreImgBox from './StoreImgBox/StoreImgBox';
 import StoreInfo from './StoreInfo/StoreInfo';
 import StoreReviewBox from './StoreReviewBox/StoreReviewBox';
 
 import './Detail.scss';
 
+const LIMIT = 10;
+
 class Detail extends React.Component {
   state = {
     restaurants: null,
     foods: null,
-    reviews: [],
-    reviewOffset: 0,
+    reviews: null,
   };
 
   componentDidMount = () => {
     const { id } = this.props.match.params;
 
+    this.props.history.push(`?offset=0&limit=10&rating-min=1&rating-max=5`);
+
     this.fetchData(`restaurants/${id}`);
     this.fetchData(`restaurants/${id}/foods`);
-    this.fetchReviewData(1, 5, 1);
+    this.fetchReviewData();
   };
 
   handleReviewEdit = reviewId => {
-    // console.log(this.state.reviews);
     const targetedReview = this.state.reviews.filter(
       review => review.id === reviewId
     );
     const targetedReviewText = targetedReview[0].content;
-
+    const targetedReviewStar = targetedReview[0].rating;
     // fetch(
-    //   `${IP_ADDRESS}/restaurants/${this.props.match.params.id}/reviews/${reviewId}`,
+    //   `${IP_ADDRESS}/restaurants/${this.props.match.params.id}/review/${reviewId}`,
     //   {
     //     method: 'PATCH',
     //   }
@@ -40,36 +44,30 @@ class Detail extends React.Component {
   };
 
   handleReviewDel = reviewId => {
-    fetch(
-      `${IP_ADDRESS}/restaurants/${this.props.match.params.id}/reviews/${reviewId}`,
-      {
-        method: 'DELETE',
-      }
-    ).then(() => this.fetchReviewData(1, 5, 1));
+    const { id } = this.props.match.params;
+
+    fetch(`${IP_ADDRESS}/restaurants/${id}/review/${reviewId}`, {
+      method: 'DELETE',
+    }).then(this.fetchReviewData);
   };
 
-  sortAddr = addr => {
-    const splitAddr = addr.split('/');
+  fetchReviewData = () => {
+    const { match, history } = this.props;
+    const queryObj = stringToQuery(history.location.search);
 
-    return parseInt(splitAddr[splitAddr.length - 1]) ===
-      Number(this.props.match.params.id)
-      ? splitAddr[0]
-      : splitAddr[splitAddr.length - 1];
-  };
-
-  fetchReviewData = (min, max, requestNum) => {
-    console.log(min, max, requestNum);
     fetch(
-      `${IP_ADDRESS}/restaurants/${this.props.match.params.id}/reviews?offset=${requestNum}&limit=10&rating-min=${min}&rating-max=${max}`
+      `${IP_ADDRESS}/restaurants/${match.params.id}/reviews?offset=${queryObj.offset}&limit=${LIMIT}&rating-min=${queryObj['rating-min']}&rating-max=${queryObj['rating-max']}`
     )
       .then(res => res.json())
       .then(res => {
-        if (requestNum !== 1) {
-          this.setState(prev => ({ review: [...prev.reviews, ...res.result] }));
-        } else if (requestNum === 1) {
+        if (Number(queryObj.offset) === 0) {
           this.setState({ reviews: res.result });
-          this.fetchData(this.restaurantsAddr);
+        } else {
+          this.setState(prev => {
+            return { reviews: [...prev.reviews, ...res.result] };
+          });
         }
+        this.fetchData(`restaurants/${match.params.id}`);
       });
   };
 
@@ -77,11 +75,20 @@ class Detail extends React.Component {
     fetch(`${IP_ADDRESS}/${addr}`)
       .then(res => res.json())
       .then(res => {
-        const name = this.sortAddr(addr);
+        const name = sortAddr(addr);
         this.setState({
           [name]: res.result,
         });
       });
+
+    const sortAddr = addr => {
+      const splitAddr = addr.split('/');
+
+      return parseInt(splitAddr[splitAddr.length - 1]) ===
+        Number(this.props.match.params.id)
+        ? splitAddr[0]
+        : splitAddr[splitAddr.length - 1];
+    };
   };
 
   render() {
@@ -99,12 +106,11 @@ class Detail extends React.Component {
               foodsData={foods}
             />
           )}
-          {!!reviews.length && restaurants && (
+          {reviews && restaurants && (
             <StoreReviewBox
               storeId={this.props.match.params.id}
               fetchData={this.fetchData}
               fetchReviewData={this.fetchReviewData}
-              reviewRequestNum={this.reviewRequestNum}
               handleReviewDel={this.handleReviewDel}
               handleReviewEdit={this.handleReviewEdit}
               restaurantsData={restaurants}
@@ -118,6 +124,5 @@ class Detail extends React.Component {
 }
 
 const IP_ADDRESS = 'http://10.58.3.213:8000';
-// const IP_ADDRESS = 'localhost';
 
 export default Detail;

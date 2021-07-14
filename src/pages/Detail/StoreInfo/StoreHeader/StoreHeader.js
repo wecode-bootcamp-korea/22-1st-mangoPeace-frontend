@@ -47,6 +47,5 @@ class StoreHeader extends React.Component {
 }
 
 const IP_ADDRESS = 'http://10.58.3.213:8000';
-// const IP_ADDRESS = 'localhost';
 
 export default StoreHeader;

@@ -24,7 +24,7 @@ class StoreInfoTable extends React.Component {
           </tr>
           <tr>
             <th>평균가격</th>
-            <td>{`${parseInt(restaurantsData.average_price)}원`}</td>
+            <td>{`${Number(restaurantsData.average_price)}원`}</td>
           </tr>
           <tr>
             <th>영업시간</th>

@@ -3,10 +3,6 @@ import React from 'react';
 import './ReviewLi.scss';
 
 class ReviewLi extends React.Component {
-  state = {
-    isEditOn: false,
-  };
-
   splitCreatedDate = createdDate => {
     return createdDate.slice(0, 10);
   };
@@ -22,9 +18,6 @@ class ReviewLi extends React.Component {
   };
 
   handleClickReviewEdit = reviewId => {
-    this.setState({
-      isEditOn: true,
-    });
     this.props.handleReviewEdit(reviewId);
   };
 
@@ -34,7 +27,6 @@ class ReviewLi extends React.Component {
       reviewContent,
       reviewRate,
       createdAt,
-      handleReviewEdit,
       handleReviewDel,
       reviewId,
     } = this.props;
@@ -50,11 +42,6 @@ class ReviewLi extends React.Component {
           <span className="reviewContentDate">
             {this.splitCreatedDate(createdAt)}
           </span>
-          {/* {this.state.isEditOn ? (
-            <textarea className="reviewEditView"></textarea>
-          ) : (
-            <p className="reviewContentText">{reviewContent}</p>
-          )} */}
           <p className="reviewContentText">{reviewContent}</p>
         </div>
         <div className="reviewScoreBox">
@@ -64,7 +51,6 @@ class ReviewLi extends React.Component {
         <div className="reviewEditOrDel">
           <i
             className="reviewBtn fas fa-edit"
-            // onClick={() => handleReviewEdit(reviewId)}
             onClick={() => this.handleClickReviewEdit(reviewId)}
           ></i>
           <i

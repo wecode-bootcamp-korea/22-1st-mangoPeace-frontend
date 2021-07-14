@@ -1,4 +1,7 @@
 import React from 'react';
+import { withRouter } from 'react-router';
+
+import RatingStar from './RatingStar/RatingStar';
 
 import './ReviewInput.scss';
 
@@ -20,9 +23,7 @@ class ReviewInput extends React.Component {
         rating: reviewRating,
         content: reviewInput,
       }),
-    })
-      .then(res => res.json())
-      .then(() => fetchReviewData(1, 5, 1));
+    }).then(fetchReviewData);
   };
 
   handleReviewSubmit = e => {
@@ -54,19 +55,19 @@ class ReviewInput extends React.Component {
     const { storeName } = this.props;
 
     return (
-      <form className="reviewInputForm" onClick={this.handleInputBoxOn}>
+      <form className="reviewInputForm">
         <p className="reviewTitle">
           <b>{storeName}</b>에 대한 솔직한 리뷰를 써주세요
         </p>
         <div className="reviewInputBox">
           <div className="reviewRatingBox">
             {[...Array(5)].map((_, index) => (
-              <i
+              <RatingStar
                 key={index}
-                onClick={() => this.handleReviewRating(index)}
                 idx={index}
-                className={`fa-star ${index < reviewRating ? 'fas' : 'far'}`}
-              ></i>
+                reviewRating={reviewRating}
+                handleReviewRating={this.handleReviewRating}
+              />
             ))}
           </div>
           <textarea
@@ -88,6 +89,5 @@ class ReviewInput extends React.Component {
 }
 
 const IP_ADDRESS = 'http://10.58.3.213:8000';
-// const IP_ADDRESS = 'localhost';
 
-export default ReviewInput;
+export default withRouter(ReviewInput);
