@@ -34,6 +34,7 @@ class Filter extends React.Component {
       priceCurrentIdx: 0,
       ratingCurrentIdx: 0,
       values: [],
+      //menuTitleArr: [],
     };
   }
 
@@ -70,11 +71,11 @@ class Filter extends React.Component {
     const isAllSectionNotValid =
       ratingCurrentIdx === 0 && priceCurrentIdx === 0 && values.length === 0;
 
-    const last = [];
-    for (let i = 0; i < values.length; i++) {
-      last.push(values.find(item => item.id === i).title);
+    let menuTitleArr = [];
+    for (let i = 0; i < this.state.values.length; i++) {
+      menuTitleArr.push(this.state.values.find(item => item.id === i).title);
     }
-    console.log(last);
+
     return (
       <>
         <span className="FilterBox">
@@ -139,7 +140,7 @@ class Filter extends React.Component {
               onClick={this.props.SearchByFilter(
                 ratingCurrentIdx,
                 priceCurrentIdx,
-                values
+                menuTitleArr
               )}
             >
               선택

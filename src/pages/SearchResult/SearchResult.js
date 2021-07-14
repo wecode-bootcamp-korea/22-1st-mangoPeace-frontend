@@ -75,7 +75,7 @@ class SearchResult extends React.Component {
     });
   };
 
-  SearchByFilter = (ratingCurrentIdx, priceCurrentIdx, values) => {
+  SearchByFilter = (ratingCurrentIdx, priceCurrentIdx, menuTitleArr) => {
     //각각의 경우가 없는 경우 (밸류는 0 인경우를 고려해야한다) - 이때에 따라서 쿼리스트링을 다르게 해야한다
     //셋다 값이 없는 경우는 없다
     // 각각의 앞의 두개는 숫자가 들어있으므로 처리를 해준다. 값은 하나만 가짐.
@@ -90,8 +90,8 @@ class SearchResult extends React.Component {
       query +=
         '${' + priceCurrentIdx.title.slice(1, priceCurrentIdx.length) + '}';
     }
-    if (values.length > 0) {
-      console.log(`values`, values);
+    if (menuTitleArr.length > 0) {
+      console.log(`values`, menuTitleArr);
     }
   };
 
