@@ -67,7 +67,7 @@ class Main extends React.Component {
   render() {
     const { handleBtn, handleDotBtn } = this;
     const { slideNum, slideTranslate, popStore, bestListImg } = this.state;
-    console.log(popStore);
+    console.log(this.props);
 
     return (
       <main>

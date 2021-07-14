@@ -41,6 +41,10 @@ class bestListImg extends Component {
     },
   ];
 
+  // goToList = () => {
+  //   this.props.history.push(``);
+  // };
+
   render() {
     const { bestListImg } = this.props;
 
