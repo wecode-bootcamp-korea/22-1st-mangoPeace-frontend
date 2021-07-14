@@ -1,0 +1,36 @@
+@import '../../../styles/common.scss';
+
+.wishListLi {
+  @include display-flex(space-between, top);
+  padding: 15px 20px 10px;
+  cursor: pointer;
+
+  .storeImgBox {
+    img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+    }
+  }
+
+  .storeInfoBox {
+    @include display-flex(normal, normal);
+    flex-direction: column;
+    width: 150px;
+
+    .storeName {
+      margin: 3px 0 5px;
+      font-size: 18px;
+    }
+
+    .storeSubCategory {
+      color: $color-grey;
+      font-size: 14px;
+    }
+  }
+
+  .starBox {
+    font-size: 35px;
+    color: $color-main;
+  }
+}
