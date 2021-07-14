@@ -83,9 +83,38 @@ class SearchResult extends React.Component {
     let query = '';
 
     if (ratingCurrentIdx.title) {
-      query += '$' + ratingCurrentIdx.title.slice(1, ratingCurrentIdx.length);
-      console.log(query);
+      query +=
+        '${' + ratingCurrentIdx.title.slice(1, ratingCurrentIdx.length) + '}';
     }
+    if (priceCurrentIdx.title) {
+      query +=
+        '${' + priceCurrentIdx.title.slice(1, priceCurrentIdx.length) + '}';
+    }
+    // if (values.length > 0) {
+    //   values.map(idx => {
+    //     return MENU.find(item => item.id === idx).title;
+    //   });
+    // }
+    fetch(
+      `http://10.58.4.170:8000/search?keyword=%EC%9D%BC%EC%8B%9D&offset=${offset}&limit=${limit}`,
+      {
+        method: 'GET',
+      }
+    )
+      .then(res => res.json())
+      .then(data => {
+        console.log(
+          `seardchResult fetch :this.state.resultList`,
+          this.state.resultList
+        );
+        this.setState({
+          resultList: [
+            ...data.category_result,
+            ...data.sub_category_result,
+            ...data.restaurant_result,
+          ],
+        });
+      });
   };
 
   render() {
