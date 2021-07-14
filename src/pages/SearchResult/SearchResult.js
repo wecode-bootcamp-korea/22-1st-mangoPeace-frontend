@@ -73,10 +73,6 @@ class SearchResult extends React.Component {
               {/* <div className="searchKeyword">국밥</div> 검색결과에 따라 달라지게 구현(추가구현)*/}
               <div className="resultRank"> 검색 결과</div>
             </div>
-            <div className="searchResultFilter">
-              <i className="fas fa-list"></i>
-              <span className="letterFilter">filter</span>
-            </div>
           </div>
 
           <div className="searchResultBody">
