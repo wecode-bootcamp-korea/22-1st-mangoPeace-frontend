@@ -1,12 +1,17 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import './Nav.scss';
 
 class Nav extends React.Component {
+  goToMain = () => {
+    this.props.history.push('/');
+  };
   render() {
+    console.log(this.props);
     return (
       <div className="navBar">
-        <div className="logoBox">
+        <div className="logoBox" onClick={this.goToMain}>
           <h1>싸우지망고</h1>
           <img className="logoImg" src="/images/mango.png" alt="로고이미지" />
         </div>
@@ -28,4 +33,4 @@ class Nav extends React.Component {
   }
 }
 
-export default Nav;
+export default withRouter(Nav);
