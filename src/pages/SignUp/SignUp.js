@@ -73,11 +73,9 @@ class SignUp extends React.Component {
       }),
     })
       .then(response => response.json())
-      .then(result => {
-        console.log(result);
-        if (result.MESSAGE !== 'SUCCESS') {
-          //this.props.history.push('/');
-          alert('다시 기입해주세요');
+      .then(response => {
+        if (response.MESSAGE !== 'SUCCESS') {
+          localStorage.setItem('token', response.token);
         }
       });
   };
