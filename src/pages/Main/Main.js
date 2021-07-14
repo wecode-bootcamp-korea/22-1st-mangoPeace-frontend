@@ -20,7 +20,7 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://10.58.0.218:8000/restaurants/sub_categories')
+    fetch('http://10.58.3.102:8000/restaurants/banner-list')
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -29,7 +29,7 @@ class Main extends React.Component {
       });
 
     // TOP 5 배너
-    fetch('http://10.58.0.218:8000/restaurants/1/high_ratings')
+    fetch('http://10.58.3.102:8000/restaurants?filtering=average_rating')
       .then(res => res.json())
       .then(data => {
         this.setState({
