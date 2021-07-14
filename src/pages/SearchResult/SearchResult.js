@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchResult.scss';
 import SearchResultComponent from '../SearchResultComponent/SearchResultComponent';
-import Button from './PaingButtonComponent';
+import Button from './PagingButtonComponent';
 import Filter from '../Filter/Filter';
 
 class SearchResult extends React.Component {
@@ -23,9 +23,11 @@ class SearchResult extends React.Component {
       currentId: 1,
     };
   }
-
+  //메인화면에서 검색어 가져옴
   componentDidMount() {
     fetch('http://localhost:3000/data/resultData3.json', {
+      //this.props.location.search
+
       method: 'GET',
     })
       .then(res => res.json())
@@ -35,7 +37,7 @@ class SearchResult extends React.Component {
         });
       });
   }
-
+  //
   updateResult = (e, currentidx) => {
     fetch('http://localhost:3000/data/resultData3.json', {
       method: 'GET',
@@ -80,8 +82,6 @@ class SearchResult extends React.Component {
               <div className="searchResultList">
                 {/* {this.state.resultList.length>0 && */}
                 {this.state.resultList.map(result => {
-                  console.log(this.state.resultList);
-                  console.log(`this.state.currentaId`, this.state.currentId);
                   return (
                     <span className="searchResultListContent" key={result.id}>
                       <SearchResultComponent
