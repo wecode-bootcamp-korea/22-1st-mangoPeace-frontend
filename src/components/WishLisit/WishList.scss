@@ -1,0 +1,44 @@
+@import '../../styles/common.scss';
+
+.wishListBox {
+  background-color: white;
+  z-index: 99999;
+  position: absolute;
+  top: 55px;
+  right: 40px;
+  border-radius: 7px;
+
+  .wishListTitleBox {
+    @include display-flex;
+    position: relative;
+    padding: 15px 0;
+    border-bottom: 1px solid $color-grey;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -1.5px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom: 3px solid $color-main;
+      width: 150px;
+    }
+
+    .wishListTitle {
+      font-size: 20px;
+      color: $color-main;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+  }
+
+  .wishListUl {
+    width: 330px;
+    height: 460px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
