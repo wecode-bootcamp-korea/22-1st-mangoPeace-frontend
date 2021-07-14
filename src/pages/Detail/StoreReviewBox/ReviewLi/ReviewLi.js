@@ -3,6 +3,10 @@ import React from 'react';
 import './ReviewLi.scss';
 
 class ReviewLi extends React.Component {
+  state = {
+    isEditOn: false,
+  };
+
   splitCreatedDate = createdDate => {
     return createdDate.slice(0, 10);
   };
@@ -17,6 +21,13 @@ class ReviewLi extends React.Component {
     }
   };
 
+  handleClickReviewEdit = reviewId => {
+    this.setState({
+      isEditOn: true,
+    });
+    this.props.handleReviewEdit(reviewId);
+  };
+
   render() {
     const {
       reviewUserInfo,
@@ -27,6 +38,7 @@ class ReviewLi extends React.Component {
       handleReviewDel,
       reviewId,
     } = this.props;
+    const [iconName, sortRange] = this.sortingReviewRate(reviewRate);
 
     return (
       <li className="reviewLi">
@@ -36,22 +48,24 @@ class ReviewLi extends React.Component {
         </div>
         <div className="reviewContent">
           <span className="reviewContentDate">
-            {(this.createdDate = this.splitCreatedDate(createdAt))}
+            {this.splitCreatedDate(createdAt)}
           </span>
+          {/* {this.state.isEditOn ? (
+            <textarea className="reviewEditView"></textarea>
+          ) : (
+            <p className="reviewContentText">{reviewContent}</p>
+          )} */}
           <p className="reviewContentText">{reviewContent}</p>
         </div>
         <div className="reviewScoreBox">
-          <i
-            className={`far scoreIcon ${this.sortingReviewRate(reviewRate)[0]}`}
-          ></i>
-          <span className="scoreText">
-            {this.sortingReviewRate(reviewRate)[1]}
-          </span>
+          <i className={`far scoreIcon ${iconName}`}></i>
+          <span className="scoreText">{sortRange}</span>
         </div>
         <div className="reviewEditOrDel">
           <i
             className="reviewBtn fas fa-edit"
-            onClick={() => handleReviewEdit(reviewId)}
+            // onClick={() => handleReviewEdit(reviewId)}
+            onClick={() => this.handleClickReviewEdit(reviewId)}
           ></i>
           <i
             className="reviewBtn fas fa-eraser"

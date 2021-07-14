@@ -3,18 +3,23 @@ import React from 'react';
 import './StoreHeader.scss';
 
 class StoreHeader extends React.Component {
-  restaurantsAddr = `restaurants/${this.props.storeId}`;
-
   handleClickWish = () => {
     const { is_wished } = this.props.restaurantsData;
 
-    is_wished ? this.fetchIsWished('DELETE') : this.fetchIsWished('POST');
+    if (is_wished) {
+      this.fetchIsWished('DELETE');
+    } else if (!is_wished) {
+      this.fetchIsWished('POST');
+    }
   };
 
   fetchIsWished = method => {
-    fetch(`http://${IP_ADDRESS}:8000/${this.restaurantsAddr}/wishlist`, {
+    fetch(`${IP_ADDRESS}/restaurants/${this.props.storeId}/wishlist`, {
       method: method,
-    }).then(() => this.props.fetchData(this.restaurantsAddr));
+    })
+      .then(res => res.json())
+      .then(res => console.log(res));
+    // .then(() => this.props.fetchData(`restaurants/${this.props.storeId}`));
   };
 
   render() {
@@ -41,7 +46,7 @@ class StoreHeader extends React.Component {
   }
 }
 
-const IP_ADDRESS = '10.58.3.213';
+const IP_ADDRESS = 'http://10.58.3.213:8000';
 // const IP_ADDRESS = 'localhost';
 
 export default StoreHeader;

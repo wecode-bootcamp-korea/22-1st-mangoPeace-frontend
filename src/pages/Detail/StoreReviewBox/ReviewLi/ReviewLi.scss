@@ -42,6 +42,14 @@
       color: $color-black;
       line-height: 28px;
     }
+
+    .reviewEditView {
+      border: 1px solid red;
+      width: 90%;
+      height: 100%;
+      // background: ;
+      resize: none;
+    }
   }
 
   .reviewScoreBox {

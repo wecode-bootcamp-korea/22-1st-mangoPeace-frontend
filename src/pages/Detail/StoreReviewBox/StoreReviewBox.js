@@ -13,7 +13,7 @@ class StoreReviewBox extends React.Component {
 
   scoreRangeMin = 1;
   scoreRangeMax = 5;
-  reviewRequestNum = 2;
+  reviewRequestNum = 1;
 
   sortScoreData = [
     {
@@ -88,7 +88,6 @@ class StoreReviewBox extends React.Component {
       handleReviewDel,
       handleReviewEdit,
       fetchReviewData,
-      reFetchReviewData,
       fetchData,
       storeId,
     } = this.props;
@@ -99,7 +98,6 @@ class StoreReviewBox extends React.Component {
         <ReviewInput
           fetchData={fetchData}
           fetchReviewData={fetchReviewData}
-          reFetchReviewData={reFetchReviewData}
           storeId={storeId}
           storeName={restaurantsData.name}
           scoreRangeMin={this.scoreRangeMin}

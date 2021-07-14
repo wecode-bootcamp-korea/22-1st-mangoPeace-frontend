@@ -10,23 +10,17 @@ class ReviewInput extends React.Component {
     reviewInput: '',
   };
 
-  reviewsAddr = `restaurants/${this.props.storeId}/review?limit=${this.reviewRequestNum}`;
-  restaurantsAddr = `restaurants/${this.props.storeId}`;
-
   fetchReviewInput = () => {
     const { reviewRating, reviewInput } = this.state;
     const { fetchReviewData } = this.props;
 
-    fetch(
-      `http://${IP_ADDRESS}:8000/restaurants/${this.props.storeId}/review`,
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          rating: reviewRating,
-          content: reviewInput,
-        }),
-      }
-    )
+    fetch(`${IP_ADDRESS}/restaurants/${this.props.storeId}/reviews`, {
+      method: 'POST',
+      body: JSON.stringify({
+        rating: reviewRating,
+        content: reviewInput,
+      }),
+    })
       .then(res => res.json())
       .then(() => fetchReviewData(1, 5, 1));
   };
@@ -93,7 +87,7 @@ class ReviewInput extends React.Component {
   }
 }
 
-const IP_ADDRESS = '10.58.3.213';
+const IP_ADDRESS = 'http://10.58.3.213:8000';
 // const IP_ADDRESS = 'localhost';
 
 export default ReviewInput;
