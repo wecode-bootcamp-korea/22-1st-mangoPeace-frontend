@@ -1,15 +1,10 @@
-$color-grey: #9b9b9b;
-$color-main: #fb7d27;
-
-// * {
-//   border: solid;
-// }
+@import '../../styles/common.scss';
 
 .signUpForm {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  margin: 10%;
+  padding: 150px 0;
 
   .signUpLogo {
     margin: 25px;
