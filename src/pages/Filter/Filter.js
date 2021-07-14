@@ -70,10 +70,11 @@ class Filter extends React.Component {
     const isAllSectionNotValid =
       ratingCurrentIdx === 0 && priceCurrentIdx === 0 && values.length === 0;
 
-    console.log(`ratingCurrentIdx`, ratingCurrentIdx.title);
-    // console.log(`priceCurrentIdx`, priceCurrentIdx);
-    // console.log(`values`, values);
-
+    const last = [];
+    for (let i = 0; i < values.length; i++) {
+      last.push(values.find(item => item.id === i).title);
+    }
+    console.log(last);
     return (
       <>
         <span className="FilterBox">

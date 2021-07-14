@@ -91,8 +91,7 @@ class SearchResult extends React.Component {
         '${' + priceCurrentIdx.title.slice(1, priceCurrentIdx.length) + '}';
     }
     if (values.length > 0) {
-      console.log(`...values`, ...values);
-      console.log(`...value.title`, ...value.title);
+      console.log(`values`, values);
     }
   };
 
