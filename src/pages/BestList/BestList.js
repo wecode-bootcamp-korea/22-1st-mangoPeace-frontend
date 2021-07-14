@@ -9,12 +9,13 @@ class BestList extends React.Component {
   constructor() {
     super();
     this.state = {
+      id: '',
       storeList: [],
     };
   }
 
   componentDidMount() {
-    fetch('http://10.58.3.102:8000/restaurants?ordering=average_rating')
+    fetch('http://10.58.3.102:8000/restaurants/top-list?filtering=ordering')
       .then(res => res.json())
       .then(data => {
         this.setState({ storeList: data.result });
