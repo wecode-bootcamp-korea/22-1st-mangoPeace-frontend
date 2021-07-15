@@ -1,4 +1,4 @@
-@import '../styles/common.scss';
+@import '../../styles/common.scss';
 
 .navBar {
   @include display-flex(flex-start, center);
@@ -7,9 +7,20 @@
   width: 100%;
   background-color: white;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
+  z-index: 99999;
+  transition: background 0.3s ease-in-out;
+
+  &.transparent {
+    background-color: transparent;
+    box-shadow: none;
+
+    .navSearchBar {
+      display: none;
+    }
+  }
 
   .logoBox {
+    position: relative;
     display: flex;
     align-items: center;
     width: 160px;
@@ -27,14 +38,16 @@
     }
 
     .logoImg {
-      width: 20px;
-      margin: 5px 0px 30px 0px;
+      position: absolute;
+      top: -8px;
+      right: -5px;
+      width: 40px;
     }
   }
 
   .navSearchBar {
     @include display-flex(flex-start, center);
-    margin-right: 50px;
+    margin: 0 50px 0 20px;
     width: 60%;
 
     .searchIcon {
@@ -48,6 +61,8 @@
       width: 60%;
       border: none;
       border-left: 1px solid $color-grey;
+      background: transparent;
+
       &:focus {
         outline: none;
       }
@@ -59,25 +74,5 @@
     position: absolute;
     right: 0;
     margin-right: 20px;
-
-    button {
-      margin-right: 40px;
-      border: none;
-      background-color: transparent;
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 16px;
-      color: $color-main;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    img {
-      margin-right: 30px;
-      width: 35px;
-      &:hover {
-        cursor: pointer;
-      }
-    }
   }
 }
