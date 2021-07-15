@@ -1,4 +1,7 @@
 import React from 'react';
+import { withRouter } from 'react-router';
+
+import RatingStar from './RatingStar/RatingStar';
 
 import './ReviewInput.scss';
 
@@ -10,24 +13,17 @@ class ReviewInput extends React.Component {
     reviewInput: '',
   };
 
-  reviewsAddr = `restaurants/${this.props.toreId}/review?limit=${this.reviewRequestNum}`;
-
   fetchReviewInput = () => {
     const { reviewRating, reviewInput } = this.state;
-    const { reFetchReviewData } = this.props;
+    const { fetchReviewData } = this.props;
 
-    fetch(
-      `http://${IP_ADDRESS}:8000/restaurants/${this.props.storeId}/review`,
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          rating: reviewRating,
-          content: reviewInput,
-        }),
-      }
-    )
-      .then(res => res.json())
-      .then(() => reFetchReviewData(1, 5));
+    fetch(`${IP_ADDRESS}/restaurants/${this.props.storeId}/reviews`, {
+      method: 'POST',
+      body: JSON.stringify({
+        rating: reviewRating,
+        content: reviewInput,
+      }),
+    }).then(fetchReviewData);
   };
 
   handleReviewSubmit = e => {
@@ -56,22 +52,22 @@ class ReviewInput extends React.Component {
 
   render() {
     const { reviewRating, isTextValid, isRatingValid } = this.state;
-    const { storeId, storeName } = this.props;
+    const { storeName } = this.props;
 
     return (
-      <form className="reviewInputForm" onClick={this.handleInputBoxOn}>
+      <form className="reviewInputForm">
         <p className="reviewTitle">
           <b>{storeName}</b>에 대한 솔직한 리뷰를 써주세요
         </p>
         <div className="reviewInputBox">
           <div className="reviewRatingBox">
             {[...Array(5)].map((_, index) => (
-              <i
+              <RatingStar
                 key={index}
-                onClick={() => this.handleReviewRating(index)}
                 idx={index}
-                className={`fa-star ${index < reviewRating ? 'fas' : 'far'}`}
-              ></i>
+                reviewRating={reviewRating}
+                handleReviewRating={this.handleReviewRating}
+              />
             ))}
           </div>
           <textarea
@@ -92,7 +88,6 @@ class ReviewInput extends React.Component {
   }
 }
 
-const IP_ADDRESS = '10.58.3.213';
-// const IP_ADDRESS = 'localhost';
+const IP_ADDRESS = 'http://10.58.3.213:8000';
 
-export default ReviewInput;
+export default withRouter(ReviewInput);

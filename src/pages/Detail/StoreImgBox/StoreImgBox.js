@@ -2,21 +2,30 @@ import React from 'react';
 
 import './StoreImgBox.scss';
 
+const SLIDE_GAP = 14;
+const SLIDE_MOVING_UNIT = 500;
+const IMG_WIDTH = 400;
+
 class StoreImgList extends React.Component {
   state = {
     slideSpot: 0,
   };
 
-  imgQuantity = this.props.imagesData.length;
+  imgQuantity = this.props.foodsData.flatMap(food => food.images).length;
   slideWidth =
     IMG_WIDTH * this.imgQuantity + (this.imgQuantity - 1) * SLIDE_GAP;
   hiddenedSlideWidth = this.slideWidth - window.innerWidth;
   slideEnd = -1;
 
   componentDidMount = () => {
-    this.slideWidth > window.innerWidth
-      ? (this.slideEnd = this.slideEnd)
-      : (this.slideEnd = 0);
+    this.slideEnd = this.slideWidth > window.innerWidth ? this.slideEnd : 0;
+    this.getFoodImages();
+  };
+
+  getFoodImages = () => {
+    const { foodsData } = this.props;
+
+    return foodsData.flatMap(food => food.images);
   };
 
   handlePrevBtn = () => {
@@ -35,8 +44,10 @@ class StoreImgList extends React.Component {
 
   handleNextBtn = () => {
     const { slideSpot } = this.state;
+    const isSlideReachedEnd =
+      this.hiddenedSlideWidth - Math.abs(slideSpot) < SLIDE_MOVING_UNIT;
 
-    if (this.hiddenedSlideWidth - Math.abs(slideSpot) < SLIDE_MOVING_UNIT) {
+    if (isSlideReachedEnd) {
       this.setState({
         slideSpot: slideSpot - (this.hiddenedSlideWidth - Math.abs(slideSpot)),
       });
@@ -51,7 +62,6 @@ class StoreImgList extends React.Component {
 
   render() {
     const { slideSpot } = this.state;
-    const { imagesData } = this.props;
 
     return (
       <div className="storeImgBox">
@@ -65,7 +75,7 @@ class StoreImgList extends React.Component {
             style={{ transform: `translateX(${slideSpot}px)` }}
             className="slideInner"
           >
-            {imagesData.map((img, i) => (
+            {this.getFoodImages().map((img, i) => (
               <li key={i} className="storeImgLi">
                 <img src={img} />
               </li>
@@ -84,9 +94,5 @@ class StoreImgList extends React.Component {
     );
   }
 }
-
-const SLIDE_GAP = 14;
-const SLIDE_MOVING_UNIT = 500;
-const IMG_WIDTH = 400;
 
 export default StoreImgList;
