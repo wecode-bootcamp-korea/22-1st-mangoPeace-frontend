@@ -14,13 +14,17 @@ class BestList extends React.Component {
     };
   }
 
-  componentDidMount() {
-    fetch(`${BASE_URL}/restaurants?ordering=average_rating&sub_category_id=1`)
+  componentDidMount = () => {
+    const { id } = this.props.match.params;
+
+    fetch(
+      `${BASE_URL}/restaurants?ordering=average_rating&sub_category_id=${id}`
+    )
       .then(res => res.json())
       .then(data => {
         this.setState({ storeList: data.result });
       });
-  }
+  };
 
   render() {
     const { storeList } = this.state;
@@ -28,7 +32,7 @@ class BestList extends React.Component {
     return (
       <div className="bestList">
         <BannerTitle />
-        <BannerList storeList={storeList} />
+        {storeList.length !== 0 && <BannerList storeList={storeList} />}
       </div>
     );
   }

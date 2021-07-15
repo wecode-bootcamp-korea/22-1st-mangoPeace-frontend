@@ -5,7 +5,6 @@ import './MainImgBar.scss';
 class MainImgBar extends Component {
   render() {
     const { checkInput, handleSearchBtn } = this.props;
-    console.log(this.props);
     return (
       <section className="mainImgBar">
         <p>솔직한 리뷰, 믿을 수 있는 평점!</p>
