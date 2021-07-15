@@ -47,7 +47,7 @@ class Main extends React.Component {
 
   handleSearchBtn = () => {
     console.log(this.state.inputValue);
-    this.state.history.push(
+    this.props.history.push(
       `/restaurants/search?keyword=${this.state.inputValue}`
     );
   };

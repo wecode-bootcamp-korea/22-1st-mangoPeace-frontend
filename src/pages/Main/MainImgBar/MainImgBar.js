@@ -17,7 +17,7 @@ class MainImgBar extends Component {
             placeholder="식당 또는 음식"
             onChange={checkInput}
           />
-          <i class="fas fa-search fa-lg" id="mainSearchIcon"></i>
+          <i className="fas fa-search fa-lg" id="mainSearchIcon"></i>
           <button className="mainSearchBtn">검색</button>
         </form>
       </section>
