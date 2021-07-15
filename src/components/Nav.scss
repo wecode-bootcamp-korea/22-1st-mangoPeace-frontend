@@ -34,7 +34,7 @@
 
   .navSearchBar {
     @include display-flex(flex-start, center);
-    margin-right: 50px;
+    margin: 0 50px 0 20px;
     width: 60%;
 
     .searchIcon {
