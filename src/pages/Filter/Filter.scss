@@ -48,35 +48,35 @@
     }
   }
 
-  .priceForOnePerson {
-    .selectHead {
-      display: flex;
-      justify-content: flex-start;
-      padding: 5px;
+  // .priceForOnePerson {
+  //   .selectHead {
+  //     display: flex;
+  //     justify-content: flex-start;
+  //     padding: 5px;
 
-      .title {
-        margin-left: 20px;
-        margin-top: 10px;
-      }
-    }
+  //     .title {
+  //       margin-left: 20px;
+  //       margin-top: 10px;
+  //     }
+  //   }
 
-    .priceSelectSection {
-      padding-left: 30px;
-      .selectPriceList {
-        display: inline-block;
-        width: 100px;
-        margin: 2px;
-        border-radius: 50px;
-        outline: 0;
-        background-color: transparent;
-        border: 0px transparent solid;
+  //   .priceSelectSection {
+  //     padding-left: 30px;
+  //     .selectPriceList {
+  //       display: inline-block;
+  //       width: 100px;
+  //       margin: 2px;
+  //       border-radius: 50px;
+  //       outline: 0;
+  //       background-color: transparent;
+  //       border: 0px transparent solid;
 
-        &.on {
-          color: $color-main;
-        }
-      }
-    }
-  }
+  //       &.on {
+  //         color: $color-main;
+  //       }
+  //     }
+  //   }
+  // }
 
   .menuCategory {
     .selectHead {

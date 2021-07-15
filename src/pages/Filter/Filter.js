@@ -72,9 +72,13 @@ class Filter extends React.Component {
       ratingCurrentIdx === 0 && priceCurrentIdx === 0 && values.length === 0;
 
     let menuTitleArr = [];
-    for (let i = 0; i < this.state.values.length; i++) {
-      menuTitleArr.push(this.state.values.find(item => item.id === i).title);
-    }
+    // for (let i = 0; i < this.state.values.length; i++) {
+    //   menuTitleArr.push(this.state.values.find(item => item.id === i).title);
+    // }
+
+    // Object.keys(this.state.values).map(idx => {
+    //   menuTitleArr.push(MENU.find(item => item.id === idx).title);
+    // });
 
     return (
       <>
@@ -97,7 +101,7 @@ class Filter extends React.Component {
               })}
             </div>
           </div>
-          <div className="priceForOnePerson">
+          {/* <div className="priceForOnePerson">
             <div className="selectHead">
               <span className="title">가격/1인당</span>
             </div>
@@ -114,7 +118,7 @@ class Filter extends React.Component {
                 );
               })}
             </div>
-          </div>
+          </div> */}
 
           <div className="menuCategory">
             <div className="selectHead">
@@ -137,11 +141,13 @@ class Filter extends React.Component {
             <button
               disabled={isAllSectionNotValid}
               className={isAllSectionNotValid ? 'confirm' : 'confirm on'}
-              onClick={this.props.SearchByFilter(
-                ratingCurrentIdx,
-                priceCurrentIdx,
-                menuTitleArr
-              )}
+              onClick={() =>
+                this.props.SearchByFilter(
+                  ratingCurrentIdx,
+                  priceCurrentIdx,
+                  menuTitleArr
+                )
+              }
             >
               선택
             </button>

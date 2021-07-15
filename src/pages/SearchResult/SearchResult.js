@@ -21,15 +21,14 @@ class SearchResult extends React.Component {
       menu_id: '',
       idx: '1',
       currentId: 1,
+      numberOfButton: 0,
     };
   }
   //메인화면에서 검색어 가져옴
   componentDidMount() {
     fetch(
-      'http://10.58.4.170:8000/search?keyword=%EC%9D%BC%EC%8B%9D&offset=0&limit=6',
+      `http://10.58.4.170:8000/search?keyword=${this.props.location.search}&offset=0&limit=6`,
       {
-        //this.props.location.search
-
         method: 'GET',
       }
     )
@@ -44,12 +43,14 @@ class SearchResult extends React.Component {
           ],
         });
       });
+    this.makingButton(data['total']); //수정해야함- 준영님에게 여쭈어 보기 
   }
 
   updateResult = (e, currentidx) => {
     const limit = 6;
     let offset = (currentidx - 1) % 6;
     fetch(
+      //'http://localhost:3000/data/resultData3.json',
       `http://10.58.4.170:8000/search?keyword=%EC%9D%BC%EC%8B%9D&offset=${offset}&limit=${limit}`,
       {
         method: 'GET',
@@ -57,19 +58,17 @@ class SearchResult extends React.Component {
     )
       .then(res => res.json())
       .then(data => {
-        console.log(
-          `seardchResult fetch :this.state.resultList`,
-          this.state.resultList
-        );
+        console.log(data);
         this.setState({
-          resultList: [
+          // this.state.resultList,
+          data: [
             ...data.category_result,
             ...data.sub_category_result,
             ...data.restaurant_result,
           ],
         });
       });
-
+      this.makingButton(data['total']);
     this.setState({
       currentId: currentidx,
     });
@@ -79,35 +78,71 @@ class SearchResult extends React.Component {
     //각각의 경우가 없는 경우 (밸류는 0 인경우를 고려해야한다) - 이때에 따라서 쿼리스트링을 다르게 해야한다
     //셋다 값이 없는 경우는 없다
     // 각각의 앞의 두개는 숫자가 들어있으므로 처리를 해준다. 값은 하나만 가짐.
-
-    let query = '';
+    console.log(`"object"`, 'object');
+    let query = [];
 
     if (ratingCurrentIdx.title) {
-      query +=
-        '${' + ratingCurrentIdx.title.slice(1, ratingCurrentIdx.length) + '}';
+      query.push(`rating=${ratingCurrentIdx.title.slice(1)}`);
     }
-    if (priceCurrentIdx.title) {
-      query +=
-        '${' + priceCurrentIdx.title.slice(1, priceCurrentIdx.length) + '}';
-    }
+    // if (priceCurrentIdx.title) {
+    //   query +=
+    //     '${' + priceCurrentIdx.title.slice(1) + '}';
+    // }
     if (menuTitleArr.length > 0) {
       console.log(`values`, menuTitleArr);
+    }
+
+    const queryString = '?' + query.join('&');
+
+    this.fetchFilterData();
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log(`컴디업`, 'ㅇㅇㅇ');
+    this.fetchPhotos(this.state.currentId);
+  };
+
+  // componentDidMount(){
+  //   this.fetchFilterData(this.state.currentId)
+  // }
+
+  //스테이트로 url 을 관리 로직구성
+  fetchFilterData = (currentidx) => {
+    const LIMIT = 6;
+    let offset = (currentidx - 1) % 6;
+    fetch(`http://localhost:3000/data/resultData${currentidx}.json`, {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          resultList: data,
+        });
+      });
+      this.makingButton(data['total']);
+  };
+
+  //바뀐 state 값 가져올 핸들러 구성
+  idHandler = e => {
+    this.setState({ currentId: e.target.dataset.idx });
+  };
+
+  makingButton = (data['total']) => {
+    const newArr = [];
+    this.setState({
+      numberOfButton : data['total'],
+    })
+    for (
+      let idx = 1;
+      idx <= Math.ceil(20 / 6);
+      //this.state.resultList.length // 단한페이지 배열의 길이여서 틀림
+      idx++
+    ) {
+      newArr.push(idx);
     }
   };
 
   render() {
-    const newArr = [];
-
-    for (
-      let idx = 1;
-      idx <= Math.ceil(18 / 6);
-      //this.state.resultList.length // 단한페이지 배열의 길이여서 틀림
-      idx++
-    ) {
-      //수 임의로 넣어줌
-      newArr.push(idx);
-    }
-
     return (
       <>
         <nav>SearchResult</nav>
