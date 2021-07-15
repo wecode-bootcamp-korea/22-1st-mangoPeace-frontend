@@ -6,7 +6,6 @@ import './PopStore.scss';
 class PopStore extends Component {
   goToStore = () => {
     this.props.history.push(`/detail/${this.props.restaurant_id}`);
-    console.log(this.props.restaurant_id);
   };
 
   render() {
@@ -14,17 +13,21 @@ class PopStore extends Component {
 
     return (
       <>
-        {popStore.map(e => (
-          <li className="popStore" onClick={this.goToStore}>
-            <img className="popStoreImg" alt="식당사진" src={e.image} />
+        {popStore.map(store => (
+          <li
+            key={store.restaurant_id}
+            className="popStore"
+            onClick={this.goToStore}
+          >
+            <img className="popStoreImg" alt="식당사진" src={store.image} />
             <div className="popStoreInfoBox">
               <div className="topInfo">
-                <h3 className="mainStoreName">{e.restaurant_name}</h3>
-                <span className="storeGrade">★ {e.rating}</span>
+                <h3 className="mainStoreName">{store.restaurant_name}</h3>
+                <span className="storeGrade">★ {store.rating}</span>
               </div>
               <div className="bottomInfo">
                 <span className="storeLocated">
-                  {e.category} - {e.sub_category}
+                  {store.category} - {store.sub_category}
                 </span>
               </div>
             </div>
