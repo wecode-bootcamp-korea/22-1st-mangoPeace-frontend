@@ -8,7 +8,10 @@ class MainImgBar extends Component {
     return (
       <section className="mainImgBar">
         <p>솔직한 리뷰, 믿을 수 있는 평점!</p>
-        <p>싸우지망고 🥭</p>
+        <p>
+          싸우지망고{' '}
+          <img className="logoImg" alt="로고사진" src="/images/logo.png" />
+        </p>
         <form className="mainSearchBar" onSubmit={handleSearchBtn}>
           <input
             className="mainSearchInput"
