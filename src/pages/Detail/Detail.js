@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { stringToQuery } from '../../utilities/query';
+import { BASE_URL } from '../../config';
 
 import StoreImgBox from './StoreImgBox/StoreImgBox';
 import StoreInfo from './StoreInfo/StoreInfo';
@@ -34,7 +35,7 @@ class Detail extends React.Component {
     const targetedReviewText = targetedReview[0].content;
     const targetedReviewStar = targetedReview[0].rating;
     // fetch(
-    //   `${IP_ADDRESS}/restaurants/${this.props.match.params.id}/review/${reviewId}`,
+    //   `${BASE_URL}/restaurants/${this.props.match.params.id}/review/${reviewId}`,
     //   {
     //     method: 'PATCH',
     //   }
@@ -46,7 +47,7 @@ class Detail extends React.Component {
   handleReviewDel = reviewId => {
     const { id } = this.props.match.params;
 
-    fetch(`${IP_ADDRESS}/restaurants/${id}/review/${reviewId}`, {
+    fetch(`${BASE_URL}/restaurants/${id}/review/${reviewId}`, {
       method: 'DELETE',
     }).then(this.fetchReviewData);
   };
@@ -56,7 +57,7 @@ class Detail extends React.Component {
     const queryObj = stringToQuery(history.location.search);
 
     fetch(
-      `${IP_ADDRESS}/restaurants/${match.params.id}/reviews?offset=${queryObj.offset}&limit=${LIMIT}&rating-min=${queryObj['rating-min']}&rating-max=${queryObj['rating-max']}`
+      `${BASE_URL}/restaurants/${match.params.id}/reviews?offset=${queryObj.offset}&limit=${LIMIT}&rating-min=${queryObj['rating-min']}&rating-max=${queryObj['rating-max']}`
     )
       .then(res => res.json())
       .then(res => {
@@ -72,7 +73,7 @@ class Detail extends React.Component {
   };
 
   fetchData = addr => {
-    fetch(`${IP_ADDRESS}/${addr}`)
+    fetch(`${BASE_URL}/${addr}`)
       .then(res => res.json())
       .then(res => {
         const name = sortAddr(addr);
@@ -122,7 +123,5 @@ class Detail extends React.Component {
     );
   }
 }
-
-const IP_ADDRESS = 'http://10.58.3.213:8000';
 
 export default Detail;

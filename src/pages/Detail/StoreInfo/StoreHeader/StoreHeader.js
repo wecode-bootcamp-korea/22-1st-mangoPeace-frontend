@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { BASE_URL } from '../../../../config';
+
 import './StoreHeader.scss';
 
 class StoreHeader extends React.Component {
@@ -14,7 +16,7 @@ class StoreHeader extends React.Component {
   };
 
   fetchIsWished = method => {
-    fetch(`${IP_ADDRESS}/restaurants/${this.props.storeId}/wishlist`, {
+    fetch(`${BASE_URL}/restaurants/${this.props.storeId}/wishlist`, {
       method: method,
     })
       .then(res => res.json())
@@ -45,7 +47,5 @@ class StoreHeader extends React.Component {
     );
   }
 }
-
-const IP_ADDRESS = 'http://10.58.3.213:8000';
 
 export default StoreHeader;
