@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import MainImgBar from './MainImgBar/MainImgBar';
 import FoodThemeListSection from './FoodThemeListSection/FoodThemeListSection';
 import PopStoreSection from './PopStoreSection/PopStoreSection';
+import { BASE_URL } from '../../config';
 
 import './Main.scss';
 
@@ -20,7 +21,7 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://10.58.3.213:8000/restaurants/banner-list')
+    fetch(`${BASE_URL}/restaurants/banner-list`)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -29,7 +30,7 @@ class Main extends React.Component {
       });
 
     // TOP 5 배너
-    fetch('http://10.58.3.213:8000/restaurants?filtering=average_rating')
+    fetch(`${BASE_URL}/restaurants?filtering=average_rating`)
       .then(res => res.json())
       .then(data => {
         this.setState({

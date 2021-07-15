@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import './PopStore.scss';
 
 class PopStore extends Component {
-  goToStore = () => {
-    this.props.history.push(`/detail/${this.props.restaurant_id}`);
+  goToStore = id => {
+    this.props.history.push(`/detail/${id}`);
   };
 
   render() {
@@ -17,13 +17,13 @@ class PopStore extends Component {
           <li
             key={store.restaurant_id}
             className="popStore"
-            onClick={this.goToStore}
+            onClick={() => this.goToStore(store.restaurant_id)}
           >
             <img className="popStoreImg" alt="식당사진" src={store.image} />
             <div className="popStoreInfoBox">
               <div className="topInfo">
                 <h3 className="mainStoreName">{store.restaurant_name}</h3>
-                <span className="storeGrade">★ {store.rating}</span>
+                <span className="storeGrade">★ {store.rating.toFixed(1)}</span>
               </div>
               <div className="bottomInfo">
                 <span className="storeLocated">
