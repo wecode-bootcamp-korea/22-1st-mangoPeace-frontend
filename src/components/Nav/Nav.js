@@ -43,6 +43,10 @@ class Nav extends React.Component {
     }
   };
 
+  componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.handleScroll);
+  };
+
   handleScroll = () => {
     if (debouncer) {
       clearTimeout(debouncer);
