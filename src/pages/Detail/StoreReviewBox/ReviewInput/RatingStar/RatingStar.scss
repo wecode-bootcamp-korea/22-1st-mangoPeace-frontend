@@ -1,0 +1,13 @@
+@import '../../../../../styles/common.scss';
+
+.reviewRatingBox {
+  i {
+    font-size: 19px;
+    color: $color-main;
+    cursor: pointer;
+
+    & + i {
+      margin-left: 3px;
+    }
+  }
+}

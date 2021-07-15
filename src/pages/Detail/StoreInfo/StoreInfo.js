@@ -39,6 +39,4 @@ class StoreInfo extends React.Component {
   }
 }
 
-const API_APP_KEY = 'ab48646716f052ca07bb18f252c48472';
-
 export default StoreInfo;
