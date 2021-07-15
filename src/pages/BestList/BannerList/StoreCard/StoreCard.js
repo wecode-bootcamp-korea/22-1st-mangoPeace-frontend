@@ -42,7 +42,7 @@ class StoreCard extends Component {
                 </div>
               </div>
               <span className="storeMore" onClick={() => store.restaurant_id}>
-                {store.name} 더보기 <i class="fas fa-chevron-right"></i>
+                {store.name} 더보기 <i className="fas fa-chevron-right"></i>
               </span>
             </div>
           </li>
