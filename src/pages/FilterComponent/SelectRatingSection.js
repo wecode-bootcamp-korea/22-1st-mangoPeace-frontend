@@ -16,7 +16,7 @@ class SelectRatingComponent extends React.Component {
           onClick={() => handleIdx(stateKey, idx)}
           className={ratingCurrentIdx === idx ? 'selectList on' : 'selectList'}
         >
-          {idx.title     }
+          {idx.title}
         </button>
       </>
     );

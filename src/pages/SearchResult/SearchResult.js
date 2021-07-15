@@ -104,36 +104,24 @@ class SearchResult extends React.Component {
   }
 
   searchByFilter = (ratingCurrentIdx, priceCurrentIdx, last) => {
-    let query = [];
+    let query = '';
 
     if (ratingCurrentIdx.title) {
-      query.push(`rating=${ratingCurrentIdx.title.slice(1)}`);
+      query += `rating=${ratingCurrentIdx.title.slice(1)}`;
     }
 
     if (last.length > 0) {
-      for (let i = 0; i < last.length; i++) {}
-    }
-
-    const queryString = '?' + query.join('&'); // 이 쿼리 스트링을 어떻게 fetchFilterData  로 옯길까? + 기존검색어도 함께 검색함
-
-    this.fetchFilterData();
-  };
-
-  fetchFilterData = () => {
-    const limit = 6;
-    let offset = 0;
-    fetch(
-      `http://10.58.4.170:8000/restaurants/search?keyword=${this.props.location.search}&offset=${offset}&limit=${limit}`,
-      {
-        method: 'GET',
+      const newValues = [];
+      for (let i = 0; i < last.length; i++) {
+        newValues.push(last[i].slice(1));
       }
-    )
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          resultList: data,
-        });
-      });
+      const newQuery = [];
+      for (let i = 0; i < newValues.length; i++) {
+        newQuery.push('&keyword=${' + newValues[i] + '}');
+      }
+
+      query += newQuery.join('');
+    }
   };
 
   makeButton = totalData => {

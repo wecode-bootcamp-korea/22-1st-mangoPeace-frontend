@@ -4,10 +4,7 @@ import PriceSelectSection from '../FilterComponent/PriceSelectSection';
 import MenuCategorySelectSection from '../FilterComponent/MenuCategorySelectSection';
 import './Filter.scss';
 
-const RATING = [
-  { title: '#별점순' },
-  { title: '#코멘트순' },
-];
+const RATING = [{ title: '#별점순' }, { title: '#코멘트순' }];
 const PRICE = [
   { id: 0, title: '#1만원 미만' },
   { id: 1, title: '#1만원 이상' },
