@@ -15,6 +15,7 @@ class Nav extends React.Component {
     isValidUser: false,
     isWishListOn: false,
     isTransparentNav: false,
+    inputValue: '',
   };
 
   componentDidMount = () => {
@@ -58,6 +59,19 @@ class Nav extends React.Component {
     }, 100);
   };
 
+  checkInput = e => {
+    const { value } = e.target;
+    this.setState({ inputValue: value });
+  };
+
+  handleSearchBtn = e => {
+    e.preventDefault();
+
+    this.props.history.push(
+      `/restaurants/search?keyword=${this.state.inputValue}`
+    );
+  };
+
   handleWishList = () => {
     this.setState({ isWishListOn: !this.state.isWishListOn });
   };
@@ -83,10 +97,14 @@ class Nav extends React.Component {
           <h1>싸우지망고</h1>
           <img className="logoImg" src="/images/logo.png" alt="로고이미지" />
         </div>
-        <div className="navSearchBar">
+        <form onSubmit={this.handleSearchBtn} className="navSearchBar">
           <i className="fas fa-search searchIcon"></i>
-          <input className="mainSearchInput" placeholder="맛집 검색"></input>
-        </div>
+          <input
+            onChange={this.checkInput}
+            className="mainSearchInput"
+            placeholder="맛집 검색"
+          ></input>
+        </form>
         <div className="navProfileBox">
           {isValidUser ? (
             <MyProfile handleWishList={this.handleWishList} />
