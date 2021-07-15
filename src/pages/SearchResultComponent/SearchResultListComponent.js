@@ -5,6 +5,7 @@ class SearchResultComponent extends React.Component {
     return (
       <>
         <img
+          alt="메인 이미지"
           className="searchResultMainImage"
           src={this.props.searchResultMainImage}
         ></img>

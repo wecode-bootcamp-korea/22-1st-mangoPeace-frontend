@@ -13,8 +13,7 @@ class Button extends React.Component {
         <span>
           <button
             type="button"
-            className="pagingButton"
-            onClick={e => this.props.updateResult(e, this.props.dataIndex)}
+            onClick={e => this.props.paginate(e, this.props.dataIndex)}
             dataIndex={this.props.dataIndex}
             className={isButtonClicked ? 'pagingButton on' : 'pagingButton'}
           >

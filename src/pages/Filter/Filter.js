@@ -5,8 +5,8 @@ import MenuCategorySelectSection from '../FilterComponent/MenuCategorySelectSect
 import './Filter.scss';
 
 const RATING = [
-  { id: 0, title: '#별점순' },
-  { id: 1, title: '#코멘트순' },
+  { title: '#별점순' },
+  { title: '#코멘트순' },
 ];
 const PRICE = [
   { id: 0, title: '#1만원 미만' },
@@ -73,7 +73,12 @@ class Filter extends React.Component {
     // Object.keys(this.state.values).map(idx => {
     //   menuTitleArr.push(MENU.find(item => item.id === idx).title);
     // });
-
+    const last = [];
+    console.log(`values`, values);
+    for (let i = 0; i < values.length; i++) {
+      last.push(values[i].title);
+    }
+    console.log(`last`, last);
     return (
       <>
         <span className="FilterBox">
@@ -118,10 +123,10 @@ class Filter extends React.Component {
               disabled={isAllSectionNotValid}
               className={isAllSectionNotValid ? 'confirm' : 'confirm on'}
               onClick={() =>
-                this.props.SearchByFilter(
+                this.props.searchByFilter(
                   ratingCurrentIdx,
                   priceCurrentIdx,
-                  values
+                  last
                 )
               }
             >

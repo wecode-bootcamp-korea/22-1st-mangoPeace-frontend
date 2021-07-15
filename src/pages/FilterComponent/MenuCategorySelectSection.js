@@ -21,7 +21,7 @@ class MenuCategorySelectSectionComponent extends React.Component {
             : 'categoryMenuList'
         }
       >
-        {idx.title}
+        {idx.sort}
       </button>
     );
   }

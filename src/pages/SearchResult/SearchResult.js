@@ -1,8 +1,9 @@
 import React from 'react';
-import './SearchResult.scss';
+import { withRouter } from 'react-router-dom';
 import SearchResultComponent from '../SearchResultComponent/SearchResultListComponent';
 import Button from './PagingButtonComponent';
 import Filter from '../Filter/Filter';
+import './SearchResult.scss';
 
 class SearchResult extends React.Component {
   constructor() {
@@ -21,17 +22,12 @@ class SearchResult extends React.Component {
       menu_id: '',
       idx: '1',
       currentId: 1,
-      numberOfButton: 0,
-      totalData: 12,
     };
   }
   //메인화면에서 검색어 가져옴
   componentDidMount() {
     fetch(
-      `http://10.58.4.170:8000/restaurants/search?keyword=${this.props.location.search}&offset=0&limit=6`,
-      {
-        method: 'GET',
-      }
+      `http://10.58.4.170:8000/restaurants/search${this.props.location.search}&offset=0&limit=6`
     )
       .then(res => res.json())
       .then(data => {
@@ -41,62 +37,91 @@ class SearchResult extends React.Component {
             ...data.sub_category_result,
             ...data.restaurant_result,
           ],
-          numberOfButton: data['total'],
         });
-        this.makingButton(data['total']);
       });
   }
 
-  updateResult = (e, currentidx) => {
-    const limit = 6;
-    let offset = (currentidx - 1) % 6;
-    fetch(
-      `http://10.58.4.170:8000/restaurants/search?keyword=${this.props.location.search}&offset=${offset}&limit=${limit}`,
-      {
-        method: 'GET',
+  queryStringToObject = querystring => {
+    // parse query string
+    const params = new URLSearchParams(querystring);
+    const obj = {};
+    // iterate over all keys
+    for (const key of params.keys()) {
+      if (params.getAll(key).length > 1) {
+        obj[key] = params.getAll(key);
+      } else {
+        obj[key] = params.get(key);
       }
-    )
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          data: [
-            ...data.category_result,
-            ...data.sub_category_result,
-            ...data.restaurant_result,
-          ],
-        });
-        this.makingButton(data['total']);
-      });
-
-    this.setState({
-      currentId: currentidx,
-    });
+    }
+    return obj;
   };
 
-  SearchByFilter = (ratingCurrentIdx, priceCurrentIdx, values) => {
-    console.log(`"object"`, 'object');
+  objectToQueryString = object => {
+    let queryString = '';
+    for (let i in object) {
+      queryString += `&${i}=${object[i]}`;
+    }
+    return '?' + queryString.slice(1);
+  };
+
+  paginate = (e, currentidx) => {
+    const limit = 6;
+    const offset = (currentidx - 1) % 6;
+    const currentQuery = this.props.location.search;
+
+    const newQueryObject = this.queryStringToObject(currentQuery);
+    newQueryObject.offset = offset;
+    newQueryObject.limit = limit;
+
+    const newQueryString = this.objectToQueryString(newQueryObject);
+
+    this.setState(
+      {
+        currentId: currentidx,
+      },
+      () => {
+        this.props.history.push(`/SearchResult${newQueryString}`);
+      }
+    );
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.location.search !== this.props.location.search) {
+      fetch(
+        `http://10.58.4.170:8000/restaurants/search${this.props.location.search}`
+      )
+        .then(res => res.json())
+        .then(data =>
+          this.setState({
+            data: [
+              ...data.category_result,
+              ...data.sub_category_result,
+              ...data.restaurant_result,
+            ],
+          })
+        );
+    }
+  }
+
+  searchByFilter = (ratingCurrentIdx, priceCurrentIdx, last) => {
     let query = [];
 
     if (ratingCurrentIdx.title) {
       query.push(`rating=${ratingCurrentIdx.title.slice(1)}`);
     }
 
-    // if (values > 0) { 다시 만들어야하는 부분- 식은 세웠지만 어떻게 관리해야하는 것인지 모름
-
-    //     const last =[];
-    // for(let i =0 ; i < values.length ;i++){
-    //   last.push(values.find(item=>item.id===i).title)  /last 라는 배열을 스테이트로 관리해야할까 ?
-    // }
-    // }
+    if (last.length > 0) {
+      for (let i = 0; i < last.length; i++) {}
+    }
 
     const queryString = '?' + query.join('&'); // 이 쿼리 스트링을 어떻게 fetchFilterData  로 옯길까? + 기존검색어도 함께 검색함
 
     this.fetchFilterData();
   };
 
-  fetchFilterData = currentidx => {
+  fetchFilterData = () => {
     const limit = 6;
-    let offset = (currentidx - 1) % 6;
+    let offset = 0;
     fetch(
       `http://10.58.4.170:8000/restaurants/search?keyword=${this.props.location.search}&offset=${offset}&limit=${limit}`,
       {
@@ -105,27 +130,31 @@ class SearchResult extends React.Component {
     )
       .then(res => res.json())
       .then(data => {
-        this.makingButton(data['total']);
         this.setState({
           resultList: data,
         });
       });
   };
 
-  makingButton = totalData => {
+  makeButton = totalData => {
     //값이 없으면 오류나서 페이지 안뜨는지 여부 확인 , 함수 내부로 옮겨서 map 함수 사용 불가능
     //어떻게 해결 ? 이전처럼 렌더링 함수안에 위치시키기 ?
     let newArr = [];
-    this.setState({
-      totalData: totalData,
-    });
-    for (let idx = 1; idx <= Math.ceil(12 / 6); idx++) {
+
+    for (let idx = 1; idx <= Math.ceil(totalData / 6); idx++) {
       //임시
       newArr.push(idx);
     }
+    return newArr;
   };
 
   render() {
+    const { resultList } = this.state;
+
+    console.log(
+      `this.makeButton(resultList.total)`,
+      this.makeButton(resultList.total)
+    );
     return (
       <>
         <nav>SearchResult</nav>
@@ -154,18 +183,18 @@ class SearchResult extends React.Component {
                 })}
               </div>
               <span className="SideFilter">
-                <Filter SearchByFilter={this.SearchByFilter} />
+                <Filter searchByFilter={this.searchByFilter} />
               </span>
             </div>
 
             <div className="searchResultPaging">
-              {[1, 2, 3, 4].map(idx => {
+              {this.makeButton(12).map(idx => {
                 //임시로 만든 배열
                 return (
                   <Button
                     key={idx}
                     dataIndex={idx}
-                    updateResult={this.updateResult}
+                    paginate={this.paginate}
                     isButtonClicked={this.state.currentId === idx}
                   />
                 );
@@ -178,4 +207,4 @@ class SearchResult extends React.Component {
   }
 }
 
-export default SearchResult;
+export default withRouter(SearchResult);
