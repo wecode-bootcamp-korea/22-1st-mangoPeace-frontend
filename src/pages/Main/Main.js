@@ -13,6 +13,7 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
+      inputValue: '',
       slideNum: 1,
       slideTranslate: 0,
       popStore: [],
@@ -30,7 +31,7 @@ class Main extends React.Component {
       });
 
     // TOP 5 배너
-    fetch(`${BASE_URL}/restaurants?filtering=average_rating`)
+    fetch(`${BASE_URL}/restaurants/popular?filtering=average_rating`)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -38,6 +39,18 @@ class Main extends React.Component {
         });
       });
   }
+
+  checkInput = e => {
+    const { value } = e.target;
+    this.setState({ inputValue: value });
+  };
+
+  handleSearchBtn = () => {
+    console.log(this.state.inputValue);
+    this.state.history.push(
+      `/restaurants/search?keyword=${this.state.inputValue}`
+    );
+  };
 
   handleBtn = e => {
     const { slideNum, slideTranslate } = this.state;
@@ -66,12 +79,17 @@ class Main extends React.Component {
   };
 
   render() {
-    const { handleBtn, handleDotBtn } = this;
-    const { slideNum, slideTranslate, popStore, bestListImg } = this.state;
+    const { checkInput, handleSearchBtn, handleBtn, handleDotBtn } = this;
+    const { inputValue, slideNum, slideTranslate, popStore, bestListImg } =
+      this.state;
 
     return (
       <main>
-        <MainImgBar />
+        <MainImgBar
+          inputValue={inputValue}
+          checkInput={checkInput}
+          handleSearchBtn={handleSearchBtn}
+        />
         {bestListImg.length !== 0 && (
           <FoodThemeListSection
             handleBtn={handleBtn}
