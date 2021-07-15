@@ -14,7 +14,7 @@ class SignUp extends React.Component {
 
   controlInput = event => {
     const { value, name } = event.target;
-
+    console.log(this.state);
     if (name === 'inputName') {
       this.setState({
         nameValue: value,
