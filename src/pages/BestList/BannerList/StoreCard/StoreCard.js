@@ -5,12 +5,11 @@ import './StoreCard.scss';
 class StoreCard extends Component {
   render() {
     const { storeList } = this.props;
-    console.log(storeList);
 
     return (
       <>
         {storeList.map((store, index) => (
-          <li className="storeCard">
+          <li key={store.restaurant_id} className="storeCard">
             <img className="storeImg" alt={store.name} src={store.image} />
             <div className="storeBox">
               <div className="storeInfoBox">

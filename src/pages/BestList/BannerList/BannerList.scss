@@ -1,0 +1,9 @@
+@import '../../../styles/common.scss';
+
+.listBox {
+  @include display-flex;
+
+  .storeList {
+    width: 50%;
+  }
+}
