@@ -6,10 +6,10 @@ import { BASE_URL } from '../../config';
 import MyProfile from './MyProfile/MyProfile';
 import SignBox from './SignBox/SignBox';
 import WishList from '../WishList/WishList';
-
-import './Nav.scss';
 import Login from '../../pages/Login/Login';
 import SignUp from '../../pages/SignUp/SignUp';
+
+import './Nav.scss';
 
 const SEARCH_BAR_HEIGHT = 300;
 let debouncer;
