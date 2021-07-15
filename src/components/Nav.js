@@ -37,7 +37,7 @@ class Nav extends React.Component {
           </button>
           <img
             className="mainProfileImg"
-            src="images/profile_img.png"
+            src="/images/profile_img.png"
             alt="내정보"
           />
         </div>
