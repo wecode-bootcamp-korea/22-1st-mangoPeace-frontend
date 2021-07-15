@@ -24,7 +24,7 @@ class FoodThemeListSection extends Component {
             className={slideNum > 1 ? 'arrowBtnLeft' : 'none'}
             onClick={handleBtn}
           >
-            <i class="fas fa-chevron-left fa-3x" id="arrowLeft"></i>
+            <i className="fas fa-chevron-left fa-3x" id="arrowLeft"></i>
           </button>
           <ul className="foodThemeImgBox">
             <div
@@ -42,12 +42,12 @@ class FoodThemeListSection extends Component {
             className={slideNum < totalSlide ? 'arrowBtnRight' : 'none'}
             onClick={handleBtn}
           >
-            <i class="fas fa-chevron-right fa-3x" id="arrowRight"></i>
+            <i className="fas fa-chevron-right fa-3x" id="arrowRight"></i>
           </button>
           <ul className="slickDots">
             <li className="slickActive">
               <i
-                class="fas fa-circle fa-xs"
+                className="fas fa-circle fa-xs"
                 id={slideNum === 1 ? 'colorDot' : ''}
                 index={1}
                 onClick={handleDotBtn}
@@ -55,7 +55,7 @@ class FoodThemeListSection extends Component {
             </li>
             <li className="slickActive">
               <i
-                class="fas fa-circle fa-xs"
+                className="fas fa-circle fa-xs"
                 id={slideNum === 2 ? 'colorDot' : ''}
                 index={2}
                 onClick={handleDotBtn}
@@ -63,7 +63,7 @@ class FoodThemeListSection extends Component {
             </li>
             <li className="slickActive">
               <i
-                class="fas fa-circle fa-xs"
+                className="fas fa-circle fa-xs"
                 id={slideNum === 3 ? 'colorDot' : ''}
                 index={3}
                 onClick={handleDotBtn}

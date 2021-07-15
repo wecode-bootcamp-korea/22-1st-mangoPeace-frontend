@@ -1,0 +1,58 @@
+@import '../../../styles/common.scss';
+
+.storeReviewBox {
+  width: 70%;
+  padding: 50px 0 200px;
+
+  .reviewListBox {
+    position: relative;
+    margin-top: 180px;
+    padding: 80px 0 50px;
+
+    .sortScore {
+      @include display-flex(space-between, normal);
+      width: 348px;
+      position: absolute;
+      top: 25px;
+      right: 0;
+
+      li {
+        position: relative;
+        font-size: 20px;
+        color: $color-grey;
+        font-weight: 400;
+        cursor: pointer;
+
+        & + li::before {
+          content: '';
+          position: absolute;
+          top: 1px;
+          left: -10px;
+          height: 20px;
+          border-left: 1px solid $color-grey;
+        }
+
+        &.on {
+          color: $color-main;
+          font-weight: 700;
+        }
+
+        b {
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  .viewMoreBox {
+    @include display-flex;
+    font-weight: 700;
+    color: $color-main;
+    font-size: 22px;
+
+    .viewMoreText {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  }
+}

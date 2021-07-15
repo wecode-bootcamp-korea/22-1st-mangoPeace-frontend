@@ -1,13 +1,11 @@
 @import '../../../styles/common.scss';
 
 .popStoreSection {
-  display: flex;
-  flex-direction: column;
+  display: block;
   padding: 60px 0;
   border-bottom: 1px solid #dbdbdb;
 
   h2 {
-    display: block;
     padding: 0 150px;
     color: $color-main;
     font-size: 25px;

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import MainImgBar from './MainImgBar/MainImgBar';
 import FoodThemeListSection from './FoodThemeListSection/FoodThemeListSection';
 import PopStoreSection from './PopStoreSection/PopStoreSection';
+import { BASE_URL } from '../../config';
 
 import './Main.scss';
 
@@ -12,6 +13,7 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
+      inputValue: '',
       slideNum: 1,
       slideTranslate: 0,
       popStore: [],
@@ -20,7 +22,7 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://10.58.0.218:8000/restaurants/sub_categories')
+    fetch(`${BASE_URL}/restaurants/banner-list`)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -29,7 +31,7 @@ class Main extends React.Component {
       });
 
     // TOP 5 배너
-    fetch('http://10.58.0.218:8000/restaurants/1/high_ratings')
+    fetch(`${BASE_URL}/restaurants/popular?filtering=average_rating`)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -37,6 +39,18 @@ class Main extends React.Component {
         });
       });
   }
+
+  checkInput = e => {
+    const { value } = e.target;
+    this.setState({ inputValue: value });
+  };
+
+  handleSearchBtn = e => {
+    e.preventDefault();
+    this.props.history.push(
+      `/restaurants/search?keyword=${this.state.inputValue}`
+    );
+  };
 
   handleBtn = e => {
     const { slideNum, slideTranslate } = this.state;
@@ -65,13 +79,17 @@ class Main extends React.Component {
   };
 
   render() {
-    const { handleBtn, handleDotBtn } = this;
-    const { slideNum, slideTranslate, popStore, bestListImg } = this.state;
-    console.log(popStore);
+    const { checkInput, handleSearchBtn, handleBtn, handleDotBtn } = this;
+    const { inputValue, slideNum, slideTranslate, popStore, bestListImg } =
+      this.state;
 
     return (
       <main>
-        <MainImgBar />
+        <MainImgBar
+          inputValue={inputValue}
+          checkInput={checkInput}
+          handleSearchBtn={handleSearchBtn}
+        />
         {bestListImg.length !== 0 && (
           <FoodThemeListSection
             handleBtn={handleBtn}

@@ -1,0 +1,73 @@
+@import '../../../../styles/common.scss';
+
+.storeHeader {
+  position: relative;
+  padding: 70px 0 10px;
+  border-bottom: 1px solid $color-grey;
+
+  .storeTitle {
+    @include display-flex(normal, normal);
+    margin-bottom: 25px;
+    font-size: 35px;
+
+    h2 {
+      margin-right: 15px;
+      color: $color-darkgrey;
+      font-weight: 400;
+    }
+
+    strong {
+      color: $color-main;
+      font-weight: 400;
+    }
+  }
+
+  .storeStatus {
+    color: $color-grey;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  .wishBox {
+    @include display-flex(space-between, center);
+    flex-direction: column;
+    height: 70px;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    color: $color-grey;
+    cursor: pointer;
+
+    i {
+      font-size: 42px;
+
+      &.fas {
+        color: $color-main;
+        animation: wishAni 0.2s;
+
+        & + span {
+          color: $color-main;
+          font-weight: 700;
+        }
+      }
+    }
+
+    span {
+      font-size: 15px;
+    }
+  }
+}
+
+@keyframes wishAni {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
