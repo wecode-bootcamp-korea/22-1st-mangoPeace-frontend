@@ -6,6 +6,8 @@ import SignBox from './SignBox/SignBox';
 import WishList from '../WishList/WishList';
 
 import './Nav.scss';
+import Login from '../../pages/Login/Login';
+import SignUp from '../../pages/SignUp/SignUp';
 
 const SEARCH_BAR_HEIGHT = 300;
 let debouncer;
@@ -16,6 +18,8 @@ class Nav extends React.Component {
     isWishListOn: false,
     isTransparentNav: false,
     inputValue: '',
+    isLoginOn: false,
+    isSignUpOn: false,
   };
 
   componentDidMount = () => {
@@ -23,6 +27,8 @@ class Nav extends React.Component {
       this.setState({ isTransparentNav: true });
       window.addEventListener('scroll', this.handleScroll);
     }
+
+    window.addEventListener('click', e => this.handleModal(e));
   };
 
   componentDidUpdate = () => {
@@ -46,6 +52,19 @@ class Nav extends React.Component {
 
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.handleScroll);
+  };
+
+  handleValidUser = () => {
+    this.setState({ isValidUser: true });
+  };
+
+  handleModal = e => {
+    if (e.target.className === 'modalBg') {
+      this.setState({
+        isLoginOn: false,
+        isSignUpOn: false,
+      });
+    }
   };
 
   handleScroll = () => {
@@ -81,39 +100,63 @@ class Nav extends React.Component {
   };
 
   goToLogin = () => {
-    this.props.history.push('/login');
+    this.setState({ isLoginOn: true });
   };
 
   goToSignUp = () => {
-    this.props.history.push('/SignUp');
+    this.setState({ isSignUpOn: true });
+  };
+
+  closeModal = () => {
+    this.setState({ isSignUpOn: false, isLoginOn: false });
   };
 
   render() {
-    const { isValidUser, isWishListOn, isTransparentNav } = this.state;
+    const {
+      isValidUser,
+      isWishListOn,
+      isTransparentNav,
+      isLoginOn,
+      isSignUpOn,
+    } = this.state;
 
     return (
-      <div className={`${isTransparentNav ? 'navBar transparent' : 'navBar'}`}>
-        <div className="logoBox" onClick={this.goToMain}>
-          <h1>싸우지망고</h1>
-          <img className="logoImg" src="/images/logo.png" alt="로고이미지" />
+      <>
+        {isLoginOn && (
+          <Login
+            handleValidUser={this.handleValidUser}
+            closeModal={this.closeModal}
+          />
+        )}
+        {isSignUpOn && <SignUp closeModal={this.closeModal} />}
+        <div
+          className={`${isTransparentNav ? 'navBar transparent' : 'navBar'}`}
+        >
+          <div className="logoBox" onClick={this.goToMain}>
+            <h1>싸우지망고</h1>
+            <img className="logoImg" src="/images/logo.png" alt="로고이미지" />
+          </div>
+          <form onSubmit={this.handleSearchBtn} className="navSearchBar">
+            <i className="fas fa-search searchIcon"></i>
+            <input
+              onChange={this.checkInput}
+              className="mainSearchInput"
+              placeholder="맛집 검색"
+            ></input>
+          </form>
+          <div className="navProfileBox">
+            {isValidUser ? (
+              <MyProfile handleWishList={this.handleWishList} />
+            ) : (
+              <SignBox
+                goToSignUp={this.goToSignUp}
+                goToLogin={this.goToLogin}
+              />
+            )}
+          </div>
+          {isWishListOn && <WishList />}
         </div>
-        <form onSubmit={this.handleSearchBtn} className="navSearchBar">
-          <i className="fas fa-search searchIcon"></i>
-          <input
-            onChange={this.checkInput}
-            className="mainSearchInput"
-            placeholder="맛집 검색"
-          ></input>
-        </form>
-        <div className="navProfileBox">
-          {isValidUser ? (
-            <MyProfile handleWishList={this.handleWishList} />
-          ) : (
-            <SignBox goToSignUp={this.goToSignUp} goToLogin={this.goToLogin} />
-          )}
-        </div>
-        {isWishListOn && <WishList />}
-      </div>
+      </>
     );
   }
 }
