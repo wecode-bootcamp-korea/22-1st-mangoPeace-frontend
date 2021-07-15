@@ -14,7 +14,7 @@ class StoreLocation extends React.Component {
   initMap = (lat, lng) => {
     const script = document.createElement('script');
     script.async = true;
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${API_APP_KEY}&autoload=false`;
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_API_KEY}&autoload=false`;
     document.head.appendChild(script);
 
     script.onload = () => {
@@ -39,7 +39,5 @@ class StoreLocation extends React.Component {
     return <div className="storeLocation"></div>;
   }
 }
-
-const API_APP_KEY = 'ab48646716f052ca07bb18f252c48472';
 
 export default StoreLocation;

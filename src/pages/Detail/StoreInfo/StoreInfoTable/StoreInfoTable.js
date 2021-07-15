@@ -5,7 +5,7 @@ import './StoreInfoTable.scss';
 class StoreInfoTable extends React.Component {
   render() {
     const { restaurantsData, foodsData } = this.props;
-    console.log(foodsData);
+
     return (
       <table className="storeInfoTable">
         <caption>매장 정보</caption>
@@ -23,8 +23,8 @@ class StoreInfoTable extends React.Component {
             <td>{restaurantsData.sub_category}</td>
           </tr>
           <tr>
-            <th>가격대</th>
-            <td>{parseInt(foodsData.average_price)}</td>
+            <th>평균가격</th>
+            <td>{`${Number(restaurantsData.average_price)}원`}</td>
           </tr>
           <tr>
             <th>영업시간</th>

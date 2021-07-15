@@ -1,0 +1,20 @@
+@import '../../../../styles/common.scss';
+
+.reviewLi {
+  .reviewEmptyBox {
+    @include display-flex;
+    width: 100%;
+
+    color: $color-main;
+
+    .reviewEmptyIcon {
+      margin-right: 15px;
+      font-size: 50px;
+    }
+
+    .reviewEmptyText {
+      font-size: 28px;
+      font-weight: 700;
+    }
+  }
+}

@@ -2,6 +2,7 @@
 
 .detailPage {
   padding-top: 60px;
+
   .detailMain {
     @include display-flex(normal, center);
     flex-direction: column;

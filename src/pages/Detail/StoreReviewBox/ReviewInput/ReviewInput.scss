@@ -27,16 +27,6 @@
       position: absolute;
       top: 16px;
       left: 20px;
-
-      i {
-        font-size: 19px;
-        color: $color-main;
-        cursor: pointer;
-
-        & + i {
-          margin-left: 3px;
-        }
-      }
     }
 
     textarea {
