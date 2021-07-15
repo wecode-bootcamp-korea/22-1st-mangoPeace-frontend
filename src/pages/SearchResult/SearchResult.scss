@@ -64,8 +64,6 @@
         display: grid;
         grid-template-columns: 55% 55%;
         justify-items: center;
-        //grid-template-rows: 40% 40% 40% 40%; //최대최소넣어주기
-
         padding-left: 100px;
         padding-right: 100px;
         min-width: 750px;
@@ -87,10 +85,11 @@
             margin-left: 0;
             text-align: left;
             padding-left: 10px;
+
             .basicInfo {
               font-size: 22px;
               text-align: left;
-              // padding-left: 26px;
+
               .menuName {
                 margin-left: 2.5px;
                 margin-right: 2.5px;
@@ -106,16 +105,13 @@
               margin: 10px;
               margin-left: 0;
               color: $color-grey;
+
               .location {
                 margin-right: 10px;
-              }
-              .category {
               }
             }
           }
         }
-      }
-      .SideFilter {
       }
     }
     .searchResultPaging {

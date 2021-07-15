@@ -1,16 +1,8 @@
 @import '../../styles/common.scss';
 
-.FilterBox {
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  margin-left: 0;
-  margin-right: 40px;
-  padding-left: 20px;
-  border-color: $color-grey;
 
   .searchFilter {
+    display:block;
     .selectHead {
       display: flex;
       justify-content: space-between;

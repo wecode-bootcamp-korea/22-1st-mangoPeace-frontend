@@ -23,7 +23,7 @@ class Routes extends React.Component {
           <Route exact path="/searchresult" component={SearchResult} />
           <Route exact path="/bestlist/:id" component={BestList} />
           <Route exact path="/detail/:id" component={Detail} />
-          <Route eaxct path="/Filter" component={Filter} />
+          <Route eaxct path="/filter" component={Filter} />
         </Switch>
         <Footer />
       </Router>

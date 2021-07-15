@@ -1,8 +1,8 @@
 import React from 'react';
+import SelectRatingSection from '../FilterComponent/SelectRatingSection';
+import PriceSelectSection from '../FilterComponent/PriceSelectSection';
+import MenuCategorySelectSection from '../FilterComponent/MenuCategorySelectSection';
 import './Filter.scss';
-import SelectRatingComponent from '../FilterComponent/SelectRatingComponent';
-import PriceSelectSectionComponent from '../FilterComponent/PriceSelectSectionComponent';
-import MenuCategorySelectSectionComponent from '../FilterComponent/MenuCategorySelectSectionComponent';
 
 const RATING = [
   { id: 0, title: '#별점순' },
@@ -84,7 +84,7 @@ class Filter extends React.Component {
             <div className="selectRating">
               {RATING.map(idx => {
                 return (
-                  <SelectRatingComponent
+                  <SelectRatingSection
                     stateKey="ratingCurrentIdx"
                     ratingCurrentIdx={ratingCurrentIdx}
                     handleIdx={this.handleIdx}
@@ -103,7 +103,7 @@ class Filter extends React.Component {
             <div className="menuCategorySelectSection">
               {MENU.map(idx => {
                 return (
-                  <MenuCategorySelectSectionComponent
+                  <MenuCategorySelectSection
                     values={values}
                     idx={idx}
                     handleButton={this.handleButton}
