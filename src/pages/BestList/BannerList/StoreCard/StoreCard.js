@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import './StoreCard.scss';
 
 class StoreCard extends Component {
+  goToStore = id => {
+    this.props.history.push(`/detail/${id}`);
+  };
   render() {
     const { storeList } = this.props;
 
@@ -10,7 +13,12 @@ class StoreCard extends Component {
       <>
         {storeList.map((store, index) => (
           <li key={store.restaurant_id} className="storeCard">
-            <img className="storeImg" alt={store.name} src={store.image} />
+            <img
+              className="storeImg"
+              alt={store.name}
+              src={store.image}
+              onClick={() => store.restaurant_id}
+            />
             <div className="storeBox">
               <div className="storeInfoBox">
                 <div className="storeHeadline">
@@ -33,7 +41,7 @@ class StoreCard extends Component {
                   <span className="userReview">{store.content}</span>
                 </div>
               </div>
-              <span className="storeMore">
+              <span className="storeMore" onClick={() => store.restaurant_id}>
                 {store.name} 더보기 <i class="fas fa-chevron-right"></i>
               </span>
             </div>

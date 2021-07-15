@@ -1,0 +1,12 @@
+@import '../../../styles/common.scss';
+
+.navProfileBox {
+  img {
+    margin-right: 30px;
+    width: 35px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

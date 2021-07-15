@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 
+import { BASE_URL } from '../../../../config';
+
 import RatingStar from './RatingStar/RatingStar';
 
 import './ReviewInput.scss';
@@ -17,7 +19,7 @@ class ReviewInput extends React.Component {
     const { reviewRating, reviewInput } = this.state;
     const { fetchReviewData } = this.props;
 
-    fetch(`${IP_ADDRESS}/restaurants/${this.props.storeId}/reviews`, {
+    fetch(`${BASE_URL}/restaurants/${this.props.storeId}/reviews`, {
       method: 'POST',
       body: JSON.stringify({
         rating: reviewRating,
@@ -87,7 +89,5 @@ class ReviewInput extends React.Component {
     );
   }
 }
-
-const IP_ADDRESS = 'http://10.58.3.213:8000';
 
 export default withRouter(ReviewInput);
