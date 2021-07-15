@@ -2,7 +2,7 @@ import React from 'react';
 
 import BannerTitle from './BannerTitle/BannerTitle';
 import BannerList from './BannerList/BannerList';
-
+import { BASE_URL } from '../../config';
 import './BestList.scss';
 
 class BestList extends React.Component {
@@ -15,9 +15,7 @@ class BestList extends React.Component {
   }
 
   componentDidMount() {
-    fetch(
-      'http://10.58.6.37:8000/restaurants?ordering=average_rating&sub_category_id=1'
-    )
+    fetch(`${BASE_URL}/restaurants?ordering=average_rating&sub_category_id=1`)
       .then(res => res.json())
       .then(data => {
         this.setState({ storeList: data.result });
@@ -26,7 +24,6 @@ class BestList extends React.Component {
 
   render() {
     const { storeList } = this.state;
-    console.log(storeList);
 
     return (
       <div className="bestList">
