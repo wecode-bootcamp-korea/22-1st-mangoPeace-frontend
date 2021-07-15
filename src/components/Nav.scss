@@ -1,20 +1,23 @@
 @import '../styles/common.scss';
 
 .navBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include display-flex(flex-start, center);
   position: fixed;
   height: 60px;
   width: 100%;
   background-color: white;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
 
   .logoBox {
     display: flex;
     align-items: center;
     width: 160px;
     padding-left: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     h1 {
       margin-left: 15px;
@@ -31,7 +34,7 @@
 
   .navSearchBar {
     @include display-flex(flex-start, center);
-    margin-right: 100px;
+    margin-right: 50px;
     width: 60%;
 
     .searchIcon {
@@ -42,7 +45,7 @@
       margin-left: 15px;
       padding-left: 15px;
       height: 30px;
-      width: 70%;
+      width: 60%;
       border: none;
       border-left: 1px solid $color-grey;
       &:focus {
@@ -53,7 +56,8 @@
 
   .navProfileBox {
     @include display-flex(space-between, center);
-    width: 17%;
+    position: absolute;
+    right: 0;
     margin-right: 20px;
 
     button {
