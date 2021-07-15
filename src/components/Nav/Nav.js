@@ -3,9 +3,9 @@ import { withRouter } from 'react-router-dom';
 
 import MyProfile from './MyProfile/MyProfile';
 import SignBox from './SignBox/SignBox';
+import WishList from '../WishList/WishList';
 
 import './Nav.scss';
-import WishList from '../WishList/WishList';
 
 const SEARCH_BAR_HEIGHT = 300;
 let debouncer;
