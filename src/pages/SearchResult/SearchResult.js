@@ -22,122 +22,105 @@ class SearchResult extends React.Component {
       idx: '1',
       currentId: 1,
       numberOfButton: 0,
+      totalData: 12,
     };
   }
   //메인화면에서 검색어 가져옴
   componentDidMount() {
     fetch(
-      `http://10.58.4.170:8000/search?keyword=${this.props.location.search}&offset=0&limit=6`,
+      `http://10.58.4.170:8000/restaurants/search?keyword=${this.props.location.search}&offset=0&limit=6`,
       {
         method: 'GET',
       }
     )
       .then(res => res.json())
       .then(data => {
-        console.log('data', data['count']);
         this.setState({
           resultList: [
             ...data.category_result,
             ...data.sub_category_result,
             ...data.restaurant_result,
           ],
+          numberOfButton: data['total'],
         });
+        this.makingButton(data['total']);
       });
-    this.makingButton(data['total']); //수정해야함- 준영님에게 여쭈어 보기 
   }
 
   updateResult = (e, currentidx) => {
     const limit = 6;
     let offset = (currentidx - 1) % 6;
     fetch(
-      //'http://localhost:3000/data/resultData3.json',
-      `http://10.58.4.170:8000/search?keyword=%EC%9D%BC%EC%8B%9D&offset=${offset}&limit=${limit}`,
+      `http://10.58.4.170:8000/restaurants/search?keyword=${this.props.location.search}&offset=${offset}&limit=${limit}`,
       {
         method: 'GET',
       }
     )
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({
-          // this.state.resultList,
           data: [
             ...data.category_result,
             ...data.sub_category_result,
             ...data.restaurant_result,
           ],
         });
+        this.makingButton(data['total']);
       });
-      this.makingButton(data['total']);
+
     this.setState({
       currentId: currentidx,
     });
   };
 
-  SearchByFilter = (ratingCurrentIdx, priceCurrentIdx, menuTitleArr) => {
-    //각각의 경우가 없는 경우 (밸류는 0 인경우를 고려해야한다) - 이때에 따라서 쿼리스트링을 다르게 해야한다
-    //셋다 값이 없는 경우는 없다
-    // 각각의 앞의 두개는 숫자가 들어있으므로 처리를 해준다. 값은 하나만 가짐.
+  SearchByFilter = (ratingCurrentIdx, priceCurrentIdx, values) => {
     console.log(`"object"`, 'object');
     let query = [];
 
     if (ratingCurrentIdx.title) {
       query.push(`rating=${ratingCurrentIdx.title.slice(1)}`);
     }
-    // if (priceCurrentIdx.title) {
-    //   query +=
-    //     '${' + priceCurrentIdx.title.slice(1) + '}';
-    // }
-    if (menuTitleArr.length > 0) {
-      console.log(`values`, menuTitleArr);
-    }
 
-    const queryString = '?' + query.join('&');
+    // if (values > 0) { 다시 만들어야하는 부분- 식은 세웠지만 어떻게 관리해야하는 것인지 모름
+
+    //     const last =[];
+    // for(let i =0 ; i < values.length ;i++){
+    //   last.push(values.find(item=>item.id===i).title)  /last 라는 배열을 스테이트로 관리해야할까 ?
+    // }
+    // }
+
+    const queryString = '?' + query.join('&'); // 이 쿼리 스트링을 어떻게 fetchFilterData  로 옯길까? + 기존검색어도 함께 검색함
 
     this.fetchFilterData();
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
-    console.log(`컴디업`, 'ㅇㅇㅇ');
-    this.fetchPhotos(this.state.currentId);
-  };
-
-  // componentDidMount(){
-  //   this.fetchFilterData(this.state.currentId)
-  // }
-
-  //스테이트로 url 을 관리 로직구성
-  fetchFilterData = (currentidx) => {
-    const LIMIT = 6;
+  fetchFilterData = currentidx => {
+    const limit = 6;
     let offset = (currentidx - 1) % 6;
-    fetch(`http://localhost:3000/data/resultData${currentidx}.json`, {
-      method: 'GET',
-    })
+    fetch(
+      `http://10.58.4.170:8000/restaurants/search?keyword=${this.props.location.search}&offset=${offset}&limit=${limit}`,
+      {
+        method: 'GET',
+      }
+    )
       .then(res => res.json())
       .then(data => {
+        this.makingButton(data['total']);
         this.setState({
           resultList: data,
         });
       });
-      this.makingButton(data['total']);
   };
 
-  //바뀐 state 값 가져올 핸들러 구성
-  idHandler = e => {
-    this.setState({ currentId: e.target.dataset.idx });
-  };
-
-  makingButton = (data['total']) => {
-    const newArr = [];
+  makingButton = totalData => {
+    //값이 없으면 오류나서 페이지 안뜨는지 여부 확인 , 함수 내부로 옮겨서 map 함수 사용 불가능
+    //어떻게 해결 ? 이전처럼 렌더링 함수안에 위치시키기 ?
+    let newArr = [];
     this.setState({
-      numberOfButton : data['total'],
-    })
-    for (
-      let idx = 1;
-      idx <= Math.ceil(20 / 6);
-      //this.state.resultList.length // 단한페이지 배열의 길이여서 틀림
-      idx++
-    ) {
+      totalData: totalData,
+    });
+    for (let idx = 1; idx <= Math.ceil(12 / 6); idx++) {
+      //임시
       newArr.push(idx);
     }
   };
@@ -149,7 +132,6 @@ class SearchResult extends React.Component {
         <div className="searchResultMain">
           <div className="searchResultHead">
             <div className="searchResultTitle">
-              {/* <div className="searchKeyword">국밥</div> 검색결과에 따라 달라지게 구현(추가구현)*/}
               <div className="resultRank"> 검색 결과</div>
             </div>
           </div>
@@ -157,9 +139,7 @@ class SearchResult extends React.Component {
           <div className="searchResultBody">
             <div className="searchResultListFilterBox">
               <div className="searchResultList">
-                {/* {this.state.resultList.length>0 && */}
                 {this.state.resultList.map(result => {
-                  console.log('map', this.state.resultList);
                   return (
                     <span className="searchResultListContent" key={result.id}>
                       <SearchResultComponent
@@ -179,7 +159,8 @@ class SearchResult extends React.Component {
             </div>
 
             <div className="searchResultPaging">
-              {newArr.map(idx => {
+              {[1, 2, 3, 4].map(idx => {
+                //임시로 만든 배열
                 return (
                   <Button
                     key={idx}

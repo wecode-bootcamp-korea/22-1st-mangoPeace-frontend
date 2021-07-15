@@ -5,7 +5,7 @@ import PriceSelectSectionComponent from '../FilterComponent/PriceSelectSectionCo
 import MenuCategorySelectSectionComponent from '../FilterComponent/MenuCategorySelectSectionComponent';
 
 const RATING = [
-  { id: 0, title: '#별점순' }, // id 라고 해야하는거야 id 라고 해야하는 거야 ?
+  { id: 0, title: '#별점순' },
   { id: 1, title: '#코멘트순' },
 ];
 const PRICE = [
@@ -19,10 +19,10 @@ const MENU = [
   { id: 1, title: '#파스타' },
   { id: 2, title: '#햄버거' },
   { id: 3, title: '#국밥' },
-  { id: 4, title: '#불고기' },
-  { id: 5, title: '#국수' },
+  { id: 4, title: '#숯불구이' },
+  { id: 5, title: '#면' },
   { id: 6, title: '#초밥' },
-  { id: 7, title: '#돈가스' },
+  { id: 7, title: '#돈까스' },
   { id: 8, title: '#덮밥' },
 ];
 
@@ -34,7 +34,6 @@ class Filter extends React.Component {
       priceCurrentIdx: 0,
       ratingCurrentIdx: 0,
       values: [],
-      //menuTitleArr: [],
     };
   }
 
@@ -71,11 +70,6 @@ class Filter extends React.Component {
     const isAllSectionNotValid =
       ratingCurrentIdx === 0 && priceCurrentIdx === 0 && values.length === 0;
 
-    let menuTitleArr = [];
-    // for (let i = 0; i < this.state.values.length; i++) {
-    //   menuTitleArr.push(this.state.values.find(item => item.id === i).title);
-    // }
-
     // Object.keys(this.state.values).map(idx => {
     //   menuTitleArr.push(MENU.find(item => item.id === idx).title);
     // });
@@ -94,31 +88,13 @@ class Filter extends React.Component {
                     stateKey="ratingCurrentIdx"
                     ratingCurrentIdx={ratingCurrentIdx}
                     handleIdx={this.handleIdx}
-                    idx={idx} //idx 라는건 뭘까 ??
-                    key={idx.title}
-                  />
-                );
-              })}
-            </div>
-          </div>
-          {/* <div className="priceForOnePerson">
-            <div className="selectHead">
-              <span className="title">가격/1인당</span>
-            </div>
-            <div className="priceSelectSection">
-              {PRICE.map(idx => {
-                return (
-                  <PriceSelectSectionComponent
-                    stateKey="priceCurrentIdx"
-                    priceCurrentIdx={priceCurrentIdx}
-                    checkPriceSelectSection={this.checkPriceSelectSection}
                     idx={idx}
                     key={idx.title}
                   />
                 );
               })}
             </div>
-          </div> */}
+          </div>
 
           <div className="menuCategory">
             <div className="selectHead">
@@ -145,7 +121,7 @@ class Filter extends React.Component {
                 this.props.SearchByFilter(
                   ratingCurrentIdx,
                   priceCurrentIdx,
-                  menuTitleArr
+                  values
                 )
               }
             >
