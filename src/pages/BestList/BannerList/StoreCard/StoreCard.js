@@ -40,8 +40,8 @@ class StoreCard extends Component {
                   <span className="userReview">{store.content}</span>
                 </div>
               </div>
-              <span className="storeMore">
-                {store.name} 더보기 <i class="fas fa-chevron-right"></i>
+              <span className="storeMore" onClick={() => store.restaurant_id}>
+                {store.name} 더보기 <i className="fas fa-chevron-right"></i>
               </span>
             </div>
           </li>

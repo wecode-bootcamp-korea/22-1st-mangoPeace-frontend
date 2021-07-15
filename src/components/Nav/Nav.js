@@ -14,23 +14,62 @@ class Nav extends React.Component {
   state = {
     isValidUser: false,
     isWishListOn: false,
-    scrollSpot: 0,
+    isTransparentNav: false,
+    inputValue: '',
   };
 
   componentDidMount = () => {
-    if (this.props.match.path === '/') {
-      window.addEventListener('scroll', e => this.handleScoll(e));
+    if (this.props.location.search === '') {
+      this.setState({ isTransparentNav: true });
+      window.addEventListener('scroll', this.handleScroll);
     }
   };
 
-  handleScoll = e => {
+  componentDidUpdate = () => {
+    const { location } = this.props;
+    const { isTransparentNav } = this.state;
+
+    if (location.pathname !== '/') {
+      window.removeEventListener('scroll', this.handleScroll);
+      if (isTransparentNav !== false) {
+        this.setState({ isTransparentNav: false });
+      }
+    }
+
+    if (location.pathname === '/') {
+      window.addEventListener('scroll', this.handleScroll);
+      if (isTransparentNav !== true && window.scrollY < SEARCH_BAR_HEIGHT) {
+        this.setState({ isTransparentNav: true });
+      }
+    }
+  };
+
+  componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.handleScroll);
+  };
+
+  handleScroll = () => {
     if (debouncer) {
       clearTimeout(debouncer);
     }
 
     debouncer = setTimeout(() => {
-      this.setState({ scrollSpot: window.scrollY });
+      const isScrollBigger = window.scrollY < SEARCH_BAR_HEIGHT;
+      this.setState({ isTransparentNav: isScrollBigger });
     }, 100);
+  };
+
+  checkInput = e => {
+    const { value } = e.target;
+    this.setState({ inputValue: value });
+  };
+
+  handleSearchBtn = e => {
+    e.preventDefault();
+
+    this.props.history.push(
+      `/restaurants/search?keyword=${this.state.inputValue}`
+    );
   };
 
   handleWishList = () => {
@@ -50,22 +89,22 @@ class Nav extends React.Component {
   };
 
   render() {
-    const { isValidUser, isWishListOn, scrollSpot } = this.state;
+    const { isValidUser, isWishListOn, isTransparentNav } = this.state;
 
     return (
-      <div
-        className={`${
-          scrollSpot < SEARCH_BAR_HEIGHT ? 'navBar transparent' : 'navBar'
-        }`}
-      >
+      <div className={`${isTransparentNav ? 'navBar transparent' : 'navBar'}`}>
         <div className="logoBox" onClick={this.goToMain}>
           <h1>싸우지망고</h1>
           <img className="logoImg" src="/images/logo.png" alt="로고이미지" />
         </div>
-        <div className="navSearchBar">
+        <form onSubmit={this.handleSearchBtn} className="navSearchBar">
           <i className="fas fa-search searchIcon"></i>
-          <input className="mainSearchInput" placeholder="맛집 검색"></input>
-        </div>
+          <input
+            onChange={this.checkInput}
+            className="mainSearchInput"
+            placeholder="맛집 검색"
+          ></input>
+        </form>
         <div className="navProfileBox">
           {isValidUser ? (
             <MyProfile handleWishList={this.handleWishList} />
