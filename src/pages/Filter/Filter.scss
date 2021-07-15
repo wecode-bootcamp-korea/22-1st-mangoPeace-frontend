@@ -1,0 +1,88 @@
+@import '../../styles/common.scss';
+
+.searchFilter {
+  display: block;
+  .selectHead {
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+      margin-left: 15px;
+      margin-top: 10px;
+      padding: 10px;
+    }
+  }
+
+  .selectRating {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 30px;
+    border-color: $color-grey;
+
+    .selectList {
+      display: inline-block;
+      text-align: left;
+      width: 85px;
+      margin: 5px;
+      margin-left: 5px;
+      padding: 5px;
+      outline: 0;
+      background-color: transparent;
+      border: 0px transparent solid;
+
+      &.on {
+        color: $color-main;
+      }
+    }
+  }
+}
+
+.menuCategory {
+  .selectHead {
+    display: flex;
+    justify-content: space-between;
+    .title {
+      margin-left: 26px;
+      margin-top: 10px;
+    }
+  }
+
+  .menuCategorySelectSection {
+    margin-top: 5px;
+    padding-left: 30px;
+    padding-top: 0;
+    .categoryMenuList {
+      text-align: left;
+      width: 90px;
+      height: 30px;
+      margin: 2px;
+      padding: 10px;
+      padding-top: 5px;
+      outline: 0;
+      background-color: transparent;
+      border: 0px transparent solid;
+
+      &.on {
+        color: $color-main;
+      }
+    }
+  }
+}
+
+.cancelOrConfirm {
+  text-align: right;
+  padding-right: 35px;
+
+  .confirm {
+    padding: 5px;
+    outline: 0;
+    background-color: transparent;
+    border: 0px transparent solid;
+    color: $color-darkgrey;
+    &.on {
+      color: $color-main;
+    }
+  }
+}
