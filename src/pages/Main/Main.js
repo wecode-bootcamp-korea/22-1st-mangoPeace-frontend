@@ -45,8 +45,8 @@ class Main extends React.Component {
     this.setState({ inputValue: value });
   };
 
-  handleSearchBtn = () => {
-    console.log(this.state.inputValue);
+  handleSearchBtn = e => {
+    e.preventDefault();
     this.props.history.push(
       `/restaurants/search?keyword=${this.state.inputValue}`
     );
