@@ -1,0 +1,95 @@
+@import '../../../../styles/common.scss';
+
+.storeCard {
+  @include display-flex(flex-start, center);
+  padding: 50px 0;
+  border-bottom: 1px solid #dbdbdb;
+
+  img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .storeBox {
+    @include display-flex(space-between, normal);
+    flex-direction: column;
+    margin: 0 0 0 30px;
+    width: 100%;
+
+    .storeInfoBox {
+      display: block;
+      margin-bottom: 20px;
+
+      .storeHeadline {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: 10px;
+
+        h2 {
+          display: inline;
+          margin-bottom: 10px;
+          font-size: 30px;
+          font-weight: 500;
+        }
+
+        i {
+          position: absolute;
+          right: 50px;
+          bottom: 12px;
+          color: $color-main;
+          font-size: 25px;
+        }
+
+        .storeName {
+          color: $color-darkgrey;
+        }
+
+        .storeGrade {
+          color: $color-main;
+        }
+      }
+
+      h3 {
+        color: $color-grey;
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+
+    .storeReviewBox {
+      @include display-flex(normal, normal);
+      height: 45%;
+
+      img {
+        margin-right: 15px;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+      }
+
+      .storeReview {
+        .userNickname {
+          margin-right: 5px;
+          font-weight: bold;
+        }
+
+        .userReview {
+          line-height: 150%;
+        }
+      }
+    }
+
+    .storeMore {
+      @include display-flex(flex-end, normal);
+      margin-bottom: 20px;
+      color: $color-grey;
+      text-align: center;
+      font-size: 18px;
+
+      i {
+        margin-left: 5px;
+      }
+    }
+  }
+}

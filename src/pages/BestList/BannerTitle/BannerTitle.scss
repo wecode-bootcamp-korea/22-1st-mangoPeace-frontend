@@ -1,0 +1,30 @@
+@import '../../../styles/common.scss';
+
+.titleBox {
+  @include display-flex;
+  flex-direction: column;
+  padding: 80px 0;
+  border-bottom: 1px solid #dbdbdb;
+  background-color: #f7f7f7;
+  color: $color-grey;
+
+  span,
+  h2,
+  h3 {
+    font-weight: 400;
+  }
+
+  span {
+    font-size: 15px;
+  }
+
+  h2 {
+    padding: 20px 0 30px 0;
+    color: $color-black;
+    font-size: 40px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+}
