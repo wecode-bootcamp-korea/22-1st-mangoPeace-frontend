@@ -20,6 +20,9 @@ class ReviewInput extends React.Component {
     const { fetchReviewData } = this.props;
 
     fetch(`${BASE_URL}/restaurants/${this.props.storeId}/reviews`, {
+      headers: {
+        Authorization: localStorage.getItem('TOKEN'),
+      },
       method: 'POST',
       body: JSON.stringify({
         rating: reviewRating,
