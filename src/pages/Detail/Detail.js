@@ -28,6 +28,18 @@ class Detail extends React.Component {
     this.fetchReviewData();
   };
 
+  componentDidUpdate = prevProps => {
+    const { id } = this.props.match.params;
+
+    if (prevProps.match.params.id !== id) {
+      this.props.history.push(`?offset=0&limit=10&rating-min=1&rating-max=5`);
+
+      this.fetchData(`restaurants/${id}`);
+      this.fetchData(`restaurants/${id}/foods`);
+      this.fetchReviewData();
+    }
+  };
+
   handleReviewEdit = reviewId => {
     const targetedReview = this.state.reviews.filter(
       review => review.id === reviewId
@@ -73,7 +85,11 @@ class Detail extends React.Component {
   };
 
   fetchData = addr => {
-    fetch(`${BASE_URL}/${addr}`)
+    fetch(`${BASE_URL}/${addr}`, {
+      headers: {
+        Authorization: localStorage.getItem('TOKEN'),
+      },
+    })
       .then(res => res.json())
       .then(res => {
         const name = sortAddr(addr);

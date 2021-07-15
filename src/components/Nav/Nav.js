@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+import { BASE_URL } from '../../config';
+
 import MyProfile from './MyProfile/MyProfile';
 import SignBox from './SignBox/SignBox';
 import WishList from '../WishList/WishList';
@@ -16,6 +18,7 @@ class Nav extends React.Component {
     isWishListOn: false,
     isTransparentNav: false,
     inputValue: '',
+    wishList: null,
   };
 
   componentDidMount = () => {
@@ -23,6 +26,11 @@ class Nav extends React.Component {
       this.setState({ isTransparentNav: true });
       window.addEventListener('scroll', this.handleScroll);
     }
+
+    localStorage.setItem(
+      'TOKEN',
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZXhwIjoxNjI2NDYwNzE2fQ.tqGvlidPjzPh5Zy0mVA5Rdk4qPjuXMgDKN1cYcuRdx4'
+    );
   };
 
   componentDidUpdate = () => {
@@ -46,6 +54,16 @@ class Nav extends React.Component {
 
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.handleScroll);
+  };
+
+  fetchWishList = () => {
+    fetch(`${BASE_URL}/users/detail`, {
+      headers: {
+        Authorization: localStorage.getItem('TOKEN'),
+      },
+    })
+      .then(res => res.json())
+      .then(res => this.setState({ wishList: res.result.wish_list }));
   };
 
   handleScroll = () => {
@@ -74,6 +92,9 @@ class Nav extends React.Component {
 
   handleWishList = () => {
     this.setState({ isWishListOn: !this.state.isWishListOn });
+    if (this.state.isWishListOn === false) {
+      this.fetchWishList();
+    }
   };
 
   goToMain = () => {
@@ -89,7 +110,8 @@ class Nav extends React.Component {
   };
 
   render() {
-    const { isValidUser, isWishListOn, isTransparentNav } = this.state;
+    const { isValidUser, isWishListOn, isTransparentNav, wishList } =
+      this.state;
 
     return (
       <div className={`${isTransparentNav ? 'navBar transparent' : 'navBar'}`}>
@@ -112,7 +134,9 @@ class Nav extends React.Component {
             <SignBox goToSignUp={this.goToSignUp} goToLogin={this.goToLogin} />
           )}
         </div>
-        {isWishListOn && <WishList />}
+        {isWishListOn && wishList && (
+          <WishList handleWishList={this.handleWishList} wishList={wishList} />
+        )}
       </div>
     );
   }

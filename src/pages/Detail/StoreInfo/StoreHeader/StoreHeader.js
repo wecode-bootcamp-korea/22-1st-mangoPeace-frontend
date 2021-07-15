@@ -17,11 +17,11 @@ class StoreHeader extends React.Component {
 
   fetchIsWished = method => {
     fetch(`${BASE_URL}/restaurants/${this.props.storeId}/wishlist`, {
+      headers: {
+        Authorization: localStorage.getItem('TOKEN'),
+      },
       method: method,
-    })
-      .then(res => res.json())
-      .then(res => console.log(res));
-    // .then(() => this.props.fetchData(`restaurants/${this.props.storeId}`));
+    }).then(() => this.props.fetchData(`restaurants/${this.props.storeId}`));
   };
 
   render() {

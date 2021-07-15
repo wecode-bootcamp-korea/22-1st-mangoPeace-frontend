@@ -1,25 +1,38 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 
 import './WishListLi.scss';
 
 class WishListLi extends React.Component {
+  goToDetail = storeId => {
+    const { history, handleWishList } = this.props;
+
+    history.push(`/detail/${storeId}`);
+    handleWishList();
+  };
+
   render() {
-    return (
-      <li className="wishListLi">
+    const { wishList } = this.props;
+
+    return wishList.map(li => (
+      <li
+        key={li.id}
+        onClick={() => this.goToDetail(li.id)}
+        className="wishListLi"
+      >
         <div className="storeImgBox">
-          <img src="http://placehold.it/70" />
+          <img src={`${li.food_image}`} />
         </div>
         <div className="storeInfoBox">
-          <strong className="storeName">store name</strong>
-          <span className="storeSubCategory">sub category</span>
+          <strong className="storeName">{li.name}</strong>
+          <span className="storeSubCategory">{li.sub_category}</span>
         </div>
         <div className="starBox">
-          {/* <i class={`fa-star ${props어쩌구는 ? 'fas' : 'far'}`}></i> */}
-          <i class="fas fa-star"></i>
+          <i className="fas fa-star"></i>
         </div>
       </li>
-    );
+    ));
   }
 }
 
-export default WishListLi;
+export default withRouter(WishListLi);
