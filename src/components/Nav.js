@@ -7,6 +7,15 @@ class Nav extends React.Component {
   goToMain = () => {
     this.props.history.push('/');
   };
+
+  goToLogin = () => {
+    this.props.history.push('/login');
+  };
+
+  goToSignUp = () => {
+    this.props.history.push('/SignUp');
+  };
+
   render() {
     console.log(this.props);
     return (
@@ -20,8 +29,12 @@ class Nav extends React.Component {
           <input className="mainSearchInput" placeholder="맛집 검색"></input>
         </div>
         <div className="navProfileBox">
-          <button className="mainLoginBtn">로그인</button>
-          <button className="mainSignUpBtn">회원가입</button>
+          <button className="mainLoginBtn" onClick={this.goToLogin}>
+            로그인
+          </button>
+          <button className="mainSignUpBtn" onClick={this.goToSignUp}>
+            회원가입
+          </button>
           <img
             className="mainProfileImg"
             src="images/profile_img.png"
