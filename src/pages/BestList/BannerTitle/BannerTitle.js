@@ -8,6 +8,7 @@ class BannerTitle extends Component {
   render() {
     const queryObj = stringToQuery(this.props.history.location.search);
     const banner = bannerText[queryObj.sub_category_id - 1];
+    console.log(banner);
     return (
       <section className="titleBox">
         <span className="views">

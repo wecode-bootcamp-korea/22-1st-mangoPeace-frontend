@@ -12,13 +12,12 @@ class StoreCard extends Component {
     return (
       <>
         {storeList.map((store, index) => (
-          <li key={store.restaurant_id} className="storeCard">
-            <img
-              className="storeImg"
-              alt={store.name}
-              src={store.image}
-              onClick={() => store.restaurant_id}
-            />
+          <li
+            key={store.restaurant_id}
+            className="storeCard"
+            onClick={() => this.goToStore(store.restaurant_id)}
+          >
+            <img className="storeImg" alt={store.name} src={store.image} />
             <div className="storeBox">
               <div className="storeInfoBox">
                 <div className="storeHeadline">
