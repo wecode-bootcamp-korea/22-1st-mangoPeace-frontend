@@ -8,6 +8,8 @@ import SignBox from './SignBox/SignBox';
 import WishList from '../WishList/WishList';
 
 import './Nav.scss';
+import Login from '../../pages/Login/Login';
+import SignUp from '../../pages/SignUp/SignUp';
 
 const SEARCH_BAR_HEIGHT = 300;
 let debouncer;
@@ -18,6 +20,8 @@ class Nav extends React.Component {
     isWishListOn: false,
     isTransparentNav: false,
     inputValue: '',
+    isLoginOn: false,
+    isSignUpOn: false,
     wishList: null,
   };
 
@@ -27,10 +31,7 @@ class Nav extends React.Component {
       window.addEventListener('scroll', this.handleScroll);
     }
 
-    localStorage.setItem(
-      'TOKEN',
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiZXhwIjoxNjI2NDYwNzE2fQ.tqGvlidPjzPh5Zy0mVA5Rdk4qPjuXMgDKN1cYcuRdx4'
-    );
+    window.addEventListener('click', e => this.handleModal(e));
   };
 
   componentDidUpdate = () => {
@@ -54,6 +55,19 @@ class Nav extends React.Component {
 
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.handleScroll);
+  };
+
+  handleValidUser = () => {
+    this.setState({ isValidUser: true });
+  };
+
+  handleModal = e => {
+    if (e.target.className === 'modalBg') {
+      this.setState({
+        isLoginOn: false,
+        isSignUpOn: false,
+      });
+    }
   };
 
   fetchWishList = () => {
@@ -102,42 +116,67 @@ class Nav extends React.Component {
   };
 
   goToLogin = () => {
-    this.props.history.push('/login');
+    this.setState({ isLoginOn: true });
   };
 
   goToSignUp = () => {
-    this.props.history.push('/SignUp');
+    this.setState({ isSignUpOn: true });
+  };
+
+  closeModal = () => {
+    this.setState({ isSignUpOn: false, isLoginOn: false });
   };
 
   render() {
-    const { isValidUser, isWishListOn, isTransparentNav, wishList } =
-      this.state;
+    const {
+      isValidUser,
+      isWishListOn,
+      isTransparentNav,
+      isLoginOn,
+      isSignUpOn,
+      wishList,
+    } = this.state;
 
     return (
-      <div className={`${isTransparentNav ? 'navBar transparent' : 'navBar'}`}>
-        <div className="logoBox" onClick={this.goToMain}>
-          <h1>싸우지망고</h1>
-          <img className="logoImg" src="/images/logo.png" alt="로고이미지" />
-        </div>
-        <form onSubmit={this.handleSearchBtn} className="navSearchBar">
-          <i className="fas fa-search searchIcon"></i>
-          <input
-            onChange={this.checkInput}
-            className="mainSearchInput"
-            placeholder="맛집 검색"
-          ></input>
-        </form>
-        <div className="navProfileBox">
-          {isValidUser ? (
-            <MyProfile handleWishList={this.handleWishList} />
-          ) : (
-            <SignBox goToSignUp={this.goToSignUp} goToLogin={this.goToLogin} />
-          )}
+      <>
+        {isLoginOn && (
+          <Login
+            handleValidUser={this.handleValidUser}
+            closeModal={this.closeModal}
+          />
+        )}
+        {isSignUpOn && <SignUp closeModal={this.closeModal} />}
+        <div
+          className={`${isTransparentNav ? 'navBar transparent' : 'navBar'}`}
+        >
+          <div className="logoBox" onClick={this.goToMain}>
+            <h1>싸우지망고</h1>
+            <img className="logoImg" src="/images/logo.png" alt="로고이미지" />
+          </div>
+          <form onSubmit={this.handleSearchBtn} className="navSearchBar">
+            <i className="fas fa-search searchIcon"></i>
+            <input
+              onChange={this.checkInput}
+              className="mainSearchInput"
+              placeholder="맛집 검색"
+            ></input>
+          </form>
+          <div className="navProfileBox">
+            {isValidUser ? (
+              <MyProfile handleWishList={this.handleWishList} />
+            ) : (
+              <SignBox
+                goToSignUp={this.goToSignUp}
+                goToLogin={this.goToLogin}
+              />
+            )}
+          </div>
+          {isWishListOn && <WishList />}
         </div>
         {isWishListOn && wishList && (
           <WishList handleWishList={this.handleWishList} wishList={wishList} />
         )}
-      </div>
+      </>
     );
   }
 }

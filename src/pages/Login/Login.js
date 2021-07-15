@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { BASE_URL } from '../../config';
+
 import './Login.scss';
 
 class Login extends React.Component {
@@ -23,9 +26,9 @@ class Login extends React.Component {
   };
 
   allValueCheck = () => {
-    const reg_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9,]+\.[a-zA-Z0-9]+$/;
+    const reg_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9.]+\.[a-zA-Z0-9]+$/;
     const reg_pwd =
-      /^(?=.+[a-z])(?=.+[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*#?&]{6,25}$/;
+      /^(?=.*[a-z])(?=.+[A-Z])(?=.+\d)(?=.+[!@#$%^&*()-=_+])[a-zA-Z0-9`~!@#$%^&*()_+-=,./<>?]{6,25}$/;
 
     const isEmailValid = reg_email.test(this.state.emailValue);
     const isPasswordValid = reg_pwd.test(this.state.passwordValue);
@@ -43,7 +46,7 @@ class Login extends React.Component {
       return;
     }
 
-    fetch('http://10.58.3.11:8000/users/signin', {
+    fetch(`${BASE_URL}/users/signin`, {
       method: 'post',
       body: JSON.stringify({
         email: this.state.emailValue,
@@ -52,7 +55,13 @@ class Login extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        console.log(result);
+        if (result.message === 'SUCCESS') {
+          localStorage.setItem('TOKEN', result.access_token);
+          this.props.handleValidUser();
+          this.props.closeModal();
+        } else {
+          alert('잘못된 정보입니다. 다시 입력해주세요!');
+        }
       });
   };
 
@@ -61,7 +70,7 @@ class Login extends React.Component {
       this.state.isEmailValid && this.state.isPasswordValid;
 
     return (
-      <>
+      <div className="modalBg">
         <form className="loginForm" onSubmit={this.goToMain}>
           <div className="loginLogo">
             <img className="logoImage" alt="logo" src="images/mango.png" />
@@ -97,7 +106,7 @@ class Login extends React.Component {
             계정이 없으신가요? <a className="goToSignUp">회원가입</a>
           </div>
         </form>
-      </>
+      </div>
     );
   }
 }
