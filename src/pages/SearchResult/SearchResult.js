@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import SearchResultComponent from '../SearchResultComponent/SearchResultListComponent';
 import Button from './PagingButtonComponent';
 import Filter from '../Filter/Filter';
+import { BASE_URL } from '../../config';
 import './SearchResult.scss';
 
 class SearchResult extends React.Component {
@@ -27,7 +28,9 @@ class SearchResult extends React.Component {
   //메인화면에서 검색어 가져옴
   componentDidMount() {
     fetch(
-      `http://10.58.0.115:8000/restaurants/search?${this.props.location.search}&offset=0&limit=6`
+      `${BASE_URL}/restaurants/search${
+        this.props.location.search || '?'
+      }&offset=0&limit=6`
     )
       .then(res => res.json())
       .then(data => {
@@ -92,16 +95,12 @@ class SearchResult extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(
-      `http://10.58.0.115:8000/restaurants/search${this.props.location.search}`
-    );
     if (prevProps.location.search !== this.props.location.search) {
       fetch(
         `http://10.58.0.115:8000/restaurants/search${this.props.location.search}`
       )
         .then(res => res.json())
         .then(data => {
-          console.log(data);
           this.setState({
             resultList: [
               ...data.category_result,
@@ -144,6 +143,10 @@ class SearchResult extends React.Component {
     return newArr;
   };
 
+  goToMainDetail = () => {
+    this.props.history.push(`/detail/${this.state.resultList.restaurantID}`);
+  };
+
   render() {
     const { resultList } = this.state;
 
@@ -171,6 +174,7 @@ class SearchResult extends React.Component {
                           result.average_rating.toFixed(1)
                         }
                         location={result.restaurantAddress}
+                        onClick={this.goToMainDetail}
                       />
                     </span>
                   );
@@ -182,7 +186,7 @@ class SearchResult extends React.Component {
             </div>
 
             <div className="searchResultPaging">
-              {this.makeButton(18).map(idx => {
+              {this.makeButton(resultList.total).map(idx => {
                 //임시로 만든 배열
                 return (
                   <Button
