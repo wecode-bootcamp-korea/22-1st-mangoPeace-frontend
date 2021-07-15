@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { withRouter } from 'react-router-dom';
 import './StoreCard.scss';
 
 class StoreCard extends Component {
@@ -12,13 +12,12 @@ class StoreCard extends Component {
     return (
       <>
         {storeList.map((store, index) => (
-          <li key={store.restaurant_id} className="storeCard">
-            <img
-              className="storeImg"
-              alt={store.name}
-              src={store.image}
-              onClick={() => store.restaurant_id}
-            />
+          <li
+            key={store.restaurant_id}
+            className="storeCard"
+            onClick={() => this.goToStore(store.restaurant_id)}
+          >
+            <img className="storeImg" alt={store.name} src={store.image} />
             <div className="storeBox">
               <div className="storeInfoBox">
                 <div className="storeHeadline">
@@ -30,7 +29,7 @@ class StoreCard extends Component {
                 </div>
                 <h3 className="storeLocate">{store.address}</h3>
               </div>
-              <div className="storeReviewBox">
+              <div className="storeListReviewBox">
                 <img
                   className="userProfileImg"
                   alt="user_img"
@@ -52,4 +51,4 @@ class StoreCard extends Component {
   }
 }
 
-export default StoreCard;
+export default withRouter(StoreCard);

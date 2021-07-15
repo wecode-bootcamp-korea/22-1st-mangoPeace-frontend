@@ -4,6 +4,7 @@
   @include display-flex(flex-start, center);
   padding: 50px 0;
   border-bottom: 1px solid #dbdbdb;
+  cursor: pointer;
 
   img {
     width: 300px;
@@ -18,7 +19,7 @@
 
     .storeInfoBox {
       display: block;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
 
       .storeHeadline {
         display: flex;
@@ -57,9 +58,10 @@
       }
     }
 
-    .storeReviewBox {
+    .storeListReviewBox {
       @include display-flex(normal, normal);
       height: 45%;
+      margin-bottom: 50px;
 
       img {
         margin-right: 15px;
@@ -82,7 +84,7 @@
 
     .storeMore {
       @include display-flex(flex-end, normal);
-      margin-bottom: 20px;
+      margin: 44px 0;
       color: $color-grey;
       text-align: center;
       font-size: 18px;

@@ -5,9 +5,7 @@ import './BestListImg.scss';
 
 class BestListImg extends Component {
   goToBestList = id => {
-    this.props.history.push(
-      `/restaurants?ordering=average_rating&sub_category_id=${id}`
-    );
+    this.props.history.push(`/bestlist/${id}`);
   };
 
   render() {

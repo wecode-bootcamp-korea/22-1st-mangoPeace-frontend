@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+import { BASE_URL } from '../../config';
+
 import MyProfile from './MyProfile/MyProfile';
 import SignBox from './SignBox/SignBox';
 import WishList from '../WishList/WishList';
@@ -20,6 +22,7 @@ class Nav extends React.Component {
     inputValue: '',
     isLoginOn: false,
     isSignUpOn: false,
+    wishList: null,
   };
 
   componentDidMount = () => {
@@ -67,6 +70,16 @@ class Nav extends React.Component {
     }
   };
 
+  fetchWishList = () => {
+    fetch(`${BASE_URL}/users/detail`, {
+      headers: {
+        Authorization: localStorage.getItem('TOKEN'),
+      },
+    })
+      .then(res => res.json())
+      .then(res => this.setState({ wishList: res.result.wish_list }));
+  };
+
   handleScroll = () => {
     if (debouncer) {
       clearTimeout(debouncer);
@@ -93,6 +106,9 @@ class Nav extends React.Component {
 
   handleWishList = () => {
     this.setState({ isWishListOn: !this.state.isWishListOn });
+    if (this.state.isWishListOn === false) {
+      this.fetchWishList();
+    }
   };
 
   goToMain = () => {
@@ -118,6 +134,7 @@ class Nav extends React.Component {
       isTransparentNav,
       isLoginOn,
       isSignUpOn,
+      wishList,
     } = this.state;
 
     return (
@@ -156,6 +173,9 @@ class Nav extends React.Component {
           </div>
           {isWishListOn && <WishList />}
         </div>
+        {isWishListOn && wishList && (
+          <WishList handleWishList={this.handleWishList} wishList={wishList} />
+        )}
       </>
     );
   }
