@@ -4,8 +4,7 @@ import './StoreCard.scss';
 
 class StoreCard extends Component {
   render() {
-    const { id, storeList } = this.props;
-    console.log(storeList);
+    const { storeList } = this.props;
 
     return (
       <>

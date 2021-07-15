@@ -15,7 +15,9 @@ class BestList extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://10.58.3.102:8000/restaurants/top-list?filtering=ordering')
+    fetch(
+      'http://10.58.6.37:8000/restaurants?ordering=average_rating&sub_category_id=1'
+    )
       .then(res => res.json())
       .then(data => {
         this.setState({ storeList: data.result });

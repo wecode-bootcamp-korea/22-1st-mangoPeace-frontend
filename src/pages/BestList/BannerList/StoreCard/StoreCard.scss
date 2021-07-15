@@ -2,7 +2,7 @@
 
 .storeCard {
   @include display-flex(flex-start, center);
-  height: 400px;
+  padding: 50px 0;
   border-bottom: 1px solid #dbdbdb;
 
   img {
@@ -13,9 +13,8 @@
   .storeBox {
     @include display-flex(space-between, normal);
     flex-direction: column;
-    margin-left: 30px;
+    margin: 0 0 0 30px;
     width: 100%;
-    height: 300px;
 
     .storeInfoBox {
       display: block;
