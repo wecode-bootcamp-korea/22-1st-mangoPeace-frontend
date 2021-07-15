@@ -72,9 +72,6 @@ class Main extends React.Component {
     return (
       <main>
         <MainImgBar />
-        <div className="tester" style={{ height: '1000px' }}>
-          무야호~~
-        </div>
         {bestListImg.length !== 0 && (
           <FoodThemeListSection
             handleBtn={handleBtn}
