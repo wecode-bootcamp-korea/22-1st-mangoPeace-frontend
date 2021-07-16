@@ -79,7 +79,7 @@ class SignUp extends React.Component {
       .then(result => {
         if (result.message === 'SUCCESS') {
           alert('싸우지망고의 회원이 되었어요!');
-          this.props.closeSignUp();
+          this.props.closeModal();
         } else {
           alert('이미 있는 유저 정보입니다!');
         }
