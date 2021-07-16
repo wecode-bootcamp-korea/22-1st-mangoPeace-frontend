@@ -127,13 +127,14 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        color: $color-grey;
+        //color: $color-grey;
         background-color: white;
         margin-right: 20px;
         margin-left: 20px;
 
         &.on {
           text-decoration: none;
+          border-color: $color-main;
           color: $color-main; //!important;
         }
       }

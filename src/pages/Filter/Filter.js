@@ -4,7 +4,10 @@ import PriceSelectSection from '../FilterComponent/PriceSelectSection';
 import MenuCategorySelectSection from '../FilterComponent/MenuCategorySelectSection';
 import './Filter.scss';
 
-const RATING = [{ title: '#별점순' }, { title: '#코멘트순' }];
+const RATING = [
+  { title: '#별점순', name: 'rating_sort' },
+  { title: '#코멘트순', name: 'review_count' },
+];
 const PRICE = [
   { id: 0, title: '#1만원 미만' },
   { id: 1, title: '#1만원 이상' },
@@ -67,9 +70,6 @@ class Filter extends React.Component {
     const isAllSectionNotValid =
       ratingCurrentIdx === 0 && priceCurrentIdx === 0 && values.length === 0;
 
-    // Object.keys(this.state.values).map(idx => {
-    //   menuTitleArr.push(MENU.find(item => item.id === idx).title);
-    // });
     const last = [];
 
     for (let i = 0; i < values.length; i++) {
