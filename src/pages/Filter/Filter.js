@@ -71,11 +71,11 @@ class Filter extends React.Component {
     //   menuTitleArr.push(MENU.find(item => item.id === idx).title);
     // });
     const last = [];
-    console.log(`values`, values);
+
     for (let i = 0; i < values.length; i++) {
       last.push(values[i].title);
     }
-    console.log(`last`, last);
+
     return (
       <>
         <span className="FilterBox">

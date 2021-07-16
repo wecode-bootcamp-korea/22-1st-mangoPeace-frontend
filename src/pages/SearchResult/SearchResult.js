@@ -1,8 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+
+import { BASE_URL } from '../../config';
+
 import SearchResultComponent from '../SearchResultComponent/SearchResultListComponent';
 import Button from './PagingButtonComponent';
 import Filter from '../Filter/Filter';
+
 import './SearchResult.scss';
 
 class SearchResult extends React.Component {
@@ -26,8 +30,9 @@ class SearchResult extends React.Component {
   }
   //메인화면에서 검색어 가져옴
   componentDidMount() {
+    console.log(this.props.location.search);
     fetch(
-      `http://10.58.4.170:8000/restaurants/search${this.props.location.search}&offset=0&limit=6`
+      `${BASE_URL}/restaurants/search${this.props.location.search}&offset=0&limit=6`
     )
       .then(res => res.json())
       .then(data => {
@@ -87,9 +92,7 @@ class SearchResult extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.search !== this.props.location.search) {
-      fetch(
-        `http://10.58.4.170:8000/restaurants/search${this.props.location.search}`
-      )
+      fetch(`${BASE_URL}/restaurants/search${this.props.location.search}`)
         .then(res => res.json())
         .then(data =>
           this.setState({
@@ -139,10 +142,6 @@ class SearchResult extends React.Component {
   render() {
     const { resultList } = this.state;
 
-    console.log(
-      `this.makeButton(resultList.total)`,
-      this.makeButton(resultList.total)
-    );
     return (
       <>
         <nav>SearchResult</nav>
