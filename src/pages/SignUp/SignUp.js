@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { BASE_URL } from '../../config';
+
 import './SignUp.scss';
 
 class SignUp extends React.Component {
@@ -14,7 +17,7 @@ class SignUp extends React.Component {
 
   controlInput = event => {
     const { value, name } = event.target;
-
+    console.log(this.state);
     if (name === 'inputName') {
       this.setState({
         nameValue: value,
@@ -36,10 +39,10 @@ class SignUp extends React.Component {
 
   isAllValueValid = () => {
     const reg_pwd =
-      /^(?=.+[a-z])(?=.+[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*#?&]{6,25}$/; // 영문 소문자, 대문자, 숫자, 특수문자 1개 이상, 6글자
-    const reg_phoneNum = /^01[0|2|5|7|8|9|0][0-9]{3,4}[0-9]{4}$/;
-    const reg_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9,]+\.[a-zA-Z0-9]+$/;
-    const reg_name = /^[a-zA-Z가-힇]{2,}$/;
+      /^(?=.*[a-z])(?=.+[A-Z])(?=.+\d)(?=.+[!@#$%^&*()-=_+])[a-zA-Z0-9`~!@#$%^&*()_+-=,./<>?]{6,25}$/; // 영문 소문자, 대문자, 숫자, 특수문자 1개 이상, 6글자
+    const reg_phoneNum = /^01[1|2|5|7|8|9|0][0-9]{3,4}[0-9]{4}$/;
+    const reg_email = /^[a-zA-Z0-9]+@[a-zA-Z0-9.]+\.[a-zA-Z0-9]+$/;
+    const reg_name = /^[a-zA-Z가-힇0-9]{1,8}$/;
 
     const isPasswordValid = reg_pwd.test(this.state.passwordValue);
     const isPhoneNumValid = reg_phoneNum.test(this.state.phoneNumValue);
@@ -63,10 +66,10 @@ class SignUp extends React.Component {
 
     if (!isValidAll) return;
 
-    fetch('', {
+    fetch(`${BASE_URL}/users/signup`, {
       method: 'post',
       body: JSON.stringify({
-        full_name: nameValue,
+        nickname: nameValue,
         email: emailValue,
         password: passwordValue,
         phone_number: phoneNumValue,
@@ -74,10 +77,11 @@ class SignUp extends React.Component {
     })
       .then(response => response.json())
       .then(result => {
-        console.log(result);
-        if (result.MESSAGE !== 'SUCCESS') {
-          //this.props.history.push('/');
-          alert('다시 기입해주세요');
+        if (result.message === 'SUCCESS') {
+          alert('싸우지망고의 회원이 되었어요!');
+          this.props.closeSignUp();
+        } else {
+          alert('이미 있는 유저 정보입니다!');
         }
       });
   };
@@ -89,7 +93,7 @@ class SignUp extends React.Component {
       isPasswordValid && isPhoneNumValid && isEmailValid && isNameValid;
 
     return (
-      <>
+      <div className="modalBg">
         <form className="signUpForm" onSubmit={this.goToMain}>
           <div className="signUpLogo">
             <img className="logoImage" alt="logo" src="images/mango.png" />
@@ -140,7 +144,7 @@ class SignUp extends React.Component {
             이미 가입 하셨나요? <a className="goToLogin">로그인</a>{' '}
           </div>
         </form>
-      </>
+      </div>
     );
   }
 }

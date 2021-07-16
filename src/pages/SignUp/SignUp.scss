@@ -1,93 +1,109 @@
-$color-grey: #9b9b9b;
-$color-main: #fb7d27;
+@import '../../styles/common.scss';
 
-.signUpForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 35%;
-  padding: 20px;
-  border-radius: 10px;
-  border: solid $color-grey;
-  .signUpLogo {
-    margin: 25px;
+.modalBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  @include display-flex;
+  width: 100vw;
+  height: 100vh;
+  background: rgba($color: #000000, $alpha: 0.6);
+  z-index: 999999;
 
-    .logoImage {
-      width: 100px;
-    }
-  }
-
-  .signUpTitle {
-    margin: 10px;
-    font-weight: bold;
-  }
-
-  .signUpContainer {
-    display: flex;
+  .signUpForm {
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
 
-    .inputName {
-      width: 300px;
-      height: 40px;
-      margin: 10px;
-      padding-left: 10px;
-      border-radius: 10px;
-      border: none;
-      background-color: #e8eaec;
+    .signUpLogo {
+      margin: 25px;
+
+      .logoImage {
+        width: 100px;
+      }
     }
 
-    .inputEmail {
-      width: 300px;
-      height: 40px;
+    .signUpTitle {
       margin: 10px;
-      padding-left: 10px;
-      border-radius: 10px;
-      border: none;
-      background-color: #e8eaec;
-    }
-
-    .inputPhoneNum {
-      width: 300px;
-      height: 40px;
-      margin: 10px;
-      padding-left: 10px;
-      border-radius: 10px;
-      border: none;
-      background-color: #e8eaec;
-    }
-
-    .inputPassword {
-      width: 300px;
-      height: 40px;
-      margin: 10px;
-      padding-left: 10px;
-      border-radius: 10px;
-      border: none;
-      background-color: #e8eaec;
-    }
-
-    .submitInfoBtn {
-      width: 300px;
-      height: 40px;
-      margin: 10px;
-      border-radius: 10px;
-      border: none;
       font-weight: bold;
-      color: white;
-      background-color: $color-main;
-
-      // &:disabled {
-      //   background-color: $color-grey;
-      // }
     }
-  }
 
-  .checkMembership {
-    margin: 10px;
-    color: $color-grey;
-    a.goToLogin {
-      color: $color-main;
+    .signUpContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .inputName {
+        width: 300px;
+        height: 40px;
+        margin: 10px;
+        padding-left: 10px;
+        border-radius: 10px;
+        border: none;
+        background-color: #e8eaec;
+      }
+
+      .inputEmail {
+        width: 300px;
+        height: 40px;
+        margin: 10px;
+        padding-left: 10px;
+        border-radius: 10px;
+        border: none;
+        background-color: #e8eaec;
+      }
+
+      .inputPhoneNum {
+        width: 300px;
+        height: 40px;
+        margin: 10px;
+        padding-left: 10px;
+        border-radius: 10px;
+        border: none;
+        background-color: #e8eaec;
+      }
+
+      .inputPassword {
+        width: 300px;
+        height: 40px;
+        margin: 10px;
+        padding-left: 10px;
+        border-radius: 10px;
+        border: none;
+        background-color: #e8eaec;
+      }
+
+      .submitInfoBtn {
+        width: 300px;
+        height: 40px;
+        margin: 10px;
+        border-radius: 10px;
+        border: none;
+        font-weight: bold;
+        color: white;
+        background-color: $color-main;
+        cursor: pointer;
+
+        &:disabled {
+          background-color: $color-grey;
+        }
+      }
+
+      input:focus {
+        outline: none;
+      }
+    }
+
+    .checkMembership {
+      margin: 10px 0 30px;
+      color: $color-grey;
+
+      a.goToLogin {
+        color: $color-main;
+      }
     }
   }
 }

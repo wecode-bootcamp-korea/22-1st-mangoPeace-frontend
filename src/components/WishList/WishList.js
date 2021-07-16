@@ -12,6 +12,7 @@ class WishList extends React.Component {
 
   render() {
     const { isWishEmpty } = this.state;
+    const { wishList, handleWishList } = this.props;
 
     return (
       <section className="wishListBox">
@@ -19,8 +20,12 @@ class WishList extends React.Component {
           <span className="wishListTitle">가고싶다</span>
         </div>
         <ul className="wishListUl">
-          {/* wishListLi  map 돌려야 됨  */}
-          {isWishEmpty ? <WishListEmpty /> : <WishListLi />}
+          {wishList.length === 0 ? (
+            <WishListEmpty />
+          ) : (
+            <WishListLi handleWishList={handleWishList} wishList={wishList} />
+          )}
+          {/* {isWishEmpty ? <WishListEmpty /> : <WishListLi wishList={wishList} />} */}
         </ul>
       </section>
     );
