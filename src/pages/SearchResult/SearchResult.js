@@ -28,9 +28,8 @@ class SearchResult extends React.Component {
   //메인화면에서 검색어 가져옴
   componentDidMount() {
     fetch(
-      `${BASE_URL}/restaurants/search${
-        this.props.location.search || '?'
-      }&offset=0&limit=6`
+      `${BASE_URL}/restaurants/search${this.props.location.search || '?'}
+      &offset=0&limit=6`
     )
       .then(res => res.json())
       .then(data => {
@@ -75,7 +74,7 @@ class SearchResult extends React.Component {
 
   paginate = (e, currentidx) => {
     const limit = 6;
-    const offset = (currentidx - 1) % 6;
+    const offset = (currentidx - 1) * 6;
     const currentQuery = this.props.location.search;
 
     const newQueryObject = this.queryStringToObject(currentQuery);
@@ -186,7 +185,7 @@ class SearchResult extends React.Component {
             </div>
 
             <div className="searchResultPaging">
-              {this.makeButton(resultList.total).map(idx => {
+              {this.makeButton(18).map(idx => {
                 //임시로 만든 배열
                 return (
                   <Button
