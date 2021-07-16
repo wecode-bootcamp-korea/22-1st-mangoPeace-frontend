@@ -32,6 +32,9 @@ class Nav extends React.Component {
     }
 
     window.addEventListener('click', e => this.handleModal(e));
+
+    const isValidUser = localStorage.getItem('TOKEN');
+    this.setState({ isValidUser });
   };
 
   componentDidUpdate = () => {
@@ -51,6 +54,8 @@ class Nav extends React.Component {
         this.setState({ isTransparentNav: true });
       }
     }
+
+    // this.handleSearchBtn();
   };
 
   componentWillUnmount = () => {
@@ -99,9 +104,7 @@ class Nav extends React.Component {
   handleSearchBtn = e => {
     e.preventDefault();
 
-    this.props.history.push(
-      `/restaurants/search?keyword=${this.state.inputValue}`
-    );
+    this.props.history.push(`/searchresult?keyword=${this.state.inputValue}`);
   };
 
   handleWishList = () => {
@@ -171,11 +174,13 @@ class Nav extends React.Component {
               />
             )}
           </div>
-          {isWishListOn && <WishList />}
+          {isWishListOn && wishList && (
+            <WishList
+              handleWishList={this.handleWishList}
+              wishList={wishList}
+            />
+          )}
         </div>
-        {isWishListOn && wishList && (
-          <WishList handleWishList={this.handleWishList} wishList={wishList} />
-        )}
       </>
     );
   }

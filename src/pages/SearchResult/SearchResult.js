@@ -1,9 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+
+import { BASE_URL } from '../../config';
+
 import SearchResultComponent from '../SearchResultComponent/SearchResultListComponent';
 import Button from './PagingButtonComponent';
 import Filter from '../Filter/Filter';
-import { BASE_URL } from '../../config';
+
 import './SearchResult.scss';
 
 class SearchResult extends React.Component {
@@ -28,8 +31,7 @@ class SearchResult extends React.Component {
   //메인화면에서 검색어 가져옴
   componentDidMount() {
     fetch(
-      `${BASE_URL}/restaurants/search${this.props.location.search || '?'}
-      &offset=0&limit=6`
+      `${BASE_URL}/restaurants/search${this.props.location.search}&offset=0&limit=6`
     )
       .then(res => res.json())
       .then(data => {
@@ -95,9 +97,7 @@ class SearchResult extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.search !== this.props.location.search) {
-      fetch(
-        `http://10.58.0.115:8000/restaurants/search${this.props.location.search}`
-      )
+      fetch(`${BASE_URL}/restaurants/search${this.props.location.search}`)
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -142,8 +142,8 @@ class SearchResult extends React.Component {
     return newArr;
   };
 
-  goToMainDetail = () => {
-    this.props.history.push(`/detail/${this.state.resultList.restaurantID}`);
+  goToMainDetail = ID => {
+    this.props.history.push(`/detail/${ID}`);
   };
 
   render() {
@@ -166,6 +166,7 @@ class SearchResult extends React.Component {
                   return (
                     <span className="searchResultListContent" key={result.id}>
                       <SearchResultComponent
+                        restaurantID={result.restaurantID}
                         searchResultMainImage={result.food_image_url}
                         restaurantName={result.restaurantName}
                         starRating={
@@ -173,7 +174,8 @@ class SearchResult extends React.Component {
                           result.average_rating.toFixed(1)
                         }
                         location={result.restaurantAddress}
-                        onClick={this.goToMainDetail}
+                        // onClick={this.goToMainDetail}
+                        goToMainDetail={this.goToMainDetail}
                       />
                     </span>
                   );

@@ -4,6 +4,9 @@
   img {
     margin-right: 30px;
     width: 35px;
+    height: 35px;
+    object-fit: fit;
+    border-radius: 50%;
 
     &:hover {
       cursor: pointer;

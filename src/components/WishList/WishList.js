@@ -6,12 +6,7 @@ import WishListLi from './WishListLi/WishListLi';
 import './WishList.scss';
 
 class WishList extends React.Component {
-  state = {
-    isWishEmpty: false,
-  };
-
   render() {
-    const { isWishEmpty } = this.state;
     const { wishList, handleWishList } = this.props;
 
     return (
@@ -25,7 +20,6 @@ class WishList extends React.Component {
           ) : (
             <WishListLi handleWishList={handleWishList} wishList={wishList} />
           )}
-          {/* {isWishEmpty ? <WishListEmpty /> : <WishListLi wishList={wishList} />} */}
         </ul>
       </section>
     );

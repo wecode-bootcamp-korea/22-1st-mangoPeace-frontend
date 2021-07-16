@@ -6,8 +6,6 @@ import Detail from './pages/Detail/Detail';
 import BestList from './pages/BestList/BestList';
 import Main from './pages/Main/Main';
 import SearchResult from './pages/SearchResult/SearchResult';
-import Login from './pages/Login/Login';
-import SignUp from './pages/SignUp/SignUp';
 import Footer from './components/Footer';
 import Filter from './pages/Filter/Filter';
 

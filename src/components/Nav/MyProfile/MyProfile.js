@@ -10,7 +10,7 @@ class MyProfile extends React.Component {
       <img
         onClick={handleWishList}
         className="mainProfileImg"
-        src="/images/profile_img.png"
+        src="https://mblogthumb-phinf.pstatic.net/MjAyMDA3MTVfMjI0/MDAxNTk0ODA4NTYwMTky.iXj_8lvSz4MgWM0RpvbcFysqzybBMvT6uVTmTtk8Oxog.Tfn199XtzcRnLKLNRyD2Bgvp-veCz-sk5jptTgfDT18g.PNG.life_book/1.png?type=w800"
         alt="내정보"
       />
     );
