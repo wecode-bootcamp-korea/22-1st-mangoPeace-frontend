@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import SearchResultComponent from '../SearchResultComponent/SearchResultListComponent';
 import Button from './PagingButtonComponent';
 import Filter from '../Filter/Filter';
+import { BASE_URL } from '../../config';
 import './SearchResult.scss';
 
 class SearchResult extends React.Component {
@@ -27,7 +28,8 @@ class SearchResult extends React.Component {
   //메인화면에서 검색어 가져옴
   componentDidMount() {
     fetch(
-      `http://10.58.4.170:8000/restaurants/search${this.props.location.search}&offset=0&limit=6`
+      `${BASE_URL}/restaurants/search${this.props.location.search || '?'}
+      &offset=0&limit=6`
     )
       .then(res => res.json())
       .then(data => {
@@ -59,14 +61,20 @@ class SearchResult extends React.Component {
   objectToQueryString = object => {
     let queryString = '';
     for (let i in object) {
-      queryString += `&${i}=${object[i]}`;
+      if (Array.isArray(object[i])) {
+        object[i].forEach(tap => {
+          queryString += `&${i}=${tap}`;
+        });
+      } else {
+        queryString += `&${i}=${object[i]}`;
+      }
     }
     return '?' + queryString.slice(1);
   };
 
   paginate = (e, currentidx) => {
     const limit = 6;
-    const offset = (currentidx - 1) % 6;
+    const offset = (currentidx - 1) * 6;
     const currentQuery = this.props.location.search;
 
     const newQueryObject = this.queryStringToObject(currentQuery);
@@ -88,18 +96,18 @@ class SearchResult extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.search !== this.props.location.search) {
       fetch(
-        `http://10.58.4.170:8000/restaurants/search${this.props.location.search}`
+        `http://10.58.0.115:8000/restaurants/search${this.props.location.search}`
       )
         .then(res => res.json())
-        .then(data =>
+        .then(data => {
           this.setState({
-            data: [
+            resultList: [
               ...data.category_result,
               ...data.sub_category_result,
               ...data.restaurant_result,
             ],
-          })
-        );
+          });
+        });
     }
   }
 
@@ -107,7 +115,7 @@ class SearchResult extends React.Component {
     let query = '';
 
     if (ratingCurrentIdx.title) {
-      query += `rating=${ratingCurrentIdx.title.slice(1)}`;
+      query += `sort=${ratingCurrentIdx.name}`;
     }
 
     if (last.length > 0) {
@@ -117,32 +125,30 @@ class SearchResult extends React.Component {
       }
       const newQuery = [];
       for (let i = 0; i < newValues.length; i++) {
-        newQuery.push('&keyword=${' + newValues[i] + '}');
+        newQuery.push(`&keyword=${newValues[i]}`);
       }
 
       query += newQuery.join('');
     }
+    this.props.history.push(`SearchResult?${query}`);
   };
 
   makeButton = totalData => {
-    //값이 없으면 오류나서 페이지 안뜨는지 여부 확인 , 함수 내부로 옮겨서 map 함수 사용 불가능
-    //어떻게 해결 ? 이전처럼 렌더링 함수안에 위치시키기 ?
     let newArr = [];
 
     for (let idx = 1; idx <= Math.ceil(totalData / 6); idx++) {
-      //임시
       newArr.push(idx);
     }
     return newArr;
   };
 
+  goToMainDetail = () => {
+    this.props.history.push(`/detail/${this.state.resultList.restaurantID}`);
+  };
+
   render() {
     const { resultList } = this.state;
 
-    console.log(
-      `this.makeButton(resultList.total)`,
-      this.makeButton(resultList.total)
-    );
     return (
       <>
         <nav>SearchResult</nav>
@@ -162,9 +168,12 @@ class SearchResult extends React.Component {
                       <SearchResultComponent
                         searchResultMainImage={result.food_image_url}
                         restaurantName={result.restaurantName}
-                        starRating={result.average_rating}
+                        starRating={
+                          result.average_rating &&
+                          result.average_rating.toFixed(1)
+                        }
                         location={result.restaurantAddress}
-                        //category={result.}
+                        onClick={this.goToMainDetail}
                       />
                     </span>
                   );
@@ -176,7 +185,7 @@ class SearchResult extends React.Component {
             </div>
 
             <div className="searchResultPaging">
-              {this.makeButton(12).map(idx => {
+              {this.makeButton(18).map(idx => {
                 //임시로 만든 배열
                 return (
                   <Button
